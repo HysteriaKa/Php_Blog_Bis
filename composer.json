@@ -1,10 +1,14 @@
 {
   "require": {
-    "twig/twig": "3.3"
+    "twig/twig": "3.3",
+    "ezyang/htmlpurifier": "^4.13"
   },
   "autoload": {
     "psr-4": {
-      "Blog\\": "src/"
+      "Blog\\": "./src/",
+      
+      "Blog\\Ctrl\\": "./src/controllers",
+      "Blog\\Models\\": "./src/models"
     }
   }
 }
