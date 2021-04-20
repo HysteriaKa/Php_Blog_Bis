@@ -26,21 +26,27 @@
 			<!-- Panel (Banner) -->
 			<section class="panel banner right">
 				<div class="intro color2">
+					{% block nav %}
 					<nav id="nav">
 						<ul>
 							<li class="special">
 
 								<div id="menu">
 									<ul>
-										<li><a href="home">Accueil</a></li>
-										<li><a href="generic.html">Tous les posts</a></li>
+										<li><a href="home"
+												class="{% if current_page == "home" %} active {% endif %}">Accueil</a>
+										</li>
+										<li><a href="articles">Tous les posts</a></li>
 										<li><a href="contact">Contact</a></li>
+										<li><a href="#">Inscription</a></li>
+										<li><a href="#">Connexion</a></li>
 
 									</ul>
 								</div>
 							</li>
 						</ul>
 					</nav>
+					{% endblock %}
 				</div>
 				<div class="content color0 span-3-75 ">
 					<h1 class=" center mt-2">Ka Sr 's BLOG <br />
@@ -64,10 +70,12 @@
 					<h2 class="major">BLOG de Ka</h2>
 					<p>Projet réalisé dans le cadre de la formation SYMFONY/PHP d'Openclassrooms.</p>
 					<p>Création d'un blog</p>
-					<p>Mon CV</p>
+					<p>
+						<a href="public/images/KARINE.pdf" target="_blank">Mon cv</a>
+					</p>
 				</div>
-				<div class="image filtered tinted" data-position="top left">
-					<img src="public/images/pic02.jpg" alt="" />
+				<div class="image tinted" data-position="top left">
+					<img src="public/images/pic02.jpg" alt="image " />
 				</div>
 			</section>
 
@@ -75,16 +83,20 @@
 			<section class="panel color1">
 				<div class="intro joined">
 					<h2 class="major">Retrouvez moi sur ces réseaux</h2>
-					<p>remplacer les icones par les icones réseaux sociaux</p>
+
 				</div>
 				<div class="inner">
 					<ul class="grid-icons three connected">
-						<li><span class="icon fa-gem"><span class="label">Lorem</span></span></li>
-						<li><span class="icon solid fa-camera-retro"><span class="label">Ipsum</span></span></li>
-						<li><span class="icon solid fa-cog"><span class="label">Dolor</span></span></li>
-						<li><span class="icon solid fa-paper-plane"><span class="label">Sit</span></span></li>
-						<li><span class="icon solid fa-chart-bar"><span class="label">Amet</span></span></li>
-						<li><span class="icon solid fa-code"><span class="label">Nullam</span></span></li>
+						<li><a class="icon brands fa-facebook-f" href="https://www.facebook.com/karyn.nerhot/"
+								target="blank"></a></li>
+						<li><a class="icon brands fa-instagram" href="https://www.instagram.com/ka_rynh/"
+								target="blank"></a></li>
+						<li><a class="icon brands fa-twitter" href="https://twitter.com/karinetakamine"
+								target="_blank"></a></li>
+						<li><a class="icon brands fa-linkedin"
+								href="https://www.linkedin.com/in/karine-nerhot-632a58110/" target="blank"></a></li>
+						{#<li><span class="icon solid fa-chart-bar"><span class="label">Amet</span></span></li>
+						<li><span class="icon solid fa-code"><span class="label">Nullam</span></span></li>#}
 					</ul>
 				</div>
 			</section>
@@ -92,12 +104,21 @@
 			<!-- Panel (Spotlight) -->
 			<section class="panel spotlight large left">
 				<div class="content span-5">
-					<h2 class="major">Liste des articles du Blog</h2>
-					<p>Faire une liste</p>
+					<h2 class="major"><a href="articles">Liste des articles du Blog</a></h2>
+
 				</div>
 				<div class="image filtered tinted" data-position="top right">
 					<img src="public/images/pic03.jpg" alt="" />
+
 				</div>
+				<ul>
+					<li><a href="article/Chalet_et_Caviar">
+							<img src="public/images/chalets.png" alt="chalets et caviar" style="height: 148px"></a></li>
+					<li><a href="artcile/Festival_de_Films">
+							<img src="public/images/festival.png" alt="Festival de films" style="height: 163px"></a>
+					</li>
+
+				</ul>
 			</section>
 
 			<!-- Panel -->
@@ -127,16 +148,14 @@
 			<section class="panel color4-alt">
 				<div class="intro color4">
 					<h2 class="major">Contact</h2>
-					<p>Sed vel nibh libero. Mauris et lorem pharetra massa lorem turpis congue pulvinar. Vivamus sed
-						feugiat finibus. Duis amet bibendum amet sed. Duis mauris ex, dapibus sed ligula tempus volutpat
-						magna etiam.</p>
+					<p>Remplissez ce formulaire pour plus d'informations.</p>
 				</div>
 				<div class="inner columns divided">
 					<div class="span-3-25">
 						<form method="post" action="#">
 							<div class="fields">
 								<div class="field half">
-									<label for="name">Name</label>
+									<label for="name">Votre nom</label>
 									<input type="text" name="name" id="name" />
 								</div>
 								<div class="field half">
@@ -149,7 +168,7 @@
 								</div>
 							</div>
 							<ul class="actions">
-								<li><input type="submit" value="Send Message" class="button primary" /></li>
+								<li><input type="submit" value="Envoyez" class="button primary" /></li>
 							</ul>
 						</form>
 					</div>
@@ -436,16 +455,18 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 			<!-- Copyright -->
 
-			<div class="copyright">&copy; 2021 Ka's Blog<a href="https://html5up.net">Design</a>.
-		
-	</div>
+			<div class="copyright">
+				<p>&copy; 2021 Ka's Blog<a href="https://html5up.net">Design</a>.</p>
+				<p>Se connecter ADMIN</p>
+
+			</div>
 
 		</div>
 
 	</div>
-<footer>
-	
-</footer>
+	<footer>
+
+	</footer>
 	<!-- Scripts -->
 	<script src="public/assets/js/jquery.min.js"></script>
 	<script src="public/assets/js/browser.min.js"></script>

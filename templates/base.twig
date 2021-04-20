@@ -4,10 +4,11 @@
     <title>KaSr's Blog</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="public/assets/css/main.css" />
+    <link rel="stylesheet" href="/public/assets/css/main.css" />
     <noscript>
         <link rel="stylesheet" href="/public/assets/css/noscript.css" /></noscript>
 </head>
+{% block body %}
 
 <body class="is-preload">
 
@@ -16,26 +17,30 @@
 
             <section class="panel banner right">
                 <div class="intro color2">
+                    {% block nav %}
                     <nav id="nav">
                         <ul>
                             <li class="special">
 
                                 <div id="menu">
                                     <ul>
-                                        <li><a href="index.html">Accueil</a></li>
-                                        <li><a href="generic.html">Tous les posts</a></li>
-                                        <li><a href="elements.html">Contact</a></li>
-                                        <li><a href="#">S'inscrire</a></li>
-                                        <li><a href="#">Se connecter</a></li>
+                                        <li><a href="home">Accueil</a></li>
+                                        <li><a href="articles">Tous les posts</a></li>
+                                        <li><a href="contact">Contact</a></li>
+                                        <li><a href="#">Inscription</a></li>
+                                        <li><a href="#">Connexion</a></li>
+
                                     </ul>
                                 </div>
                             </li>
                         </ul>
-                    </nav>
+                    </nav> 
+                    {% endblock %}
                 </div>
 
 
             </section>
+           
             {% block content %}{% endblock %}
             <div class="copyright">&copy; 2021 Ka's Blog<a href="https://html5up.net">Design</a>.</div>
         </div>
@@ -46,5 +51,6 @@
     <script src="public/assets/js/main.js"></script>
 
 </body>
+{% endblock %}
 
 </html>

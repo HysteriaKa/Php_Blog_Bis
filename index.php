@@ -29,4 +29,4 @@ switch($safeData->uri[0]){
         $page = new Blog\Ctrl\Front($safeData);
         break;
 }
-echo $twig->render($page->template.".twig", $page->data);
+echo $twig->render($page->template.".twig", ["data"=>$page->data], $page->current_page);

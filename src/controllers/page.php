@@ -7,6 +7,7 @@ class Page{
     public $template;
     public $data = [];
     public $status = 200;
+    public $current_page;
 
     public function __construct(SafeData $safeData){
         $action = $safeData->uri[0];

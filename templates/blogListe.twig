@@ -1,0 +1,44 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+<section class="panel spotlight medium right" id="first">
+    <div class="content span-7">
+        <h1 class="major">Liste des articles</h1>
+
+    </div>
+    <div class="image filtered tinted" data-position="top left">
+
+
+        <img src="public/images/pic02.jpg" alt="image " />
+
+    </div>
+
+    <div class="">
+        {# <ul>
+            <li><a href="/article/{{ article.url }}">{{ article.titre }}</a></li>
+
+            {# <li>{{ article.content }}</li> 
+        </ul>#}
+
+        <article class="inner ">
+            {% for article in data %}
+            <ul class="">
+
+                {#<a href="#" class="image"> </a>#}
+                <h3>{{ article.titre}}</h3>
+                <p>{{article.chapo}}</p>
+                <li><a href="/article/{{ article.url }}" class="button">En détail</a></li>
+
+            </ul>
+            {% endfor %}
+        </article>
+    </div>
+
+</section>
+
+
+
+
+
+{% endblock %}
