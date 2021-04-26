@@ -30,9 +30,10 @@ class PostModel extends DataBase
         $resultData =$this->db->prepare("SELECT * FROM `articles` WHERE `titre`=:titre");
         $resultData->execute(["titre"=>Utils::uriToTitle($this->props->titre)]);
         // die(var_dump($resultData->debugDumpParams()));
-
+        
         while ($data = $resultData->fetchObject()) {
-           return $data;    
+           return $data;  
+           
         }
     }
 }

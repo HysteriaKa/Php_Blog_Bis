@@ -5,6 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/public/assets/css/main.css" />
+
+    <script src="/public/assets/js/jquery.min.js" defer></script>
+    <script src="/public/assets/js/browser.min.js" defer></script>
+    <script src="/public/assets/js/breakpoints.min.js" defer></script>
+    <script src="/public/assets/js/main.js" defer></script>
     <noscript>
         <link rel="stylesheet" href="/public/assets/css/noscript.css" /></noscript>
 </head>
@@ -34,23 +39,28 @@
                                 </div>
                             </li>
                         </ul>
-                    </nav> 
+                    </nav>
                     {% endblock %}
                 </div>
-
+                {% endblock %}
 
             </section>
-           
+
             {% block content %}{% endblock %}
-            <div class="copyright">&copy; 2021 Ka's Blog<a href="https://html5up.net">Design</a>.</div>
+
         </div>
     </div>
-    <script src="public/assets/js/jquery.min.js"></script>
-    <script src="public/assets/js/browser.min.js"></script>
-    <script src="public/assets/js/breakpoints.min.js"></script>
-    <script src="public/assets/js/main.js"></script>
+
+
+<footer>
+    
+			<div class="copyright">
+				<p>&copy; 2021 Ka's Blog<a href="https://html5up.net">Design</a>.</p>
+				<p>Se connecter ADMIN</p>
+
+			</div>
+</footer>
+
 
 </body>
-{% endblock %}
-
 </html>

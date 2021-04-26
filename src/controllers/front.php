@@ -4,7 +4,7 @@ namespace Blog\Ctrl;
 
 use Blog\Ctrl\Page;
 use Blog\Ctrl\utils;
-use Blog\Models\PostModel;
+use Blog\Ctrl\Post;
 use Blog\Models\CommentModel;
 
 class Front extends Page
@@ -30,9 +30,9 @@ class Front extends Page
     protected function articles()
     {
         $this->template = "blogListe";
-        $model = new PostModel(NULL);
+        $articles = new Post("all");
         $this->data = [];
-        foreach ($model->getArticles() as $key => $value) {
+        foreach ($articles->getList() as $key => $value) {
             $value->url = Utils::titleToURI($value->titre);
             array_push($this->data, $value);
         }
@@ -41,18 +41,19 @@ class Front extends Page
     protected function article($safedata)
     {
         $this->template = 'article';
-        $article = new PostModel(["titre" => $safedata->uri[1]]);
-        // $commentaires = new CommentModel($article->id);
-
+        $article = new Post(["titre" => $safedata->uri[1]]);
+        $commentaires = new Comments($article->getId());
+       
         $this->data = [
-            // "article"     => $article->getArticle(),
-            // "commentaires"=> $commentaires->getComments()
-            $article->getArticle()
+            "article"     => $article->getAll(),
+            "commentaires"=> $commentaires
+            ->getCommentByArticle($article->getId())
         ];
-        // die(var_dump($this->data));
+        die($this);
 
-        // $this->data = [$safedata];  
-
-
+    }
+    protected function contactForm()
+    {
+        $this->template = 'contact';
     }
 }
