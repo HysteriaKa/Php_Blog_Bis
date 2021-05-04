@@ -5,10 +5,10 @@
 <section class="panel spotlight large left">
   <div class="content span-5">
     <h1 class="major align-center">{{ data.article.titre }}</h1>
-    <p class=""> {{ data.article.content }}</p>
+    <p class="contenuarticles"> {{ data.article.content }}</p>
   </div>
   <div class="image filtered tinted" data-position="top right">
-    <img src="{{ data.article.image}}" alt="">
+    <img src="{{ data.article.image}}" alt="photo de l'article">
 
   </div>
 
@@ -23,10 +23,12 @@
     <div class="span-2-75">
 
       <h3 class="major">Commentaires</h3>
-      <p>{{data.commentaires.contenu}}</p>
+      {% for item in data.commentaires %}
+      <h1>{{ item.auteur }}</h1>
+      <p>{{ item.contenu }} </p>
+      {% endfor %}
 
-      <h1></h1>
-      <p></p>
+
 
     </div>
   </div>

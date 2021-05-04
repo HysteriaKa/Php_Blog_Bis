@@ -13,12 +13,13 @@ class Comments extends Entity
     protected $statut;
     protected $created_at;
     protected $id_user;
-    protected $id_article;
+    protected String $id_article;
     protected $auteur;
 
 
     public function __construct($data)
     {
+        if (isset($data["id_article"])) $this->id_article = $data["id_article"]; 
         $this->model = new CommentModel($data);
     }
 
@@ -42,7 +43,7 @@ class Comments extends Entity
     }
     public function getCommentByArticle()
     {
-        $this->commentaires = $this->model->getComments();
+        $this->commentaires = $this->model->getComments($this->id_article);
         return $this->commentaires;
     }
 

@@ -40,17 +40,28 @@ class Front extends Page
 
     protected function article($safedata)
     {
+
+        if ($safedata->method === "POST") {
+            
+
+            try {
+                //appel le model des commentaires et demande à enregistrer 
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        }
+
+
+
         $this->template = 'article';
         $article = new Post(["titre" => $safedata->uri[1]]);
-        $commentaires = new Comments($article->getId());
-       
+        $commentaires = new Comments(["id_article" => $article->getId()]);
         $this->data = [
             "article"     => $article->getAll(),
-            "commentaires"=> $commentaires
-            ->getCommentByArticle($article->getId())
+            "commentaires" => $commentaires
+                ->getCommentByArticle()
         ];
-        die($this);
-
+        // die(var_dump($this->data));
     }
     protected function contactForm()
     {

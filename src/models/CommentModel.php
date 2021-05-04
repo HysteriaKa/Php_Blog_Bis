@@ -6,17 +6,19 @@ use Blog\Models\DataBase;
 
 class CommentModel extends DataBase
 {
-    public function getComments()
+    /**
+     * permet d'obtenir la liste des commentaires à parttir d'un id
+     *
+     * @param   String  $id_article  l'id de l'article
+     *
+     * @return   Array              la liste des commantaires
+     */
+    public function getComments($id_article)
     {
-
         $req = $this->db
-            ->prepare("SELECT * FROM `commentaires` join articles ON commentaires.id_article=articles.id");
-        $req->execute();
-        while ($rows = $req->fetchObject()) {
-            $commentaires[] = $rows;
-        }
-
-        return $rows;
+            ->prepare("SELECT * FROM `commentaires`   WHERE id_article=:id_article ");
+        $req->execute(["id_article"=>$id_article]);
+        return $req->fetchAll ();
     }
 
     public function postComment($idArticle, $auteur, $content)
