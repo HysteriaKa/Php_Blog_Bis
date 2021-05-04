@@ -422,13 +422,10 @@ body.is-ie p {
   width: 100%;
 }
 
-h1.ka{
-  color:#2e2b37;
+h1.ka {
+  color: #2e2b37;
   display: contents;
 }
-
-
-
 
 h1,
 h2,
@@ -3804,6 +3801,13 @@ button:disabled,
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
 }
+.column {
+  flex-direction: column;
+}
+
+.row {
+  flex-direction: row !important;
+}
 
 @media screen and (max-width: 736px) {
   .panel.banner .content {
@@ -3940,8 +3944,45 @@ button:disabled,
     rgba(0, 0, 0, 0.175) 50%
   );
 }
-.contenuarticles{
+/* Css ka */
+.contenuarticles {
   font-size: 14px;
+}
+.d-flex {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.m-1 {
+  margin: 1rem;
+}
+.mt-1 {
+  margin-top: 1rem;
+}
+.mt-2 {
+  margin-top: 2rem;
+}
+.mt-3 {
+  margin-top: 3rem;
+}
+.mr-1 {
+  margin-right: 1rem;
+}
+.mr-2 {
+  margin-right: 2rem;
+}
+.mr-3 {
+  margin-right: 3rem;
+}
+.ml-1{
+  margin-left: 1rem;
+}
+
+.ml-2{
+margin-left: 2rem;
+}
+
+.ml-3{
+margin-left: 3rem;
 }
 
 @media screen and (max-width: 736px) {
@@ -4300,8 +4341,8 @@ a:hover {
   cursor: pointer;
 }
 #menu ul li:hover {
-	color: #4E4E5C;
+  color: #4e4e5c;
 }
-.active{
-    color:#716091 !important;
+.active {
+  color: #716091 !important;
 }

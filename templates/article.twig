@@ -2,7 +2,7 @@
 {% block content %}
 
 
-<section class="panel spotlight large left">
+<section class="panel spotlight large left d-flex column">
   <div class="content span-5">
     <h1 class="major align-center">{{ data.article.titre }}</h1>
     <p class="contenuarticles"> {{ data.article.content }}</p>
@@ -11,7 +11,15 @@
     <img src="{{ data.article.image}}" alt="photo de l'article">
 
   </div>
+  <div class="column ml-2">
+    <p> mise en ligne le
+      {{ data.article.createdAt|date('d-m-Y') }}</p>
 
+    {% if data.article.modifyAt%}
+    <p>Dernière mise à jour le</p>
+    {{ data.article.modifyAt|date('d-m-Y')}}
+    {% endif %}
+  </div>
 </section>
 
 <section class="panel color2-alt">

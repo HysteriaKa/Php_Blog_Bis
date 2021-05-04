@@ -44,7 +44,8 @@ class Post extends Entity{
             "createdAt" => $this->created_at,
             "chapo" => $this->chapo,
             "image" =>$this->image,
-            "idUser" => $this->id_user
+            "idUser" => $this->id_user,
+            "modifyAt"=>$this->modify_at
         ];
     }   
 
