@@ -48,6 +48,11 @@ class Post extends Entity{
         ];
     }   
 
+    /**
+     * permet d'avoir l'id de l'article
+     *
+     * @return  Integer  l'id de l'article
+     */
     public function getId(){
         return $this->id;
     }

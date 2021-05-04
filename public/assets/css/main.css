@@ -3940,6 +3940,9 @@ button:disabled,
     rgba(0, 0, 0, 0.175) 50%
   );
 }
+.contenuarticles{
+  font-size: 14px;
+}
 
 @media screen and (max-width: 736px) {
   .panel.spotlight .content {
