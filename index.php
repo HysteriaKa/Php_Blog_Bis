@@ -2,12 +2,6 @@
 
 require './vendor/autoload.php';
 
-// require_once './src/controllers/front.php';
-//routing
-// $page = 'home';
-// if (isset($_GET['p'])) {
-//     $page = $_GET['p'];
-// }
 
 $safeData = new Blog\Ctrl\SafeData([
     "post"=>[

@@ -54,20 +54,27 @@ class Comments extends Entity
     }
 
 
-    public function save()
-    { die(var_dump($this->data,
-        $this->auteur,
-        $this->contenu));
+    public function save($safedata)
+    { 
+        //tableau recupère les données de l'objet avec 2 foreach pour le tri. Assignation des des valeurs récupérées aux bonnes variables.
         try {
+            $recupData=[];
+        foreach ($safedata as $key => $value) {
+            foreach ($value as $key => $valuedata) {
+                array_push($recupData, $valuedata);
+            }
+        }
+        $this->id_article = $recupData[3];
+        $this->auteur = $recupData[1];
+        $this->contenu = $recupData[2];
+
             $this->model->postComment(
                 $this->id_article,
                 $this->auteur,
                 $this->contenu,
-
-
             );
         } catch (\Throwable $th) {
-            var_dump($th);
+           
         }
     }
 }
