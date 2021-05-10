@@ -25,8 +25,8 @@ class CommentModel extends DataBase
     {
        
         $req = $this->db
-        ->prepare("INSERT INTO comments(id_article,auteur,contenu,created_at) VALUES(?,?,?,NOW())");
+        ->prepare("INSERT INTO commentaires(id_article,auteur,contenu,created_at) VALUES(?,?,?,NOW())");
         $req->execute(array($idArticle,$auteur,$content));
-            return $req->fetchAll;
+            // return $req->fetchAll();
     }
 }

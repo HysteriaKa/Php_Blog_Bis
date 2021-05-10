@@ -34,7 +34,7 @@
 
       <h3 class="major">Commentaires</h3>
       {% for item in data.commentaires %}
-      <h1>{{ item.auteur }}</h1>
+      <p>{{ item.auteur }}</p>
       <p>{{ item.contenu }} </p>
       {% endfor %}
 
@@ -58,10 +58,10 @@
             
             <input type="hidden" name="id_article" id="id_article" value="{{ data.article.id }}"/>
           </div>
-         {#<div class="field half">
+         <div class="field half">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" />
-          </div>#}
+          </div>
           <div class="field">
             <label for="content">Votre commentaire</label>
             <textarea name="content" id="content" rows="4"></textarea>

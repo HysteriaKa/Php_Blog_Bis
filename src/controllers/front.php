@@ -5,7 +5,7 @@ namespace Blog\Ctrl;
 use Blog\Ctrl\Page;
 use Blog\Ctrl\utils;
 use Blog\Ctrl\Post;
-use Blog\Models\CommentModel;
+use Blog\Ctrl\Comments;
 
 class Front extends Page
 {
@@ -45,7 +45,7 @@ class Front extends Page
             //  die(var_dump($safedata));   
             try {
                 $newComment = new Comments($safedata);
-                $newComment->save();
+                $newComment->save($safedata);
             } catch (\Throwable $th) {
                 //throw $th;
                 $this->template ="page500";
