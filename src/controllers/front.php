@@ -42,27 +42,39 @@ class Front extends Page
     {
 
         if ($safedata->method === "POST") {
-            
-
+            //  die(var_dump($safedata));   
             try {
-                //appel le model des commentaires et demande à enregistrer 
+                $newComment = new Comments($safedata);
+                $newComment->save();
             } catch (\Throwable $th) {
                 //throw $th;
+                $this->template ="page500";
+                $this->status = 500;
+                $this->data = ["msg"=>$th];
+                return;
             }
         }
+       
+        // if ( isset( $_POST['submit'] ) ) 
+        // {   
+        //     $articleUri = $safedata->uri[1];
+        //     $article = new Post(["titre" => $safedata->uri[1]]);
+        //     $auteur = $_POST['auteur'];
+        //     $content = $_POST['content'];
 
-
+        // }
 
         $this->template = 'article';
         $article = new Post(["titre" => $safedata->uri[1]]);
         $commentaires = new Comments(["id_article" => $article->getId()]);
         $this->data = [
             "article"     => $article->getAll(),
-            "commentaires" => $commentaires
-                ->getCommentByArticle()
+            "commentaires" => $commentaires->getCommentByArticle()
+                
         ];
         // die(var_dump($this->data));
     }
+
     protected function contactForm()
     {
         $this->template = 'contact';
