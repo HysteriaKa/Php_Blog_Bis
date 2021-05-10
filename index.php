@@ -11,7 +11,10 @@ require './vendor/autoload.php';
 
 $safeData = new Blog\Ctrl\SafeData([
     "post"=>[
-        "email" => FILTER_SANITIZE_EMAIL
+        "email" => FILTER_SANITIZE_EMAIL,
+        "auteur"=> FILTER_SANITIZE_STRING,
+        "content"=> FILTER_SANITIZE_STRING,
+        "id_article"=> FILTER_SANITIZE_NUMBER_INT
     ]
 ]);
 

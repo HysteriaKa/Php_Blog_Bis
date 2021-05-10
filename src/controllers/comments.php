@@ -15,11 +15,16 @@ class Comments extends Entity
     protected $id_user;
     protected String $id_article;
     protected $auteur;
+    private   CommentModel $model;
 
 
-    public function __construct($data)
+    public function __construct($datas)
     {
-        if (isset($data["id_article"])) $this->id_article = $data["id_article"]; 
+
+        foreach ($datas as $key => $data) {
+            $this->data = $data;
+        }
+        // if (isset($data["id_article"])) $this->id_article = $data["id_article"]; 
         $this->model = new CommentModel($data);
     }
 
@@ -43,12 +48,26 @@ class Comments extends Entity
     }
     public function getCommentByArticle()
     {
-        $this->commentaires = $this->model->getComments($this->id_article);
+        // var_dump($this->id_article, $this->data);
+        $this->commentaires = $this->model->getComments($this->data);
         return $this->commentaires;
     }
 
-    public function addComment()
-    {
-       
+
+    public function save()
+    { die(var_dump($this->data,
+        $this->auteur,
+        $this->contenu));
+        try {
+            $this->model->postComment(
+                $this->id_article,
+                $this->auteur,
+                $this->contenu,
+
+
+            );
+        } catch (\Throwable $th) {
+            var_dump($th);
+        }
     }
 }

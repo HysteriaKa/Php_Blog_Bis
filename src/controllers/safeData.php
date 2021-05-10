@@ -22,22 +22,5 @@ class SafeData{
         $this->uri = substr($this->uri, 1);
         $this->uri = explode("/", $this->uri);
     }
-    // private function securizeURI(){
-    //     $this->uri = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
-    //     if ( mb_substr_count($this->uri,'/') === 1 ) {
-    //         $this->uri = substr($this->uri, 1);
-    //         $this->uri = explode("/", $this->uri);
-    //     }else{
-    //         switch ($this->uri) {
-    //             case '/article/home':
-    //                 $this->uri = substr($this->uri, 9);
-    //                 $this->uri = explode("/", $this->uri);
-    //                 break;
-                
-    //             default:
-    //                 # code...
-    //                 break;
-    //         }
-    //     }
-    // }
+   
 }

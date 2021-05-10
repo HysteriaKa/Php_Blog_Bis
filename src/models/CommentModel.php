@@ -7,11 +7,11 @@ use Blog\Models\DataBase;
 class CommentModel extends DataBase
 {
     /**
-     * permet d'obtenir la liste des commentaires à parttir d'un id
+     * permet d'obtenir la liste des commentaires à partir d'un id
      *
      * @param   String  $id_article  l'id de l'article
      *
-     * @return   Array              la liste des commantaires
+     * @return   Array              la liste des commentaires
      */
     public function getComments($id_article)
     {
@@ -23,9 +23,10 @@ class CommentModel extends DataBase
 
     public function postComment($idArticle, $auteur, $content)
     {
+       
         $req = $this->db
-            ->prepare('INSERT INTO comments(id_article, auteur, contenu, created_at )VALUE(.,?,?, NOW()');
-        $row = $req->execute(array($idArticle, $auteur, $content));
-        return $row;
+        ->prepare("INSERT INTO comments(id_article,auteur,contenu,created_at) VALUES(?,?,?,NOW())");
+        $req->execute(array($idArticle,$auteur,$content));
+            return $req->fetchAll;
     }
 }

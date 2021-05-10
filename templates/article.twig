@@ -50,23 +50,25 @@
   </div>
   <div class="inner columns divided">
     <div class="span-3-25">
-      <form method="post" action="#">
+      <form method="post" action="/article/{{ data.article.url }}">
         <div class="fields">
           <div class="field half">
-            <label for="name">Nom</label>
-            <input type="text" name="name" id="name" />
+            <label for="auteur">Nom</label>
+            <input type="text" name="auteur" id="auteur" />
+            
+            <input type="hidden" name="id_article" id="id_article" value="{{ data.article.id }}"/>
           </div>
-          <div class="field half">
+         {#<div class="field half">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" />
-          </div>
+          </div>#}
           <div class="field">
-            <label for="message">Votre commentaire</label>
-            <textarea name="message" id="message" rows="4"></textarea>
+            <label for="content">Votre commentaire</label>
+            <textarea name="content" id="content" rows="4"></textarea>
           </div>
         </div>
         <ul class="actions">
-          <li><input type="submit" value="Envoyer mon commentaire" class="button primary" /></li>
+          <li><input type="submit" name="submit" value="Envoyer mon commentaire" class="button primary" /></li>
         </ul>
       </form>
     </div>

@@ -13,6 +13,7 @@ class Post extends Entity{
     protected $id_user;
     protected $image;
     protected $list;
+    protected $modify_at;
     private $model;
 
     public function __construct($data) {
@@ -45,7 +46,8 @@ class Post extends Entity{
             "chapo" => $this->chapo,
             "image" =>$this->image,
             "idUser" => $this->id_user,
-            "modifyAt"=>$this->modify_at
+            "modifyAt"=>$this->modify_at,
+            "url"=>Utils::titleToURI($this->titre)
         ];
     }   
 
