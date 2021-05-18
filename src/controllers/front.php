@@ -11,9 +11,6 @@ class Front extends Page
 {
 
 
-    // public function __construct(Array $uri){
-    // }
-
     protected function home()
     {
         $this->template = "home";
@@ -24,6 +21,7 @@ class Front extends Page
     protected function contact()
     {
         $this->template = "contact";
+        $this->current_page = "contact";
         $this->data = []; //données du modele
 
     }
@@ -54,15 +52,6 @@ class Front extends Page
                 return;
             }
         }
-       
-        // if ( isset( $_POST['submit'] ) ) 
-        // {   
-        //     $articleUri = $safedata->uri[1];
-        //     $article = new Post(["titre" => $safedata->uri[1]]);
-        //     $auteur = $_POST['auteur'];
-        //     $content = $_POST['content'];
-
-        // }
 
         $this->template = 'article';
         $article = new Post(["titre" => $safedata->uri[1]]);
