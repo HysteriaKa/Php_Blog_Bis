@@ -457,7 +457,7 @@ h3.major {
   position: relative;
 }
 
-h1.major:after,
+/* h1.major:after,
 h2.major:after,
 h3.major:after {
   content: "";
@@ -466,7 +466,7 @@ h3.major:after {
   width: 3.5rem;
   height: 0.1rem;
   background-color: rgba(255, 255, 255, 0.25);
-}
+} */
 
 h1 {
   font-size: 3rem;
@@ -3950,7 +3950,9 @@ button:disabled,
 }
 .d-flex {
   display: flex !important;
-  flex-direction: column !important;
+}
+.column {
+  flex-direction: column;
 }
 .m-1 {
   margin: 1rem;
@@ -3973,18 +3975,31 @@ button:disabled,
 .mr-3 {
   margin-right: 3rem;
 }
-.ml-1{
+.ml-1 {
   margin-left: 1rem;
 }
 
-.ml-2{
-margin-left: 2rem;
+.ml-2 {
+  margin-left: 2rem;
 }
 
-.ml-3{
-margin-left: 3rem;
+.ml-3 {
+  margin-left: 3rem;
 }
-
+.bordercomment {
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+}
+.commenttitle {
+  position: absolute;
+  height: 100%;
+  margin-left: -558px;
+ 
+}
+.contentcomment {
+  margin-left: 338px;
+}
 @media screen and (max-width: 736px) {
   .panel.spotlight .content {
     padding: 2.8875rem 1.75rem 1.3875rem 1.75rem;
@@ -4003,7 +4018,7 @@ margin-left: 3rem;
 
 @media screen and (max-width: 480px) {
   .panel.spotlight .content {
-    min-height: 30rem;
+    min-height: 8rem;
   }
 }
 
@@ -4123,8 +4138,9 @@ margin-left: 3rem;
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-  color: black;
+  color: white;
   display: flex;
+ 
 }
 
 #wrapper > .copyright a:hover {
@@ -4316,7 +4332,7 @@ body.is-preload #wrapper {
 }
 #copyright {
   display: inline-block;
-  background: #e7eae8;
+  background: #18141a;
   padding: 0.75em 2em 0.75em 2em;
   border-radius: 8px;
   color: #8b9790;
@@ -4324,7 +4340,7 @@ body.is-preload #wrapper {
 }
 
 #copyright a {
-  color: inherit;
+  color: white;
 }
 
 #copyright .menu {
@@ -4335,6 +4351,7 @@ body.is-preload #wrapper {
   border-color: #c1cac5;
   border-width: 2px;
   line-height: 1em;
+  position:fixed;
 }
 a:hover {
   color: #dd7c7b;
@@ -4345,4 +4362,79 @@ a:hover {
 }
 .active {
   color: #716091 !important;
+}
+@media screen and (max-width: 640px) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  body:before {
+    display: flex;
+  }
+  h1.major:after,
+  h2.major:after,
+  h3.major:after {
+    display: flex;
+  }
+  input[type="checkbox"] + label:before,
+  input[type="radio"] + label:before {
+    display: flex;
+  }
+  ul.grid-icons.connected > li:before {
+    display: flex;
+  }
+  input[type="submit"].icon.circle:before,
+  input[type="reset"].icon.circle:before,
+  input[type="button"].icon.circle:before,
+  button.icon.circle:before,
+  .button.icon.circle:before {
+    display: flex;
+  }
+  .image[data-position] img {
+    display: flex;
+  }
+  .commenttitle {
+    display: flex;
+    margin-top: 259px !important;
+  
+  }
+  .panel.spotlight .image img {
+    display: flex;
+   
+  }
+ .panel .spotlight .content{
+    min-height: 8rem !important;
+
+  }
+  .panel.spotlight .image {
+    display: flex;
+  }
+  .panel.banner .image img {
+    display: flex;
+  }
+  .panel > .inner.columns.divided > *:before {
+    display: flex;
+  }
+  .gallery .modal:after {
+    display: flex;
+  }
+  .gallery .modal:before {
+    display: flex;
+  }
+  .button.icon.circle:before {
+    display: flex;
+  }
+ 
+  #wrapper section * {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle !important;
+    margin: 0;
+    width: 100%;
+    
+    /* margin-top: 5%; */
+  }
 }

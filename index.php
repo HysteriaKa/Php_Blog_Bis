@@ -17,13 +17,16 @@ $twig = new Twig\Environment($loader, [
     'cache' => false,
     //__DIR__.'/tmp'
 ]);
-
+//routing
 switch($safeData->uri[0]){
     case "admin" : 
+        array_shift($safeData->uri);
         $page = new Blog\Ctrl\Admin($safeData);
         break;
     default:
         $page = new Blog\Ctrl\Front($safeData);
         break;
 }
+
+//rendu
 echo $twig->render($page->template.".twig", ["data"=>$page->data], $page->current_page);

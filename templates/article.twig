@@ -2,7 +2,7 @@
 {% block content %}
 
 
-<section class="panel spotlight large left d-flex column">
+<section class="panel spotlight large left d-flex ">
   <div class="content span-5">
     <h1 class="major align-center">{{ data.article.titre }}</h1>
     <p class="contenuarticles"> {{ data.article.content }}</p>
@@ -11,33 +11,56 @@
     <img src="{{ data.article.image}}" alt="photo de l'article">
 
   </div>
-  <div class="ml-2">
+  <div class="ml-2 mt-2">
     <h4> Mise en ligne le :</h4>
-      <p>{{ data.article.createdAt|date('d-m-Y') }}</p>
+    <p>{{ data.article.createdAt|date('d-m-Y') }}</p>
 
     {% if data.article.modifyAt%}
-    
+
     <h4>Dernière mise à jour : </h4>
     <p>{{ data.article.modifyAt|date('d-m-Y')}}</p>
-  
+
     {% endif %}
   </div>
 </section>
 
-<section class="panel color2-alt">
-  <div class="intro color2">
+<section class="panel color2-alt ">
+  <div class="intro color2 commenttitle">
     <h2 class="major">Commentaires</h2>
-    <p>Affiche commentaires </p>
+
   </div>
-  <div class="inner columns aligned">
-    <div class="span-2-75">
+  <div class="inner columns aligned contentcomment">
+    <div class="span-2-75 ">
 
       <h3 class="major">Commentaires</h3>
       {% for item in data.commentaires %}
-      <p>{{ item.auteur }}</p>
-      <p>{{ item.contenu }} </p>
-      {% endfor %}
-
+      {% if item.statut == 1 %}
+      <div class="d-flex column">
+        <div class="d-flex">
+          <h4>
+            {# if condition %}#}
+            <a href="/admin/delete_comment/{{item.id}}" method="get">
+              <i class="far fa-trash-alt"></i>
+            </a>
+            {#{% endif %}#}
+            
+            Auteur : </h4>
+          <div>{{ item.auteur }}</div>
+        </div>
+        <div class="mb-2">
+          <div>
+            {% autoescape %}
+            {{ item.contenu|raw }} {# var won't be escaped #}
+        {% endautoescape %}
+          </div>
+        </div>
+        <div class="d-flex">
+          <p>Date : </p>
+          <p class="">{{item.created_at|date("d/m/Y")}}</p>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
 
 
     </div>
@@ -45,8 +68,8 @@
 </section>
 <section class="panel color4-alt">
   <div class="intro color4">
-    <h2 class="major">Poster un commentaire</h2>
-    <p>Après sa soumission, votre commentaire sera étudié avant d'être mis en ligne</p>
+    <h2 class="major mb-2">Poster un commentaire</h2>
+    <p class="mt-1">Après sa soumission, votre commentaire sera étudié avant d'être mis en ligne</p>
   </div>
   <div class="inner columns divided">
     <div class="span-3-25">
@@ -55,10 +78,10 @@
           <div class="field half">
             <label for="auteur">Nom</label>
             <input type="text" name="auteur" id="auteur" />
-            
-            <input type="hidden" name="id_article" id="id_article" value="{{ data.article.id }}"/>
+
+            <input type="hidden" name="id_article" id="id_article" value="{{ data.article.id }}" />
           </div>
-         <div class="field half">
+          <div class="field half">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" />
           </div>
