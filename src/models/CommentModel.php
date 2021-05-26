@@ -21,12 +21,26 @@ class CommentModel extends DataBase
         return $req->fetchAll ();
     }
 
-    public function postComment($idArticle, $auteur, $content)
+    public function postComment($idArticle, $auteur, $content, $statut, $email)
     {
        
         $req = $this->db
-        ->prepare("INSERT INTO commentaires(id_article,auteur,contenu,created_at) VALUES(?,?,?,NOW())");
-        $req->execute(array($idArticle,$auteur,$content));
+        ->prepare("INSERT INTO commentaires(id_article,auteur,contenu,created_at,statut, email) VALUES(?,?,?,NOW(),?, ?)");
+        $req->execute(array($idArticle,$auteur,$content,$statut, $email));
             // return $req->fetchAll();
+    }
+    public function deleteComment($id){
+        $req = $this->db
+        ->prepare("DELETE FROM commentaires where id=:id");
+        $req->execute();
+    }
+
+    public function getParentArticle($idComment){
+        // die(var_dump($idComment));
+        $req = $this->db
+        ->prepare("SELECT articles.titre from commentaires INNER JOIN articles ON commentaires.id_article = articles.id WHERE commentaires.id = ? LIMIT 1");
+        // die(var_dump($req->debugDumpParams()));
+        $req->execute([$idComment]);
+        return $req->fetch();
     }
 }

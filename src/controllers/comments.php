@@ -9,8 +9,6 @@ class Comments extends Entity
 {
 
     protected $id;
-    protected $contenu;
-    protected $statut;
     protected $created_at;
     protected $id_user;
     protected String $id_article;
@@ -22,7 +20,7 @@ class Comments extends Entity
     {
 
         foreach ($datas as $key => $data) {
-            $this->data = $data;
+            $this->$key = $data;
         }
         // if (isset($data["id_article"])) $this->id_article = $data["id_article"]; 
         $this->model = new CommentModel($data);
@@ -48,33 +46,45 @@ class Comments extends Entity
     }
     public function getCommentByArticle()
     {
-        // var_dump($this->id_article, $this->data);
+        var_dump($this->id_article, $this->data);
         $this->commentaires = $this->model->getComments($this->data);
         return $this->commentaires;
     }
 
 
     public function save($safedata)
-    { 
-        //tableau recupère les données de l'objet avec 2 foreach pour le tri. Assignation des des valeurs récupérées aux bonnes variables.
+    {
+
         try {
-            $recupData=[];
-        foreach ($safedata as $key => $value) {
-            foreach ($value as $key => $valuedata) {
-                array_push($recupData, $valuedata);
-            }
-        }
-        $this->id_article = $recupData[3];
-        $this->auteur = $recupData[1];
-        $this->contenu = $recupData[2];
 
             $this->model->postComment(
-                $this->id_article,
-                $this->auteur,
-                $this->contenu,
+                $safedata->post["id_article"],
+                $safedata->post["auteur"],
+                $safedata->post["content"],
+                0,
+                $safedata->post["email"]
             );
         } catch (\Throwable $th) {
-           
+            // die(var_dump($th));
         }
+    }
+
+    public function deleteComment($safedata)
+    {
+
+        try {
+            $this->model->deleteComment(
+                $safedata
+            );
+        } catch (\Throwable $th) {
+            // die(var_dump($th));
+        }
+    }
+
+    public function getArticle(){
+        // die(var_dump($this->model->getParentArticle($this->id)));
+        $title = $this->model->getParentArticle($this->id);
+        // die(var_dump($title->titre));
+        return $title->titre;
     }
 }

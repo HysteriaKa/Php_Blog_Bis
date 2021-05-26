@@ -27,7 +27,7 @@ class PostModel extends DataBase
 
     public function getArticle(){
 
-        $resultData =$this->db->prepare("SELECT * FROM `articles` WHERE `titre`=:titre");
+        $resultData =$this->db->prepare("SELECT * FROM `articles` WHERE `titre`=:titre ORDER BY `created_at` DESC" );
         $resultData->execute(["titre"=>Utils::uriToTitle($this->props->titre)]);
         // die(var_dump($resultData->debugDumpParams()));
         
