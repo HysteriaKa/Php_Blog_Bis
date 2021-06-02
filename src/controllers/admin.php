@@ -17,6 +17,7 @@ class Admin extends Page
     public function delete_comment($safeData)
     {
         $comment = new Comments(["id"=>$safeData->uri[1]]);
+        $articleUrl = Utils::titleToURI($comment->getArticleTitle());
         // die(var_dump($comment->getArticle()));
         // si methode GET
         if ($safeData->method === "GET"){
@@ -24,7 +25,7 @@ class Admin extends Page
                 $this->template = "deleteConfirm";
                 $this->data = [
                     "message" => "voulez vous supprimer ce commentaire",
-                    "articleUrl" => Utils::titleToURI($comment->getArticle())
+                    "articleUrl" => $articleUrl
                     
                 ];
             } catch (\Throwable $th) {
@@ -33,10 +34,32 @@ class Admin extends Page
             }
 
         }
-        else {
-            $this->template = "base";
-            //appeler le model pour supprimer
-            //redirection vers on verra
+        if ($safeData->method === "POST"){
+            if ( $safeData->post["removeContent"] !== ""){
+                $this->template = "redirection";
+                $this->data = ["url" => "/admin"];
+               
+                return;
+            }
+            try{
+                $idArticle = $comment->getArticleId();
+                $comment->removeComment();
+                $this->template = 'article';
+                $article = new Post(["titre" => $articleUrl]);
+                $commentaires = new Comments(["id_article" => $idArticle]);
+                $this->data = [
+                    "article"     => $article->getAll(),
+                    "commentaires" => $commentaires->getCommentByArticle(),
+                    "ack"=>[
+                        "type"=>"succes",
+                        "message"=>"le commentaire a bien été supprimé."
+                    ]
+                ];
+
+            }
+            catch (\Exception $e){
+                die(var_dump($e));
+            }
         }
         // $this->template ="";
         // $this->data =[

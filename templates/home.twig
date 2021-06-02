@@ -12,10 +12,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="/public/assets/css/main.css" />
 	<script src="/public/assets/js/jquery.min.js" defer></script>
-    <script src="/public/assets/js/browser.min.js" defer></script>
-    <script src="/public/assets/js/breakpoints.min.js" defer></script>
-    <script src="/public/assets/js/main.js" defer></script>
-   
+	<script src="/public/assets/js/browser.min.js" defer></script>
+	<script src="/public/assets/js/breakpoints.min.js" defer></script>
+	<script src="/public/assets/js/main.js" defer></script>
+
 	<noscript>
 		<link rel="stylesheet" href="/public/assets/css/noscript.css" /></noscript>
 </head>
@@ -107,29 +107,34 @@
 			</section>
 
 			<!-- Panel (Spotlight) -->
-			<section class="panel spotlight large left">
-				<div class="content span-5">
-					<h2 class="major"><a href="articles">Liste des articles du Blog</a></h2>
+			<section class="panel spotlight large1 left">
+				<div class="content span-5  ">
+					<h2 class="major"><a href="articles">Liste des articles</a></h2>
 
 				</div>
-				
+
 				<div class="image filtered tinted" data-position="top right">
 					<img src="/public/images/pic03.jpg" alt="" />
 
 				</div>
-				<ul>
+				<div class="d-flex column pr-1">
+					{% for article in data %}
+				<a class="special" href="/article/{{ article.url }}"><img class="mini" src="{{ article.image }}"  alt="image"></a>	
+					{% endfor %}
+				</div>
+				{# <ul>
 					<li><a href="article/Chalet_et_Caviar">
 							<img src="/public/images/chalets.png" alt="chalets et caviar" style="height: 148px"></a></li>
 					<li><a href="article/Festival_de_Films">
 							<img src="/public/images/festival.png" alt="Festival de films" style="height: 163px"></a>
 					</li>
 
-				</ul>
+				</ul> #}
 			</section>
 
 			<!-- Panel -->
 			<section class="panel">
-			
+
 			</section>
 
 			<!-- Panel -->
@@ -179,7 +184,7 @@
 									<p>Sed vel nibh libero. Mauris et lorem pharetra massa lorem turpis congue pulvinar. Vivamus sed feugiat finibus. Duis amet bibendum amet sed. Duis mauris ex, dapibus sed ligula tempus volutpat magna etiam. </p>
 								</div> -->
 				<div class="inner columns aligned">
-		
+
 				</div>
 			</section>
 
@@ -194,7 +199,7 @@
 		</div>
 
 	</div>
-	
+
 
 
 </body>

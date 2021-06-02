@@ -32,7 +32,7 @@ class CommentModel extends DataBase
     public function deleteComment($id){
         $req = $this->db
         ->prepare("DELETE FROM commentaires where id=:id");
-        $req->execute();
+        $req->execute(["id"=>$id]);
     }
 
     public function getParentArticle($idComment){

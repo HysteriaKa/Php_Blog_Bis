@@ -46,8 +46,7 @@ class Comments extends Entity
     }
     public function getCommentByArticle()
     {
-        var_dump($this->id_article, $this->data);
-        $this->commentaires = $this->model->getComments($this->data);
+        $this->commentaires = $this->model->getComments($this->id_article);
         return $this->commentaires;
     }
 
@@ -81,10 +80,27 @@ class Comments extends Entity
         }
     }
 
-    public function getArticle(){
+    public function getArticleTitle(){
         // die(var_dump($this->model->getParentArticle($this->id)));
         $title = $this->model->getParentArticle($this->id);
         // die(var_dump($title->titre));
         return $title->titre;
+    }
+
+    public function getArticleId(){
+        // die(var_dump($this->model->getParentArticle($this->id)));
+        $article = $this->model->getParentArticle($this->id);
+        die(var_dump($article->id));
+        return $article->id;
+    }
+
+    public function removeComment(){
+        try{
+        $this->model->deleteComment($this->id);
+        }
+        catch(\Exception $err){
+            var_dump($err);
+           throw $err;
+        }
     }
 }

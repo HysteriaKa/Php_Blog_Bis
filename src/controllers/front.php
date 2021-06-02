@@ -14,17 +14,16 @@ class Front extends Page
     protected function home()
     {
         $this->template = "home";
+        $articles = new Post("all");
         $this->current_page = "home";
-        $this->data = []; //données du modele
+        $this->data = [];
+        foreach ($articles->getList() as $key => $value) {
+            $value->url = Utils::titleToURI($value->titre);
+            array_push($this->data, $value);
+        }
     }
 
-    protected function contact()
-    {
-        $this->template = "contact";
-        $this->current_page = "contact";
-        $this->data = []; //données du modele
 
-    }
     protected function articles()
     {
         $this->template = "blogListe";
@@ -64,8 +63,19 @@ class Front extends Page
         // die(var_dump($this->data));
     }
 
-    protected function contactForm()
+    protected function contact()
     {
-        $this->template = 'contact';
+        
+        $this->template = "contact";
+        $this->current_page = "contact";
+        if(isset($_POST) && !empty($_POST)){
+          
+        $contact = new Contact;
+        $contact->getInfos();
+    }
+        $this->data = [
+            
+        ]; //données du modele
+
     }
 }
