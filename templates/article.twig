@@ -40,12 +40,12 @@
           <h4>
             {# if condition %}#}
             <a href="/admin/delete_comment/{{item.id}}" method="get">
-              <i class="far fa-trash-alt"></i>
+              <i class="far fa-trash-alt mr-1"></i>
             </a>
             {#{% endif %}#}
             
             Auteur : </h4>
-          <div>{{ item.auteur }}</div>
+          <p class="auteur">{{ item.auteur }}</p>
         </div>
         <div class="mb-2">
           <div>
@@ -56,7 +56,7 @@
         </div>
         <div class="d-flex">
           <p>Date : </p>
-          <p class="">{{item.created_at|date("d/m/Y")}}</p>
+          <p class="ml-1">{{item.created_at|date("d/m/Y")}}</p>
         </div>
         {% endif %}
         {% endfor %}
@@ -66,7 +66,7 @@
     </div>
   </div>
 </section>
-<section class="panel color4-alt size2">
+<section class="panel color4-alt size3">
   <div class="intro color4">
     <h2 class="major mb-2">Poster un commentaire</h2>
     <p class="mt-1">Après sa soumission, votre commentaire sera étudié avant d'être mis en ligne</p>

@@ -3988,7 +3988,7 @@ button:disabled,
 .ml-3 {
   margin-left: 3rem;
 }
-.pr-1{
+.pr-1 {
   padding-right: 1rem;
 }
 .bordercomment {
@@ -4000,13 +4000,12 @@ button:disabled,
   position: absolute;
   height: 100%;
   margin-left: -558px;
- 
 }
 .contentcomment {
   margin-left: 338px;
 }
-.mini{
- width:248px;
+.mini {
+  width: 248px;
 }
 
 @media screen and (max-width: 736px) {
@@ -4149,7 +4148,6 @@ button:disabled,
   right: 1rem;
   color: white;
   display: flex;
- 
 }
 
 #wrapper > .copyright a:hover {
@@ -4184,7 +4182,6 @@ button:disabled,
 #wrapper.is-dragged * {
   pointer-events: none;
 }
-
 
 body.is-preload #wrapper {
   -moz-transform: translateX(2rem);
@@ -4340,12 +4337,19 @@ body.is-preload #wrapper {
 .mb-3 {
   margin-bottom: 3rem;
 }
-.size{
-  width:100%;
+.size {
+  width: 100%;
 }
 
-.size2{
-  height:85% !important;
+.size2 {
+  height: 85% !important;
+}
+.size3 {
+  height: 100%;
+}
+.auteur {
+  margin-top: -4px;
+  margin-left: 19px;
 }
 #copyright {
   display: inline-block;
@@ -4368,7 +4372,7 @@ body.is-preload #wrapper {
   border-color: #c1cac5;
   border-width: 2px;
   line-height: 1em;
-  position:fixed;
+  position: fixed;
 }
 a:hover {
   color: #dd7c7b;
@@ -4413,15 +4417,12 @@ a:hover {
   .commenttitle {
     display: flex;
     margin-top: 259px !important;
-  
   }
   .panel.spotlight .image img {
     display: flex;
-   
   }
- .panel .spotlight .content{
+  .panel .spotlight .content {
     min-height: 8rem !important;
-
   }
   .panel.spotlight .image {
     display: flex;
@@ -4441,7 +4442,7 @@ a:hover {
   .button.icon.circle:before {
     display: flex;
   }
- 
+
   #wrapper section * {
     display: flex;
     flex-direction: column;
@@ -4451,7 +4452,7 @@ a:hover {
     vertical-align: middle !important;
     margin: 0;
     width: 100%;
-    
+
     /* margin-top: 5%; */
   }
 }

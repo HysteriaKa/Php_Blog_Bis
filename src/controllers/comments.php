@@ -22,6 +22,7 @@ class Comments extends Entity
         foreach ($datas as $key => $data) {
             $this->$key = $data;
         }
+       
         // if (isset($data["id_article"])) $this->id_article = $data["id_article"]; 
         $this->model = new CommentModel($data);
     }
