@@ -2,13 +2,15 @@
 
 require './vendor/autoload.php';
 
+// die(var_dump($_POST));
 
 $safeData = new Blog\Ctrl\SafeData([
     "post"=>[
         "email" => FILTER_SANITIZE_EMAIL,
         "auteur"=> FILTER_SANITIZE_STRING,
         "content"=> FILTER_SANITIZE_STRING,
-        "id_article"=> FILTER_SANITIZE_NUMBER_INT
+        "id_article"=> FILTER_SANITIZE_NUMBER_INT,
+        "removeContent" =>FILTER_SANITIZE_STRING
     ]
 ]);
 

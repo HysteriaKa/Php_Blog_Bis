@@ -18,7 +18,11 @@
 {% block body %}
 
 <body class="is-preload">
-
+    {% if ack is defined %}
+    <div class="ack_{{ ack.type }}">
+        {{ ack.message }}
+    </div>
+    {% endif %}
     <div id="page-wrapper">
         <div id="wrapper">
 
