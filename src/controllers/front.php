@@ -57,7 +57,11 @@ class Front extends Page
         $commentaires = new Comments(["id_article" => $article->getId()]);
         $this->data = [
             "article"     => $article->getAll(),
-            "commentaires" => $commentaires->getCommentByArticle()
+            "commentaires" => $commentaires->getCommentByArticle(),
+             "ack"=>[
+                "type"=>"succes",
+                "message"=>"le commentaire a bien été envoyé."
+            ]
                 
         ];
         // die(var_dump($this->data));
