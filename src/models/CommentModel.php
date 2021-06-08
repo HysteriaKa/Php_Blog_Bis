@@ -32,14 +32,15 @@ class CommentModel extends DataBase
     public function deleteComment($id){
         $req = $this->db
         ->prepare("DELETE FROM commentaires where id=:id");
+        // die(var_dump($this));
         $req->execute(["id"=>$id]);
     }
 
     public function getParentArticle($idComment){
-        // die(var_dump($idComment));
+        // die(var_dump($idComment)); on récupère bien l id en string 
         $req = $this->db
-        ->prepare("SELECT articles.titre from commentaires INNER JOIN articles ON commentaires.id_article = articles.id WHERE commentaires.id = ? LIMIT 1");
-        // die(var_dump($req->debugDumpParams()));
+        ->prepare("SELECT articles.titre, articles.id from commentaires INNER JOIN articles ON commentaires.id_article = articles.id WHERE commentaires.id = ? LIMIT 1");
+        // die(var_dump($req->debugDumpParams())); resultat null 
         $req->execute([$idComment]);
         return $req->fetch();
     }
