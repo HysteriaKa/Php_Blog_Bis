@@ -43,6 +43,7 @@ class Admin extends Page
             }
             try{
                 $idArticle = $comment->getArticleId();
+                var_dump($idArticle);
                 $comment->removeComment();
                 $this->template = 'article';
                 $article = new Post(["titre" => $articleUrl]);

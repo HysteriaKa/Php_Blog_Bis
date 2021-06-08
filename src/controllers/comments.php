@@ -90,7 +90,7 @@ class Comments extends Entity
     public function getArticleId(){
         // die(var_dump($this->model->getParentArticle($this->id)));
         $article = $this->model->getParentArticle($this->id);
-        die(var_dump($article->id));
+        // die(var_dump($article->id));
         return $article->id;
     }
 
