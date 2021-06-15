@@ -3,6 +3,7 @@
 require './vendor/autoload.php';
 
 // die(var_dump($_POST));
+// session_start(); 
 $currentSession = new \Blog\Ctrl\SessionManager();
 
 $safeData = new Blog\Ctrl\SafeData([
@@ -17,7 +18,7 @@ $safeData = new Blog\Ctrl\SafeData([
 
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/templates/');
 $twig = new Twig\Environment($loader, [
-    'debug' => true,
+    'debug' => false,
     'cache' => false,
     //__DIR__.'/tmp'
 ]);
@@ -33,6 +34,7 @@ switch($safeData->uri[0]){
         $page = new Blog\Ctrl\Front($safeData);
         break;
 }
+
 
 //rendu
 $templateData = ["data"=>$page->data];

@@ -36,18 +36,18 @@ class Admin extends Page
         }
         if ($safeData->method === "POST"){
             if ( $safeData->post["removeContent"] !== ""){
-                $this->template = "redirection";
-                $this->data = ["url" => "/admin"];
-               
-                return;
+                $currentSession->addNotification("warn","le commentaire n'a pas été supprimé");
+                return header("Location:/article/$articleUrl");
             }
             try{
                 $idArticle = $comment->getArticleId();
                 // var_dump($idArticle);
                 $comment->removeComment();
                 $currentSession->addNotification("success","Le commentaire a bien été supprimé.");
-                $this->template = 'article';
+                // $this->template = 'article';
+                // die(var_dump($_SESSION));
                 header("Location:/article/$articleUrl");
+                exit();
 
             }
             catch (\Exception $e){

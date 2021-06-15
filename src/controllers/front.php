@@ -59,7 +59,7 @@ class Front extends Page
             "article"     => $article->getAll(),
             "commentaires" => $commentaires->getCommentByArticle(),
              "ack"=>[
-                "type"=>"succes",
+                "type"=>"success",
                 "message"=>"le commentaire a bien été envoyé."
             ]
                 
@@ -82,4 +82,13 @@ class Front extends Page
         ]; //données du modele
 
     }
+    protected function registration(){
+        
+        $this->template = "registration";
+        $this->current_page = "registration";
+        $this->data = [
+            
+        ]; //données du modele
+    }
+
 }

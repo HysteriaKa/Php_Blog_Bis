@@ -11,14 +11,19 @@ class SessionManager
 
     public function __construct()
     {
-        $started = session_start();   
-         $_SESSION =[];
+        $started = session_start(); 
+        //  $_SESSION =[];
         if ($started) {
+            
+            // var_dump($_SESSION);
             foreach ($_SESSION as $key => $value) {
+                // var_dump("started", $key, $value);
                 $this->$key = $value;
             }
             // die(var_dump($value));
         }
+          
+        // die(var_dump($this));
     }
 
     /**
@@ -31,25 +36,27 @@ class SessionManager
      */
     public function addNotification($type, $message)
     {
+        var_dump("addNotification", $type, $message);
         array_push($this->ack, ["type" => $type, "message" => $message]);
-        $this->update();
+        $this->update("ack");
         // die(var_dump($this->update()));
      
     }
 
     public function getNotifications()
     {
+        // var_dump("getNotifications");
         $response = $this->ack;
         $this->ack = [];
-        $this->update();
+        $this->update("ack");
         return $response;
         // die(var_dump($response));
     }
 
-    private function update()
+    private function update($key)
     {
-        foreach ($this as $key => $value) {
-            $_SESSION[$key] = $value;
-        }
+        $_SESSION[$key] = $this->$key;
+        
+        // var_dump("updated", $_SESSION);
     }
 }
