@@ -18,10 +18,17 @@
 {% block body %}
 
 <body class="is-preload">
+    <pre>
+        {{ dump(ack) }}
+    </pre>
     {% if ack is defined %}
-    <div class="ack_{{ ack.type }}">
-        {{ ack.message }}
+    {% for item in ack %}
+        
+    
+    <div class="ack_{{ item.type }}">
+        {{ item.message }}
     </div>
+    {% endfor %}
     {% endif %}
     <div id="page-wrapper">
         <div id="wrapper">
