@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Suppression commentaire</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/assets/css/delete.css" />
+
+    {# <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> #}
+    <noscript>
+        <link rel="stylesheet" href="/public/assets/css/noscript.css" /></noscript>
+</head>
+
+<body>
+<h1>Enregistrez-vous</h1>
+<div class="header">
+	<h2>Register</h2>
+</div>
+<form method="post" action="register.php">
+	<div class="input-group">
+		<label>Username</label>
+		<input type="text" name="username" value="">
+	</div>
+	<div class="input-group">
+		<label>Email</label>
+		<input type="email" name="email" value="">
+	</div>
+	<div class="input-group">
+		<label>Mot de passe</label>
+		<input type="password" name="password_1">
+	</div>
+	<div class="input-group">
+		<label>Confirmez votre mot de passe</label>
+		<input type="password" name="password_2">
+	</div>
+	<div class="input-group">
+		<button type="submit" class="btn" name="register_btn">Valider</button>
+	</div>
+	<p>
+		Déjà membre? <a href="#">Se connecter</a>
+	</p>
+</form>
+</body>
+
+</html>

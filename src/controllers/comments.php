@@ -22,7 +22,7 @@ class Comments extends Entity
         foreach ($datas as $key => $data) {
             $this->$key = $data;
         }
-       
+
         // if (isset($data["id_article"])) $this->id_article = $data["id_article"]; 
         $this->model = new CommentModel($data);
     }
@@ -69,6 +69,23 @@ class Comments extends Entity
         }
     }
 
+
+
+    public function getArticleTitle()
+    {
+        // die(var_dump($this->model->getParentArticle($this->id)));
+        $title = $this->model->getParentArticle($this->id);
+        // die(var_dump($title->titre));
+        return $title->titre;
+    }
+
+    public function getArticleId()
+    {
+        // die(var_dump($this->model->getParentArticle($this->id)));
+        $article = $this->model->getParentArticle($this->id);
+        // die(var_dump($article->id));
+        return $article->id;
+    }
     public function deleteComment($safedata)
     {
 
@@ -80,28 +97,13 @@ class Comments extends Entity
             // die(var_dump($th));
         }
     }
-
-    public function getArticleTitle(){
-        // die(var_dump($this->model->getParentArticle($this->id)));
-        $title = $this->model->getParentArticle($this->id);
-        // die(var_dump($title->titre));
-        return $title->titre;
-    }
-
-    public function getArticleId(){
-        // die(var_dump($this->model->getParentArticle($this->id)));
-        $article = $this->model->getParentArticle($this->id);
-        // die(var_dump($article->id));
-        return $article->id;
-    }
-
-    public function removeComment(){
-        try{
-        $this->model->deleteComment($this->id);
-        }
-        catch(\Exception $err){
+    public function removeComment()
+    {
+        try {
+            $this->model->deleteComment($this->id);
+        } catch (\Exception $err) {
             var_dump($err);
-           throw $err;
+            throw $err;
         }
     }
 }
