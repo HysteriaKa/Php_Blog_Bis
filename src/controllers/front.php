@@ -82,13 +82,6 @@ class Front extends Page
         ]; //données du modele
 
     }
-    protected function registration(){
-        
-        $this->template = "registration";
-        $this->current_page = "registration";
-        $this->data = [
-            
-        ]; //données du modele
-    }
+   
 
 }
