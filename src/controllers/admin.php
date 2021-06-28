@@ -59,4 +59,13 @@ class Admin extends Page
         //     "message" => "commentaire supprimé"
         // ];
     }
+    
+    protected function registration(){
+        
+        $this->template = "registration";
+        $this->current_page = "registration";
+        $this->data = [
+            
+        ]; //données du modele
+    }
 }
