@@ -4444,13 +4444,19 @@ a:hover {
     display: flex;
   }
 
+  .message {
+    background-color: #fedea6;
+    color: #18141a;
+    align-items: center;
+    position: absolute;
+  }
   .ack_success {
     background-color: #fedea6;
     color: #18141a;
     align-items: center;
     position: absolute;
   }
-  
+
   #wrapper section * {
     display: flex;
     flex-direction: column;

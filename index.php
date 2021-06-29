@@ -7,12 +7,16 @@ require './vendor/autoload.php';
 $currentSession = new \Blog\Ctrl\SessionManager();
 
 $safeData = new Blog\Ctrl\SafeData([
-    "post"=>[
+    "post" => [
         "email" => FILTER_SANITIZE_EMAIL,
-        "auteur"=> FILTER_SANITIZE_STRING,
-        "content"=> FILTER_SANITIZE_STRING,
-        "id_article"=> FILTER_SANITIZE_NUMBER_INT,
-        "removeContent" =>FILTER_SANITIZE_STRING
+        "auteur" => FILTER_SANITIZE_STRING,
+        "content" => FILTER_SANITIZE_STRING,
+        "id_article" => FILTER_SANITIZE_NUMBER_INT,
+        "removeContent" => FILTER_SANITIZE_STRING,
+        "username" => FILTER_SANITIZE_STRING,
+        "password" => FILTER_SANITIZE_STRING,
+        "password_2" => FILTER_SANITIZE_STRING,
+        "register_btn" => FILTER_SANITIZE_STRING,
     ]
 ]);
 
@@ -25,8 +29,8 @@ $twig = new Twig\Environment($loader, [
 
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 //routing
-switch($safeData->uri[0]){
-    case "admin" : 
+switch ($safeData->uri[0]) {
+    case "admin":
         array_shift($safeData->uri);
         $page = new Blog\Ctrl\Admin($safeData);
         break;
@@ -37,8 +41,8 @@ switch($safeData->uri[0]){
 
 
 //rendu
-$templateData = ["data"=>$page->data];
+$templateData = ["data" => $page->data];
 $notifications  = $currentSession->getNotifications();
 // var_dump($notifications);
-if (!empty($notifications)) $templateData["ack"]= $notifications;
-echo $twig->render($page->template.".twig", $templateData , $page->current_page);
+if (!empty($notifications)) $templateData["ack"] = $notifications;
+echo $twig->render($page->template . ".twig", $templateData, $page->current_page);
