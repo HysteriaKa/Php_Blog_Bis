@@ -60,12 +60,5 @@ class Admin extends Page
         // ];
     }
     
-    protected function registration(){
-        
-        $this->template = "registration";
-        $this->current_page = "registration";
-        $this->data = [
-            
-        ]; //données du modele
-    }
+
 }

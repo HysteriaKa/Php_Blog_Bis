@@ -8,6 +8,7 @@ class SessionManager
     public array $ack = [];  //tableau contenant des tableaux associatifs contenant type et message : utile pour les notifications
     private String $user; // nom d'utilisateur
     private  $expiration; //stock la date d'expiration de la session
+    private $role;
 
     public function __construct()
     {
@@ -36,7 +37,7 @@ class SessionManager
      */
     public function addNotification($type, $message)
     {
-        var_dump("addNotification", $type, $message);
+        // var_dump("addNotification", $type, $message);
         array_push($this->ack, ["type" => $type, "message" => $message]);
         $this->update("ack");
         // die(var_dump($this->update()));
@@ -58,5 +59,16 @@ class SessionManager
         $_SESSION[$key] = $this->$key;
         
         // var_dump("updated", $_SESSION);
+    }
+
+    public function init($username, $role){
+        $this->name = $username;
+        $this->role = $role;
+        $date = new \DateTime();
+        $date->add(new \DateInterval('P1D'));
+        $this->expiration = $date;
+        $this->update("name");
+        $this->update("role");
+        $this->update("expiration");
     }
 }

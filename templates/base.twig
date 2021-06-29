@@ -36,7 +36,7 @@
                 <div class="intro color2">
                     {% if ack is defined %}
                     {% for item in ack %}
-                    <div class="ack_{{ item.type }}">
+                    <div class="ack_{{ item.type }} message">
                         {{ item.message }}
                     </div>
                     {% endfor %}
