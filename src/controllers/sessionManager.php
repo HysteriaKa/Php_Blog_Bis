@@ -61,6 +61,11 @@ class SessionManager
         // var_dump("updated", $_SESSION);
     }
 
+    public function set($key, $value){
+        $this->$key = $value;
+        $this->update($key);
+    }
+
     public function init($username, $role){
         $this->name = $username;
         $this->role = $role;
