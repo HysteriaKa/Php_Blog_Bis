@@ -17,15 +17,16 @@ class UserModel extends DataBase
      *
      * @return  Boolean             [return description]
      */
-    public function addUser()
+    public function addUser($cryptedPwd)
     {
-        var_dump($this->props);
+        // var_dump($this->props);
         try {
+            unset($this->props->password);
             $req = $this->db->prepare("INSERT INTO `users` (`email`, `password`, `username`, `user_type`) VALUES (:email, :pwd, :username, '0');");
             $req->execute([
                 ":email" => $this->props->email,
-                ":pwd" => $this->props->password,
-                ":username"   => $this->props->username
+                ":pwd" => $cryptedPwd,
+                ":username" => $this->props->username
             ]);
             // $req->execute(array($email, $password, $username));
             return true;
@@ -48,16 +49,14 @@ class UserModel extends DataBase
     //     }
     // }
 
-    public function exists()
+    public function getDataFromEmail()
     {
-        var_dump($this->props);
         try {
-            $req = $this->db->prepare("SELECT * FROM `users` WHERE email = :email AND password = :pwd LIMIT 1");
+            $req = $this->db->prepare("SELECT * FROM `users` WHERE email = :email LIMIT 1");
             $req->execute([
-                ":email" => $this->props->email,
-                ":pwd" => $this->props->password
+                ":email" => $this->props->email
             ]);
-            // $req->execute(array($email, $password, $username));
+            unset($this->props->password);
             return $req->fetch();
         } catch (\Exception $e) {
             return false;

@@ -30,8 +30,14 @@
 
 			<!-- Panel (Banner) -->
 			<section class="panel banner right">
+				{% if ack is defined %}
+				{% for item in ack %}
+				<div class="ack_{{ item.type }} message">
+					{{ item.message }}
+				</div>
+				{% endfor %}
+				{% endif %}
 				<div class="intro color2">
-					{% block nav %}
 					<nav id="nav">
 						<ul>
 							<li class="special">
@@ -44,15 +50,15 @@
 										<li><a href="/articles">Tous les posts</a></li>
 										<li><a href="/contact">Contact</a></li>
 										<li><a href="/registration">Inscription</a></li>
-										<li><a href="#">Connexion</a></li>
-
+										<li><a href="/login">Connexion</a></li>
 									</ul>
 								</div>
 							</li>
 						</ul>
 					</nav>
-					{% endblock %}
+					
 				</div>
+				
 				<div class="content color0 span-3-75 ">
 					<h1 class=" center mt-2">Ka Sr 's BLOG <br />
 					</h1>
@@ -187,13 +193,12 @@
 
 				</div>
 			</section>
-
+		
 			<!-- Copyright -->
 
 			<div class="copyright">
 				<p>&copy; 2021 Ka's Blog<a href="https://html5up.net">Design</a>.</p>
 				<p>Se connecter ADMIN</p>
-
 			</div>
 
 		</div>
@@ -204,4 +209,4 @@
 
 </body>
 
-</html>
+</html>#}

@@ -14,15 +14,14 @@ class User extends Entity
 
     public function __construct($data)
     {
-        if ($data["password"]) $data["password"] = $this->crypt($data["password"]); //has
         $this->model = new UserModel($data);
         $this->hydrate($data);
     }
 
     public function create()
     {
-        try {
-            $this->model->addUser();
+        try {//has
+            $this->model->addUser($this->crypt());
             return true;
         } catch (\Throwable $th) {
 
@@ -30,22 +29,32 @@ class User extends Entity
         }
     }
 
-    public function exists()
+    public function login()
     {
+        global $currentSession;
         try {
-            $data = $this->model->exists();
-            die(var_dump($data));
+            $data = $this->model->getDataFromEmail();
+            if ( ! password_verify($this->password, $data->password)) throw("mot de passe invalide");
+            unset($data->password);
+            unset($this->password);
             $this->hydrate($data);
+            $currentSession->set("role", $data->user_type);
+            $currentSession->set("user", $data->username);
+            //TODO : ajouter la durée de la session
             return true;
         } catch (\Throwable $th) {
             return false;
         }
-        
     }
-
-    private function crypt($toCrypt){
+    private function crypt()
+    {
+        $pwd = $this->password;
+        unset($this->password);
         // $toCrypt="aaa";
-        return password_hash($toCrypt, PASSWORD_DEFAULT );
+        return password_hash($pwd, PASSWORD_DEFAULT);
     }
-   
+    // private function verify($verify){
+    //     return password_verify($verify,$toCrypt);
+    // }
+
 }

@@ -20,16 +20,6 @@
 {% block body %}
 
 <body class="is-preload">
-    {#<pre>
-        {{ dump(ack) }}
-    </pre> #}
-    {# {% if ack is defined %}
-    {% for item in ack %}
-    <div class="ack_{{ item.type }}">
-        {{ item.message }}
-    </div>
-    {% endfor %}
-    {% endif %}#}
     <div id="page-wrapper">
         <div id="wrapper">
             <section class="panel banner right">
@@ -52,7 +42,7 @@
                                         <li><a href="/articles">Tous les posts</a></li>
                                         <li><a href="/contact">Contact</a></li>
                                         <li><a href="/registration">Inscription</a></li>
-                                        <li><a href="#">Connexion</a></li>
+                                        <li><a href="/login">Connexion</a></li>
 
                                     </ul>
                                 </div>
@@ -65,7 +55,8 @@
 
             </section>
 
-            {% block content %}{% endblock %}
+            {% block content %}
+            {% endblock %}
             <div class="copyright">
                 <p>&copy; 2021 Ka's Blog<a href="https://html5up.net">Design</a>.</p>
                 <p>Se connecter ADMIN</p>

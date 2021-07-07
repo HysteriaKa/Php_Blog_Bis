@@ -111,7 +111,7 @@ class Front extends Page
                 return;
             }
             $currentSession->addNotification("success", "le compte a bien été créé");
-            // return header("Location:/login");
+            return header("Location:/login");
             exit();
         }
     }
@@ -127,19 +127,27 @@ class Front extends Page
         if ($safeData->method === "POST") {
             global $currentSession;
             $this->data = $safeData->post;
+            // $hash = 'pwd';
             $user = new User([
                 "password" => $safeData->post["password"],
                 "email" => $safeData->post["email"]
             ]);
-            if (! $user->exists()){
-                header("HTTP/1.0 401");
-                $currentSession->addNotification("error", "l'authentification à échoué");
+
+            unset($safeData->post["password"]);
+
+
+            $isLogged =  $user->login();
+            if (! $isLogged) {
+
+                header("HTTP/1.0 500");
+                $currentSession->addNotification("error", "la connexion à échouée");
                 return;
             }
-
-            $currentSession->addNotification("succes", "Bienvenue ");
-            return header("Location:/home");
+            $currentSession->addNotification("success", "Bienvenue");
+            return header("location:/home");
+            //TODO trouver pourquoi il n'y a pas les ACK
             exit();
         }
     }
+    
 }

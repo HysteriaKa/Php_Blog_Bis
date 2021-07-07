@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "tâche-p5_blogBis",
+      "appliesTo": "/",
+      "type": "launch"
+    }
+  ]
+}
