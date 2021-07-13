@@ -20,7 +20,7 @@ class User extends Entity
 
     public function create()
     {
-        try {//has
+        try { //has
             $this->model->addUser($this->crypt());
             return true;
         } catch (\Throwable $th) {
@@ -34,7 +34,7 @@ class User extends Entity
         global $currentSession;
         try {
             $data = $this->model->getDataFromEmail();
-            if ( ! password_verify($this->password, $data->password)) throw("mot de passe invalide");
+            if (!password_verify($this->password, $data->password)) throw ("mot de passe invalide");
             unset($data->password);
             unset($this->password);
             $this->hydrate($data);
@@ -53,8 +53,10 @@ class User extends Entity
         // $toCrypt="aaa";
         return password_hash($pwd, PASSWORD_DEFAULT);
     }
-    // private function verify($verify){
-    //     return password_verify($verify,$toCrypt);
-    // }
-
+    public function logout()
+    {
+        global $currentSession;
+        $currentSession->clear();
+        $currentSession->addNotification("success", "Vous êtes déconnectés");
+    }
 }

@@ -6,25 +6,24 @@ class SessionManager
 {
 
     public array $ack = [];  //tableau contenant des tableaux associatifs contenant type et message : utile pour les notifications
-    private String $user; // nom d'utilisateur
+    private  $user; // nom d'utilisateur
     private  $expiration; //stock la date d'expiration de la session
     private $role;
 
     public function __construct()
     {
-        $started = session_start(); 
-        //  $_SESSION =[];
-        if ($started) {
-            
-            // var_dump($_SESSION);
-            foreach ($_SESSION as $key => $value) {
-                // var_dump("started", $key, $value);
-                $this->$key = $value;
-            }
-            // die(var_dump($value));
+        session_start();
+        $this->initValue();
+        foreach ($_SESSION as $key => $value) {
+            $this->$key = $value;
         }
-          
-        // die(var_dump($this));
+    }
+
+    private function initValue()
+    {
+        $this->user = "";
+        $this->ack = [];
+        $this->role = 0; //utilisateur
     }
 
     /**
@@ -41,7 +40,7 @@ class SessionManager
         array_push($this->ack, ["type" => $type, "message" => $message]);
         $this->update("ack");
         // die(var_dump($this->update()));
-     
+
     }
 
     public function getNotifications()
@@ -57,16 +56,25 @@ class SessionManager
     private function update($key)
     {
         $_SESSION[$key] = $this->$key;
-        
+
         // var_dump("updated", $_SESSION);
     }
 
-    public function set($key, $value){
+    public function set($key, $value)
+    {
         $this->$key = $value;
         $this->update($key);
     }
 
-    public function init($username, $role){
+    public function get($value)
+    {
+
+        return $this->$value;
+        // return $this->$value ? $this->$value : null;
+    }
+
+    public function init($username, $role)
+    {
         $this->name = $username;
         $this->role = $role;
         $date = new \DateTime();
@@ -75,5 +83,19 @@ class SessionManager
         $this->update("name");
         $this->update("role");
         $this->update("expiration");
+    }
+
+    /**
+     * remove supergolbales value
+     *
+     * @return  void    clear superglobal. After you need to create a new iteration of SessionManger
+     */
+    public function clear()
+    {
+        session_destroy();
+        foreach ($this as $key => $value) {
+            unset($this->key);
+        }
+        $this->initValue();
     }
 }

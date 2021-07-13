@@ -14,13 +14,20 @@ class Front extends Page
 
     protected function home()
     {
+
+        global $currentSession;
+        //    var_dump($sessionActuelle);
         $this->template = "home";
         $articles = new Post("all");
         $this->current_page = "home";
-        $this->data = [];
+        $this->data = [
+            "user"=>$currentSession->get("user"),
+            "role"=>$currentSession->get("role"),
+            "posts"=>[]
+        ];
         foreach ($articles->getList() as $key => $value) {
             $value->url = Utils::titleToURI($value->titre);
-            array_push($this->data, $value);
+            array_push($this->data["posts"], $value);
         }
     }
 
@@ -126,6 +133,7 @@ class Front extends Page
         }
         if ($safeData->method === "POST") {
             global $currentSession;
+            // $logged =false;
             $this->data = $safeData->post;
             // $hash = 'pwd';
             $user = new User([
@@ -136,18 +144,26 @@ class Front extends Page
             unset($safeData->post["password"]);
 
 
-            $isLogged =  $user->login();
-            if (! $isLogged) {
+            $isLogged = $user->login();
+            if (!$isLogged) {
 
                 header("HTTP/1.0 500");
                 $currentSession->addNotification("error", "la connexion à échouée");
                 return;
             }
             $currentSession->addNotification("success", "Bienvenue");
+            // $logged =true;
             return header("location:/home");
             //TODO trouver pourquoi il n'y a pas les ACK
             exit();
         }
     }
-    
+    //TODO logout
+    protected function logout()
+    {
+        $user = new User([]);
+        $user->logout();
+        // $logged =true;
+        return header("location:/home");
+    }
 }

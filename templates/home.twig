@@ -41,7 +41,6 @@
 					<nav id="nav">
 						<ul>
 							<li class="special">
-
 								<div id="menu">
 									<ul>
 										<li><a href="/home"
@@ -49,24 +48,29 @@
 										</li>
 										<li><a href="/articles">Tous les posts</a></li>
 										<li><a href="/contact">Contact</a></li>
-										<li><a href="/registration">Inscription</a></li>
-										<li><a href="/login">Connexion</a></li>
+										{% if data.role == 1 %}	
+										<li><a href="/listComments">Commentaires à modérer</a></li>	
+										{% endif %}
+										{% if data.user is empty %}	
+										<li><a href="/registration">Inscription</a></li>	
+										<li><a href="/login">Connexion</a></li>	
+										{% else %}
+										<li><a href="/logout">Déconnexion</a></li>
+										{% endif %}
 									</ul>
 								</div>
 							</li>
 						</ul>
 					</nav>
-					
 				</div>
-				
 				<div class="content color0 span-3-75 ">
-					<h1 class=" center mt-2">Ka Sr 's BLOG <br />
+					<h1 class=" center mt-2">Ka Sr's BLOG <br />
 					</h1>
 					<p class="center"><strong>Le développement de sites passe par le développement de soi.</strong></p>
 					<p class="center ">
 						<img src="/public/images/IMG-6502.jpg" alt="photo de profil" class="photoprofil"></p>
 					<ul class="actions">
-						<li><a href="#first" class="button primary color1 circle icon solid fa-angle-right ">Next</a>
+						<li><a href="#first" class="button primary color1 circle icon solid fa-angle-right">Next</a>
 						</li>
 					</ul>
 				</div>
@@ -125,7 +129,8 @@
 				</div>
 				<div class="d-flex column pr-1">
 					{% for article in data %}
-				<a class="special" href="/article/{{ article.url }}"><img class="mini" src="{{ article.image }}"  alt="image"></a>	
+					<a class="special" href="/article/{{ article.url }}"><img class="mini" src="{{ article.image }}"
+							alt="image"></a>
 					{% endfor %}
 				</div>
 				{# <ul>
@@ -193,7 +198,7 @@
 
 				</div>
 			</section>
-		
+
 			<!-- Copyright -->
 
 			<div class="copyright">
