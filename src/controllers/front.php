@@ -14,10 +14,14 @@ class Front extends Page
 
     protected function home()
     {
+
+        $sessionActuelle = $_SESSION;
+        //    var_dump($sessionActuelle);
         $this->template = "home";
         $articles = new Post("all");
         $this->current_page = "home";
-        $this->data = [];
+        $this->data = ['session' => $sessionActuelle['user']];
+        // var_dump($sessionActuelle['user']);
         foreach ($articles->getList() as $key => $value) {
             $value->url = Utils::titleToURI($value->titre);
             array_push($this->data, $value);
@@ -152,10 +156,9 @@ class Front extends Page
         }
     }
     //TODO logout
-    protected function logout()
+    protected function logout(User $user, $currentSession)
     {
-        global $currentSession;
-        unset ($currentSession);
+        $user->logout();
         $currentSession->addNotification("success", "Vous êtes déconnectés");
         // $logged =true;
         return header("location:/home");
