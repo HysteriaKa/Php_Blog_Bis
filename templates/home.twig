@@ -41,7 +41,6 @@
 					<nav id="nav">
 						<ul>
 							<li class="special">
-
 								<div id="menu">
 									<ul>
 										<li><a href="/home"
@@ -49,31 +48,26 @@
 										</li>
 										<li><a href="/articles">Tous les posts</a></li>
 										<li><a href="/contact">Contact</a></li>
-										<li><a href="/registration">Inscription</a></li>
-										
-											
-									
-										{#{% if !isLogged}#}
+										<li><a href="/registration">Inscription</a></li>	
+										{% if data.session is empty %}	
 										<li><a href="/login">Connexion</a></li>	
-										{#{% else %}#}
-										<li><a href="/login">Déconnexion</a></li>
-										{#{% endif %}#}
+										{% else %}
+										<li><a href="/logout">Déconnexion</a></li>
+										{% endif %}
 									</ul>
 								</div>
 							</li>
 						</ul>
 					</nav>
-
 				</div>
-
 				<div class="content color0 span-3-75 ">
-					<h1 class=" center mt-2">Ka Sr 's BLOG <br />
+					<h1 class=" center mt-2">Ka Sr's BLOG <br />
 					</h1>
 					<p class="center"><strong>Le développement de sites passe par le développement de soi.</strong></p>
 					<p class="center ">
 						<img src="/public/images/IMG-6502.jpg" alt="photo de profil" class="photoprofil"></p>
 					<ul class="actions">
-						<li><a href="#first" class="button primary color1 circle icon solid fa-angle-right ">Next</a>
+						<li><a href="#first" class="button primary color1 circle icon solid fa-angle-right">Next</a>
 						</li>
 					</ul>
 				</div>
