@@ -53,9 +53,10 @@ class User extends Entity
         // $toCrypt="aaa";
         return password_hash($pwd, PASSWORD_DEFAULT);
     }
-    public function logout($currentSession)
+    public function logout()
     {
-    
-        unset($currentSession);
+        global $currentSession;
+        $currentSession->clear();
+        $currentSession->addNotification("success", "Vous êtes déconnectés");
     }
 }

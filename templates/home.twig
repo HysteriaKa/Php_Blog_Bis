@@ -48,8 +48,11 @@
 										</li>
 										<li><a href="/articles">Tous les posts</a></li>
 										<li><a href="/contact">Contact</a></li>
+										{% if data.role == 1 %}	
+										<li><a href="/listComments">Commentaires à modérer</a></li>	
+										{% endif %}
+										{% if data.user is empty %}	
 										<li><a href="/registration">Inscription</a></li>	
-										{% if data.session is empty %}	
 										<li><a href="/login">Connexion</a></li>	
 										{% else %}
 										<li><a href="/logout">Déconnexion</a></li>
