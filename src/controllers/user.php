@@ -53,8 +53,10 @@ class User extends Entity
         // $toCrypt="aaa";
         return password_hash($pwd, PASSWORD_DEFAULT);
     }
-    // private function verify($verify){
-    //     return password_verify($verify,$toCrypt);
-    // }
+   public function logout()
+   {
+       global $currentSession;
+       unset ($currentSession);
+   }
 
 }

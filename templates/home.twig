@@ -50,15 +50,22 @@
 										<li><a href="/articles">Tous les posts</a></li>
 										<li><a href="/contact">Contact</a></li>
 										<li><a href="/registration">Inscription</a></li>
-										<li><a href="/login">Connexion</a></li>
+										
+											
+									
+										{#{% if !isLogged}#}
+										<li><a href="/login">Connexion</a></li>	
+										{#{% else %}#}
+										<li><a href="/login">Déconnexion</a></li>
+										{#{% endif %}#}
 									</ul>
 								</div>
 							</li>
 						</ul>
 					</nav>
-					
+
 				</div>
-				
+
 				<div class="content color0 span-3-75 ">
 					<h1 class=" center mt-2">Ka Sr 's BLOG <br />
 					</h1>
@@ -125,7 +132,8 @@
 				</div>
 				<div class="d-flex column pr-1">
 					{% for article in data %}
-				<a class="special" href="/article/{{ article.url }}"><img class="mini" src="{{ article.image }}"  alt="image"></a>	
+					<a class="special" href="/article/{{ article.url }}"><img class="mini" src="{{ article.image }}"
+							alt="image"></a>
 					{% endfor %}
 				</div>
 				{# <ul>
@@ -193,7 +201,7 @@
 
 				</div>
 			</section>
-		
+
 			<!-- Copyright -->
 
 			<div class="copyright">

@@ -126,6 +126,7 @@ class Front extends Page
         }
         if ($safeData->method === "POST") {
             global $currentSession;
+            // $logged =false;
             $this->data = $safeData->post;
             // $hash = 'pwd';
             $user = new User([
@@ -136,18 +137,27 @@ class Front extends Page
             unset($safeData->post["password"]);
 
 
-            $isLogged =  $user->login();
-            if (! $isLogged) {
+            $isLogged = $user->login();
+            if (!$isLogged) {
 
                 header("HTTP/1.0 500");
                 $currentSession->addNotification("error", "la connexion à échouée");
                 return;
             }
             $currentSession->addNotification("success", "Bienvenue");
+            // $logged =true;
             return header("location:/home");
             //TODO trouver pourquoi il n'y a pas les ACK
             exit();
         }
     }
-    
+    //TODO logout
+    protected function logout()
+    {
+        global $currentSession;
+        unset ($currentSession);
+        $currentSession->addNotification("success", "Vous êtes déconnectés");
+        // $logged =true;
+        return header("location:/home");
+    }
 }
