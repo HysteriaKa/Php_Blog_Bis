@@ -21,9 +21,9 @@ class Front extends Page
         $articles = new Post("all");
         $this->current_page = "home";
         $this->data = [
-            "user"=>$currentSession->get("user"),
-            "role"=>$currentSession->get("role"),
-            "posts"=>[]
+            "user" => $currentSession->get("user"),
+            "role" => $currentSession->get("role"),
+            "posts" => []
         ];
         foreach ($articles->getList() as $key => $value) {
             $value->url = Utils::titleToURI($value->titre);
@@ -45,7 +45,7 @@ class Front extends Page
 
     protected function article($safedata)
     {
-
+        global $currentSession;
         if ($safedata->method === "POST") {
             //  die(var_dump($safedata));   
             try {
@@ -55,7 +55,10 @@ class Front extends Page
                 //throw $th;
                 $this->template = "page500";
                 $this->status = 500;
-                $this->data = ["msg" => $th];
+                $this->data = [
+                    "msg" => $th
+                ];
+
                 return;
             }
         }
@@ -64,6 +67,8 @@ class Front extends Page
         $article = new Post(["titre" => $safedata->uri[1]]);
         $commentaires = new Comments(["id_article" => $article->getId()]);
         $this->data = [
+            "user" => $currentSession->get("user"),
+            "role" => $currentSession->get("role"),
             "article"     => $article->getAll(),
             "commentaires" => $commentaires->getCommentByArticle(),
             "ack" => [

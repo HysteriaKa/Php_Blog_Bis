@@ -44,11 +44,11 @@
       <div class="d-flex column">
         <div class="d-flex">
           <h4>
-            {# if condition %}#}
+            {% if data.role == 1 %}	
             <a href="/admin/delete_comment/{{item.id}}" method="get">
               <i class="far fa-trash-alt mr-1"></i>
             </a>
-            {#{% endif %}#}
+            {% endif %}
             
             Auteur : </h4>
           <p class="auteur">{{ item.auteur }}</p>
