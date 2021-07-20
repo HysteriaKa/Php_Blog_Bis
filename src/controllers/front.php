@@ -20,11 +20,17 @@ class Front extends Page
         $this->template = "home";
         $articles = new Post("all");
         $this->current_page = "home";
+        if ($currentSession->get("user")){
         $this->data = [
             "user" => $currentSession->get("user"),
             "role" => $currentSession->get("role"),
             "posts" => []
         ];
+    } else{
+        $this->data = [
+            "posts" => []
+        ];
+    }
         foreach ($articles->getList() as $key => $value) {
             $value->url = Utils::titleToURI($value->titre);
             array_push($this->data["posts"], $value);
