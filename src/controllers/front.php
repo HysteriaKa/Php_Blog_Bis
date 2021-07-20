@@ -45,6 +45,7 @@ class Front extends Page
 
     protected function article($safedata)
     {
+        //TODO saveCOmment Only user connected
         global $currentSession;
         if ($safedata->method === "POST") {
             //  die(var_dump($safedata));   
@@ -163,7 +164,7 @@ class Front extends Page
             exit();
         }
     }
-    //TODO logout
+    
     protected function logout()
     {
         $user = new User([]);
