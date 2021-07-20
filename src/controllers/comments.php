@@ -94,7 +94,7 @@ class Comments extends Entity
                 $safedata
             );
         } catch (\Throwable $th) {
-            // die(var_dump($th));
+            
         }
     }
     public function removeComment()
@@ -104,6 +104,14 @@ class Comments extends Entity
         } catch (\Exception $err) {
             var_dump($err);
             throw $err;
+        }
+    }
+    public function getComments(){
+
+        try {
+            $this->model->getAllComments();
+        } catch (\Throwable $th) {
+            //throw $th;
         }
     }
 }
