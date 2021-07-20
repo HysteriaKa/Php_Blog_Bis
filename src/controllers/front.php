@@ -39,10 +39,13 @@ class Front extends Page
 
 
     protected function articles()
-    {
+    { 
+        global $currentSession;
         $this->template = "blogListe";
         $articles = new Post("all");
-        $this->data = [];
+        $this->data = [
+          
+        ];
         foreach ($articles->getList() as $key => $value) {
             $value->url = Utils::titleToURI($value->titre);
             array_push($this->data, $value);
@@ -89,7 +92,7 @@ class Front extends Page
 
     protected function contact()
     {
-
+global $currentSession;
         $this->template = "contact";
         $this->current_page = "contact";
         if (isset($_POST) && !empty($_POST)) {
@@ -97,7 +100,8 @@ class Front extends Page
             $contact = new Contact;
             $contact->getInfos();
         }
-        $this->data = []; //données du modele
+        $this->data = [  "user" => $currentSession->get("user"),
+        "role" => $currentSession->get("role")]; //données du modele
 
     }
 

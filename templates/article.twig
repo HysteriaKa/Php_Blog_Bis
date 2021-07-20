@@ -75,6 +75,7 @@
 <section class="panel color4-alt size3">
   <div class="intro color4">
     <h2 class="major mb-2">Poster un commentaire</h2>
+    <p>Vous devez être inscrits et connectés pour soumettre un commentaire</p>
     <p class="mt-1">Après sa soumission, votre commentaire sera étudié avant d'être mis en ligne</p>
   </div>
   <div class="inner columns divided">
@@ -96,9 +97,15 @@
             <textarea name="content" id="content" rows="4"></textarea>
           </div>
         </div>
+             
         <ul class="actions">
+          {% if data.user is empty %}
+          <li><a href="/login">Connexion</a></li>
+          <li><a href="/registration">Inscription</a></li>
+          {% else %} 
           <li><input type="submit" name="submit" value="Envoyer mon commentaire" class="button primary" /></li>
         </ul>
+        {% endif %}
       </form>
     </div>
   </div>
