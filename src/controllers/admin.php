@@ -5,12 +5,18 @@ namespace Blog\Ctrl;
 use Blog\Ctrl\Comments;
 // use Blog\Models\CommentModel;
 use Blog\Ctrl\Utils;
-
+use Blog\Debug;
 
 class Admin extends Page
 {
     public function __construct(SafeData $safeData)
     {
+        global $currentSession;
+        if($currentSession->get("role") === "0" || is_null($_SERVER["HTTP_REFERER"])){
+            $currentSession->addNotification("error", "vous ne pouvez pas faire cette action.");
+            header("Location:/login");
+            exit;
+        }
         parent::__construct($safeData);
     }
 
@@ -61,11 +67,16 @@ class Admin extends Page
         global $currentSession;
         $this->template = 'listComments';
         $commentaires = new comments($safeData);
-        $commentaires->getComments();
+        
         $this->data = [
             "user" => $currentSession->get("user"),
             "role" => $currentSession->get("role"),
-            "commentaires" => $commentaires
+            "commentaires" => $commentaires->getCommentsToValidate()
         ];
+        // var_dump($this->data);
+    }
+
+    public function validateComment($safeData){
+
     }
 }

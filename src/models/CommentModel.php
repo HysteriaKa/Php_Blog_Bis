@@ -21,13 +21,13 @@ class CommentModel extends DataBase
         return $req->fetchAll();
     }
 
-    public function postComment($idArticle, $auteur, $content, $statut, $email)
+    public function postComment($idArticle, $idAuteur, $content, $statut)
     {
 
         $req = $this->db
-            ->prepare("INSERT INTO commentaires(id_article,auteur,contenu,created_at,statut, email) VALUES(?,?,?,NOW(),?, ?)");
-        $req->execute(array($idArticle, $auteur, $content, $statut, $email));
-        // return $req->fetchAll();
+            ->prepare("INSERT INTO commentaires(id_article,id_user,contenu,created_at,statut) VALUES(?,?,?,NOW(),?)");
+        $req->execute(array($idArticle, $idAuteur, $content, $statut));
+        // var_dump($idArticle, $idAuteur, $content, $statut);
     }
     public function deleteComment($id)
     {
@@ -46,11 +46,11 @@ class CommentModel extends DataBase
         $req->execute([$idComment]);
         return $req->fetch();
     }
-    public function getAllComments()
+    public function getCommentsToValidate()
     {
         $req = $this->db
 
-            ->prepare("SELECT * FROM `commentaires`");
+            ->prepare("SELECT commentaires.id, commentaires.statut, commentaires.created_at, commentaires.id_article, commentaires.contenu, users.username FROM `commentaires` JOIN `users` WHERE users.id = commentaires.id_user AND commentaires.statut=0");
         $req->execute();
         $comments = [];
         while ($rows = $req->fetchObject()) {
