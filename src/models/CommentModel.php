@@ -50,7 +50,8 @@ class CommentModel extends DataBase
     {
         $req = $this->db
 
-            ->prepare("SELECT commentaires.id, commentaires.statut, commentaires.created_at, commentaires.id_article, commentaires.contenu, users.username FROM `commentaires` JOIN `users` WHERE users.id = commentaires.id_user AND commentaires.statut=0");
+            ->prepare("SELECT commentaires.id, commentaires.statut, commentaires.created_at, commentaires.id_article, commentaires.contenu, users.username, articles.titre FROM ((`commentaires` JOIN `users` ON users.id = commentaires.id_user AND commentaires.statut=0)
+            JOIN `articles` ON commentaires.id_article = articles.id) ORDER BY created_at DESC");
         $req->execute();
         $comments = [];
         while ($rows = $req->fetchObject()) {
@@ -58,5 +59,11 @@ class CommentModel extends DataBase
         }
         // var_dump($comments);
         return $comments;
+    }
+    public function updateComment($id)
+    {
+        $req = $this->db
+            ->prepare("UPDATE `commentaires` SET commentaires.statut = 1 WHERE id=:id");
+        $req->execute(["id" => $id]);
     }
 }
