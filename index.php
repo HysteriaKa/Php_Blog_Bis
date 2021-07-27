@@ -8,15 +8,16 @@ $currentSession = new \Blog\Ctrl\SessionManager();
 
 $safeData = new Blog\Ctrl\SafeData([
     "post" => [
-        "email" => FILTER_SANITIZE_EMAIL,
         "auteur" => FILTER_SANITIZE_STRING,
+        "commentToValidate" => FILTER_SANITIZE_NUMBER_INT,
         "content" => FILTER_SANITIZE_STRING,
+        "email" => FILTER_SANITIZE_EMAIL,
         "id_article" => FILTER_SANITIZE_NUMBER_INT,
-        "removeContent" => FILTER_SANITIZE_STRING,
-        "username" => FILTER_SANITIZE_STRING,
         "password" => FILTER_SANITIZE_STRING,
         "password_2" => FILTER_SANITIZE_STRING,
         "register_btn" => FILTER_SANITIZE_STRING,
+        "removeContent" => FILTER_SANITIZE_STRING,
+        "username" => FILTER_SANITIZE_STRING,
     ]
 ]);
 
