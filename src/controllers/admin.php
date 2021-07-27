@@ -12,7 +12,7 @@ class Admin extends Page
     public function __construct(SafeData $safeData)
     {
         global $currentSession;
-        if($currentSession->get("role") === "0" || is_null($_SERVER["HTTP_REFERER"])){
+        if ($currentSession->get("role") === "0" || is_null($_SERVER["HTTP_REFERER"])) {
             $currentSession->addNotification("error", "vous ne pouvez pas faire cette action.");
             header("Location:/login");
             exit;
@@ -67,7 +67,7 @@ class Admin extends Page
         global $currentSession;
         $this->template = 'listComments';
         $commentaires = new comments($safeData);
-        
+
         $this->data = [
             "user" => $currentSession->get("user"),
             "role" => $currentSession->get("role"),
@@ -76,7 +76,19 @@ class Admin extends Page
         // var_dump($this->data);
     }
 
-    public function validateComment($safeData){
+    public function validateComment($safeData)
+    {
+        global $currentSession;
+        $comment = new Comments();
 
+        if ($safeData->method === "POST") {
+            try {
+                $comment->validateComment();
+                $currentSession->addNotification("success", "Le commentaire est en ligne.");
+                return header("Location:/admin/listComments");
+            } catch (\Exception $e) {
+                die(var_dump($e));
+            }
+        }
     }
 }

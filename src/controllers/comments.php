@@ -117,4 +117,13 @@ class Comments extends Entity
             //throw $th;
         }
     }
+    public function validateComment()
+    {
+        try{
+            $this->model->updateComment($this->id);
+        }catch (\Exception $err) {
+            var_dump($err);
+            throw $err;
+        }
+    }
 }
