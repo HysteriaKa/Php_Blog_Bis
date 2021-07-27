@@ -9,9 +9,12 @@ class SessionManager
     private  $user; // nom d'utilisateur
     private  $expiration; //stock la date d'expiration de la session
     private $role;
+    private $idUser;
 
     public function __construct()
     {
+        session_cache_expire(280);
+        $expiration = session_cache_expire();
         session_start();
         $this->initValue();
         foreach ($_SESSION as $key => $value) {
@@ -24,6 +27,7 @@ class SessionManager
         $this->user = "";
         $this->ack = [];
         $this->role = 0; //utilisateur
+        $this->idUser ="";
     }
 
     /**
@@ -73,16 +77,18 @@ class SessionManager
         // return $this->$value ? $this->$value : null;
     }
 
-    public function init($username, $role)
+    public function init($username, $role, $id)
     {
         $this->name = $username;
         $this->role = $role;
+        $this->idUser =$id;
         $date = new \DateTime();
         $date->add(new \DateInterval('P1D'));
         $this->expiration = $date;
         $this->update("name");
         $this->update("role");
         $this->update("expiration");
+        $this->update("idUser");
     }
 
     /**

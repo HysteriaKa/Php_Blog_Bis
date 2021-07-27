@@ -40,6 +40,8 @@ class User extends Entity
             $this->hydrate($data);
             $currentSession->set("role", $data->user_type);
             $currentSession->set("user", $data->username);
+            $currentSession->set("idUser", $data->id);
+            // die(var_dump($data));
             //TODO : ajouter la durée de la session
             return true;
         } catch (\Throwable $th) {

@@ -16,7 +16,7 @@ class Comments extends Entity
     private   CommentModel $model;
 
 
-    public function __construct($datas)
+    public function __construct($datas=[])
     {
 
         foreach ($datas as $key => $data) {
@@ -42,7 +42,7 @@ class Comments extends Entity
             "createdAt" => $this->created_at,
             "idArticle" => $this->id_article,
             "idUser" => $this->id_user,
-            "auteur" => $this->auteur
+            
         ];
     }
     public function getCommentByArticle()
@@ -54,15 +54,17 @@ class Comments extends Entity
 
     public function save($safedata)
     {
-
+        global $currentSession;
         try {
 
             $this->model->postComment(
                 $safedata->post["id_article"],
-                $safedata->post["auteur"],
-                $safedata->post["content"],
+                $currentSession->get("idUser"),
+                
+                $safedata->post["content"],   
                 0,
-                $safedata->post["email"]
+                // $safedata->post["email"]
+                // die(var_dump(($currentSession)))
             );
         } catch (\Throwable $th) {
             // die(var_dump($th));
@@ -106,10 +108,11 @@ class Comments extends Entity
             throw $err;
         }
     }
-    public function getComments(){
+    public function getCommentsToValidate(){
 
         try {
-            $this->model->getAllComments();
+            $comments = $this->model->getCommentsToValidate();
+            return $comments;
         } catch (\Throwable $th) {
             //throw $th;
         }

@@ -7,6 +7,7 @@ use Blog\Ctrl\utils;
 use Blog\Ctrl\Post;
 use Blog\Ctrl\Comments;
 use Blog\Ctrl\User;
+use Blog\Debug;
 
 class Front extends Page
 {
@@ -43,13 +44,23 @@ class Front extends Page
         global $currentSession;
         $this->template = "blogListe";
         $articles = new Post("all");
+        // (new Debug)->vardump($articles->getList());
+        
         $this->data = [
-          
+            "user" => $currentSession->get("user"),
+            "role" => $currentSession->get("role"),
+            "posts" =>[]
         ];
+        
+        // var_dump($this->data);
         foreach ($articles->getList() as $key => $value) {
+            
             $value->url = Utils::titleToURI($value->titre);
-            array_push($this->data, $value);
+            // (new Debug)->vardump($value, $this->data);
+            array_push($this->data["posts"], $value);
         }
+        // (new Debug)->vardump($this->data);
+        
     }
 
     protected function article($safedata)
@@ -87,7 +98,7 @@ class Front extends Page
             ]
 
         ];
-        // die(var_dump($this->data));
+        
     }
 
     protected function contact()

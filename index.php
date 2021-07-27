@@ -29,16 +29,15 @@ $twig = new Twig\Environment($loader, [
 
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 //routing
-// switch ($safeData->uri[0]) {
-//     case "admin":
-//         array_shift($safeData->uri);
-//         $page = new Blog\Ctrl\Admin($safeData);
-//         break;
-//     default:
-//         $page = new Blog\Ctrl\Front($safeData);
-//         break;
-// }
-$page = new Blog\Ctrl\Front($safeData);
+switch ($safeData->uri[0]) {
+    case "admin":
+        array_shift($safeData->uri);
+        $page = new Blog\Ctrl\Admin($safeData);
+        break;
+    default:
+        $page = new Blog\Ctrl\Front($safeData);
+        break;
+}
 
 //rendu
 $templateData = ["data" => $page->data];

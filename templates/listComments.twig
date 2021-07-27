@@ -14,6 +14,16 @@
 </head>
 
 <body>
+    <h1>Derniers commentaires à modérer</h1>
+    <div>
+        
+        {% for comment in data.commentaires %}
+        {% if comment.role == 0 %}
+        <p>{{ comment.created_at | date('d/m/Y')}}</p>
+           <p> {{ comment.contenu}}</p>
+           {% endif %}
+        {% endfor %}
+    </div>
 </body>
 
 </html>
