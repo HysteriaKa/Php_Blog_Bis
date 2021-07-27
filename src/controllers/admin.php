@@ -66,7 +66,7 @@ class Admin extends Page
         global $currentSession;
         $comment = new Comments($safeData);
 
-        // $currentSession->addNotification("success", "test");
+        $currentSession->addNotification("success", "test");
         if ($safeData->method === "POST") {
             try {
                 $comment->validateComment();
