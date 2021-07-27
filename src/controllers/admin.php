@@ -63,23 +63,8 @@ class Admin extends Page
 
     public function listComments($safeData)
     {
-
         global $currentSession;
-        $this->template = 'listComments';
-        $commentaires = new comments($safeData);
-
-        $this->data = [
-            "user" => $currentSession->get("user"),
-            "role" => $currentSession->get("role"),
-            "commentaires" => $commentaires->getCommentsToValidate()
-        ];
-        // var_dump($this->data);
-    }
-
-    public function validateComment($safeData)
-    {
-        global $currentSession;
-        $comment = new Comments();
+        $comment = new Comments($safeData);
 
         if ($safeData->method === "POST") {
             try {
@@ -90,5 +75,15 @@ class Admin extends Page
                 die(var_dump($e));
             }
         }
+        $this->template = 'listComments';
+
+        $this->data = [
+            "user" => $currentSession->get("user"),
+            "role" => $currentSession->get("role"),
+            "commentaires" => $comment->getCommentsToValidate()
+        ];
+        // var_dump($this->data);
     }
+
+    
 }

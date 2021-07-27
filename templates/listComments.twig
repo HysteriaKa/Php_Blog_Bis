@@ -32,6 +32,7 @@
                     <div class="card-action">
                         <a href="/admin/delete_comment/{{comment.id}}" method="get">Supprimer le commentaire</a>
                         <form action="" method="POST">
+                            <input type="hidden" value="{{comment.id}}" name="commentToValidate">
                             <button type="submit" name="validateComment" data-bs-dismiss="modal">Publier le commentaire</button>
                           </form>
                     </div>

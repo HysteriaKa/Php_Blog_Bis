@@ -120,7 +120,7 @@ class Comments extends Entity
     public function validateComment()
     {
         try{
-            $this->model->updateComment($this->id);
+            $this->model->updateComment($this->post["commentToValidate"]);
         }catch (\Exception $err) {
             var_dump($err);
             throw $err;
