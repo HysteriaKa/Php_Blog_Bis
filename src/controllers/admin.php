@@ -86,5 +86,36 @@ class Admin extends Page
         // var_dump($this->data);
     }
 
-    
+    public function addArticle($safedata)
+    {
+        global $currentSession;
+        
+        if ($safedata->method === "POST") {
+            
+            try {
+                die(var_dump($safedata, $currentSession));
+                $newArticle = new Post($safedata);
+                $newArticle->addArticle($safedata);
+                die(var_dump($safedata));
+            } catch (\Throwable $th) {
+                //throw $th;
+                $this->template = "page500";
+                $this->status = 500;
+                $this->data = [
+                    "msg" => $th
+                ];
+
+                return header("location:/articles");
+            }
+        }
+        $this->template = 'addArticle';
+        $this->data =[
+            "user" => $currentSession->get("user"),
+            "role" => $currentSession->get("role"),
+            "ack" => [
+                "type" => "success",
+                "message" => "l'article a bien été publié."
+            ]
+        ];
+    }
 }

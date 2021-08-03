@@ -36,4 +36,11 @@ class PostModel extends DataBase
            
         }
     }
+    public function addArticle( $titre,$content, $image, $chapo, $created_at, $idUser){
+
+        $req = $this->db
+        ->prepare("INSERT INTO articles(titre,id_user,content,image,created_at,chapo) VALUES(?,?,?,?,NOW(),?)");
+    $req->execute(array($titre,$content, $image, $chapo, $created_at, $idUser));   
+    }
+    
 }
