@@ -161,11 +161,23 @@ class Admin extends Page
 
     public function edit_article($safedata)
     {
-        $this->template = 'addArticle';
+        global $currentSession;
         $article = new Post(["id" => $safedata->uri[1]]);
         $article->initById();
+       
+        if ($safedata->method === "POST") {
+            try {
+                // var_dump($article);
+                $article->modifyArticle($safedata);
+                $currentSession->addNotification("success", "La modification a été effectuée.");
+                return header("location:/articles");
+            } catch (\Exception $e) {
+                die(var_dump($e));
+            }
+        }
+        $this->template = 'addArticle';
         $this->data = $article->getAll();
+        
 
     }
-    
 }

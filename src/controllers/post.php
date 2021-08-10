@@ -127,13 +127,12 @@ class Post extends Entity
         global $currentSession;
         try {
             $this->model->updateArticle(
-                // $id =$this->getId(),
+                $id =$this->getId(),
+                // $currentSession->get("idUser"),
                 $safedata->post["titre"],
-                $currentSession->get("idUser"),
-                $safedata->post["chapo"],
                 $safedata->post["content"],
-                $safedata->post["image"],
-                $safedata->post["modify_at"],
+                $safedata->post["chapo"],
+                $safedata->post["image"]
             );
         } catch (\Exception $err) {
             var_dump($err);

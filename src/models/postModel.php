@@ -68,9 +68,14 @@ class PostModel extends DataBase
     {
 
         try {
+            // var_dump($id, $titre, $chapo,$image, $content);
             $req = $this->db
-                ->prepare("UPDATE `articles` SET articles.titre =$titre,articles.content=$content, articles.chapo=$chapo, articles.image=$image, articles.modify_at= NOW()  WHERE id=:id");
-            $req->execute(["id" => $id]);
+                ->prepare("UPDATE `articles` SET articles.titre=:titre,
+                articles.content=:content, articles.chapo=:chapo, 
+                articles.image=:image, articles.modify_at= NOW() WHERE id=:id");
+            $req->execute([":id" => $id, ":content"=>$content, ":chapo"=>$chapo,":titre"=>$titre, ":image"=>$image]);
+            //   die(var_dump($req->debugDumpParams())); 
+
         } catch (\Throwable $th) {
             die(var_dump($th));
         }
@@ -80,7 +85,7 @@ class PostModel extends DataBase
         try {
             $req = $this->db
                 ->prepare("DELETE FROM articles where id=:id");
-            $req->execute(["id" => $this->props->id]);
+            $req->execute();
             //  die(var_dump($req->debugDumpParams())); 
         } catch (\Throwable $th) {
             die(var_dump($th));
