@@ -1,0 +1,21 @@
+{% extends 'baseAdmin.twig' %}
+
+{% block content %}
+
+<h1 class="center">Ajouter un article</h1>
+<form method="post">
+    <label for="titre">Titre de l'article</label>
+    <input type="text" name ="titre" id="titre" value="{{ data.titre }}">
+    <label for="titre">Résumé de l'article</label>
+    <input type="text" name ="chapo" id="chapo">
+    <input type="hidden" name="id_user" id="id_user" value="{{ data.idUser }}" />
+    <label for="image">lien de l'image</label>
+    <input type="text" name ="image" id="image">
+    <textarea style="width: 100%;" name="content">{{ data.content }}</textarea>
+    <input name="submit" type="submit" value="Publier" /></form>
+{% endblock %}
+
+
+{% block javascript %}
+        var notifications ={{ ack|json_encode|raw }};
+{% endblock %}

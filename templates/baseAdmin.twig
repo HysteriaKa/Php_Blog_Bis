@@ -14,12 +14,13 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.8.2/tinymce.min.js" integrity="sha512-laacsEF5jvAJew9boBITeLkwD47dpMnERAtn4WCzWu/Pur9IkF0ZpVTcWRT/FUCaaf7ZwyzMY5c9vCcbAAuAbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/public/assets/js/texteblog.js"></script>
 
     <script>
         {% block javascript %}
         {% endblock %};
         window.onload= function(){
-            if (notifications !== undefined) {
+            if (notifications !== null) {
                for(let i=0; i<notifications.length; i++){
                     M.toast({html: notifications[i].message, class:notifications[i].type})
                 }

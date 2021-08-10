@@ -59,7 +59,7 @@ class Admin extends Page
             }
         }
     }
-    //TODO display all comments publish/delete 
+
 
     public function listComments($safeData)
     {
@@ -86,5 +86,86 @@ class Admin extends Page
         // var_dump($this->data);
     }
 
+    public function addArticle($safedata)
+    {
+        global $currentSession;
+
+        if ($safedata->method === "POST") {
+
+            try {
+                // die(var_dump($safedata, $currentSession));
+                $newArticle = new Post($safedata->post);
+                $newArticle->addPost();
+                return header("location:/articles");
+            } catch (\Throwable $th) {
+                //throw $th;
+                $this->template = "page500";
+                $this->status = 500;
+                $this->data = [
+                    "msg" => $th
+                ];
+            }
+        }
+
+        $this->template = 'addArticle';
+        $this->data = [
+
+            "ack" => [
+                "type" => "success",
+                "message" => "l'article a bien été publié."
+            ],
+            "idUser" => $currentSession->get("idUser"),
+            "role" => $currentSession->get("role"),
+            "user" => $currentSession->get("user"),
+            "titre" => "",
+        ];
+    }
+
+    public function delete_article($safedata)
+    {
+
+        global $currentSession;
+
+        //   die(var_dump($article->getArticleToDelete($safedata)));
+        // si methode GET
+        if ($safedata->method === "GET") {
+            try {
+                // var_dump($article);
+                $this->template = "deleteConfirm";
+                $this->data = [
+                    "message" => "voulez vous supprimer cet article",
+                    // "articleUrl" => $articleUrl
+
+                ];
+            } catch (\Throwable $th) {
+                //throw $th;
+
+            }
+        }
+        if ($safedata->method === "POST") {
+            if ($safedata->post["removeContent"] !== "") {
+                $currentSession->addNotification("warn", "l'article' n'a pas été supprimé");
+                return header("Location:/articles");
+            }
+            try {
+                $article = new Post(["id" => $safedata->uri[1]]);
+                $article->removeArticle();
+                $currentSession->addNotification("success", "L'article' a bien été supprimé.");
+                header("Location:/articles");
+                exit();
+            } catch (\Exception $e) {
+                die(var_dump($e));
+            }
+        }
+    }
+
+    public function edit_article($safedata)
+    {
+        $this->template = 'addArticle';
+        $article = new Post(["id" => $safedata->uri[1]]);
+        $article->initById();
+        $this->data = $article->getAll();
+
+    }
     
 }
