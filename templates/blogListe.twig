@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<section class="panel spotlight medium right" id="first">
-    <div class="content span-7">
+<section class="panel spotlight medium right" id="first" style="background-color: #7C6D75;">
+    <div class="content span-15">
         <h1 class="major">Liste des articles</h1>
 
     </div>
@@ -15,16 +15,21 @@
     </div>
 
     <div class="">
-        <article class="inner mt-1 ml-2 mr-2" style="display: flex;">
+        <article class="inner mt-1 mb-2 ml-2 mr-2">
             {% for article in data["posts"] %}
-            <ul class="">
 
-                {#<a href="#" class="image"> </a>#}
-                <h3>{{ article.titre}}</h3>
-                <p>{{article.chapo}}</p>
-                <li><a href="/article/{{ article.url }}" class="button">En détail</a></li>
+            <h3>{{ article.titre}}</h3>
+            <p>{{article.chapo}}</p>
+            <div class="">
+                <div class="display: inline mb-2 ">
+                    <span><a href="/article/{{ article.url }}" class="button">En détail</a></span>
+                    {% if data.role == 1 %}
+                    <span><a href="/admin/edit_article/{{ article.id }}" class="button">Modifier</a></span>
+                    <span><a href="/admin/delete_article/{{article.id}}" method="get" class="button">Supprimer</a></span>
 
-            </ul>
+                    {% endif %}
+                </div>
+            </div>
             {% endfor %}
         </article>
     </div>

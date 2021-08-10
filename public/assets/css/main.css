@@ -2708,6 +2708,9 @@ button:disabled,
 .panel .span-10 {
   width: 100rem;
 }
+.panel .span-15{
+  width: 120rem;
+}
 
 .panel.small {
   width: 35rem;

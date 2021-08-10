@@ -14,6 +14,7 @@ $safeData = new Blog\Ctrl\SafeData([
         "content" => FILTER_SANITIZE_STRING,
         "email" => FILTER_SANITIZE_EMAIL,
         "id_article" => FILTER_SANITIZE_NUMBER_INT,
+        "id_user"=>FILTER_SANITIZE_NUMBER_INT,
         "image"=>FILTER_SANITIZE_STRING,
         "password" => FILTER_SANITIZE_STRING,
         "password_2" => FILTER_SANITIZE_STRING,

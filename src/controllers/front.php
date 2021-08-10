@@ -65,7 +65,7 @@ class Front extends Page
 
     protected function article($safedata)
     {
-        //TODO saveCOmment Only user connected
+        
         global $currentSession;
         if ($safedata->method === "POST") {
             //  die(var_dump($safedata));   
@@ -86,6 +86,7 @@ class Front extends Page
 
         $this->template = 'article';
         $article = new Post(["titre" => $safedata->uri[1]]);
+        $article->initByTitle();
         $commentaires = new Comments(["id_article" => $article->getId()]);
         $this->data = [
             "user" => $currentSession->get("user"),

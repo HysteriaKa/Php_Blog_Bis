@@ -23,10 +23,10 @@ class Post extends Entity
         $this->model = new PostModel($data);
 
         if ($data === "all") return $this->initInOrderToGetList();
-        if (isset($data["titre"])) return $this->initByTitle();
+        // if (isset($data["titre"])) return $this->initByTitle(); TODO : verifier quand on en vait besoin et adapter
     }
 
-    private function initByTitle()
+    public function initByTitle()
     {
         $data = $this->model->getArticle();
         $this->hydrate($data);
@@ -35,6 +35,13 @@ class Post extends Entity
     private function initInOrderToGetList()
     {
         $this->list = $this->model->getArticles();
+    }
+
+    public function initById()
+    {
+        $data = $this->list = $this->model->getOneArticleById();
+        $this->hydrate($data);
+
     }
 
     public function getList()
@@ -75,14 +82,62 @@ class Post extends Entity
                 $safedata->post["titre"],
                 $currentSession->get("idUser"),
                 $safedata->post["chapo"],
-                $safedata->post["content"],  
-                $safedata->post["image"], 
+                $safedata->post["content"],
+                $safedata->post["image"],
                 $safedata->post["created_at"],
                 // $safedata->post["titre"]
                 die(var_dump(($currentSession)))
             );
         } catch (\Throwable $th) {
             die(var_dump($th));
+        }
+    }
+
+    public function addPost()
+    {
+        try {
+            $data = $this->model->addArticle();
+            $this->hydrate($data);
+        } catch (\Throwable $th) {
+            die(var_dump($th));
+        }
+    }
+    public function deleteArticle($safedata)
+    {
+
+        try {
+            $this->model->deleteArticle(
+                $safedata
+            );
+        } catch (\Throwable $th) {
+        }
+    }
+    public function removeArticle()
+    {
+        try {
+            $this->model->deleteArticle();
+        } catch (\Exception $err) {
+            var_dump($err);
+            throw $err;
+        }
+    }
+
+    public function modifyArticle($safedata)
+    {
+        global $currentSession;
+        try {
+            $this->model->updateArticle(
+                // $id =$this->getId(),
+                $safedata->post["titre"],
+                $currentSession->get("idUser"),
+                $safedata->post["chapo"],
+                $safedata->post["content"],
+                $safedata->post["image"],
+                $safedata->post["modify_at"],
+            );
+        } catch (\Exception $err) {
+            var_dump($err);
+            throw $err;
         }
     }
 }
