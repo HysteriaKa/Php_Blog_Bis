@@ -63,12 +63,13 @@ class Comments extends Entity
                 
                 $safedata->post["content"],   
                 0,
-                // $safedata->post["email"]
+                
                 // die(var_dump(($currentSession)))
             );
         } catch (\Throwable $th) {
             // die(var_dump($th));
         }
+        // die(var_dump($currentSession));
     }
 
 

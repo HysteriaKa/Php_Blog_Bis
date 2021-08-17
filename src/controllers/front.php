@@ -21,17 +21,17 @@ class Front extends Page
         $this->template = "home";
         $articles = new Post("all");
         $this->current_page = "home";
-        if ($currentSession->get("user")){
-        $this->data = [
-            "user" => $currentSession->get("user"),
-            "role" => $currentSession->get("role"),
-            "posts" => []
-        ];
-    } else{
-        $this->data = [
-            "posts" => []
-        ];
-    }
+        if ($currentSession->get("user")) {
+            $this->data = [
+                "user" => $currentSession->get("user"),
+                "role" => $currentSession->get("role"),
+                "posts" => []
+            ];
+        } else {
+            $this->data = [
+                "posts" => []
+            ];
+        }
         foreach ($articles->getList() as $key => $value) {
             $value->url = Utils::titleToURI($value->titre);
             array_push($this->data["posts"], $value);
@@ -40,32 +40,32 @@ class Front extends Page
 
 
     protected function articles()
-    { 
+    {
         global $currentSession;
         $this->template = "blogListe";
         $articles = new Post("all");
         // (new Debug)->vardump($articles->getList());
-        
+
         $this->data = [
             "user" => $currentSession->get("user"),
             "role" => $currentSession->get("role"),
-            "posts" =>[]
+            "posts" => []
         ];
-        
+
         // var_dump($this->data);
         foreach ($articles->getList() as $key => $value) {
-            
+
             $value->url = Utils::titleToURI($value->titre);
             // (new Debug)->vardump($value, $this->data);
             array_push($this->data["posts"], $value);
         }
         // (new Debug)->vardump($this->data);
-        
+
     }
 
     protected function article($safedata)
     {
-        
+
         global $currentSession;
         if ($safedata->method === "POST") {
             //  die(var_dump($safedata));   
@@ -87,6 +87,7 @@ class Front extends Page
         $this->template = 'article';
         $article = new Post(["titre" => $safedata->uri[1]]);
         $article->initByTitle();
+
         $commentaires = new Comments(["id_article" => $article->getId()]);
         $this->data = [
             "user" => $currentSession->get("user"),
@@ -99,22 +100,29 @@ class Front extends Page
             ]
 
         ];
-        
     }
 
-    protected function contact()
+    protected function contact($safedata)
     {
-global $currentSession;
+        global $currentSession;
         $this->template = "contact";
         $this->current_page = "contact";
+
+        $contact = new Contact;
+            $contact->getInfos();
+            return;
+
         if (isset($_POST) && !empty($_POST)) {
 
             $contact = new Contact;
             $contact->getInfos();
         }
-        $this->data = [  "user" => $currentSession->get("user"),
-        "role" => $currentSession->get("role")]; //données du modele
-
+        $this->data = [
+            "user" => $currentSession->get("user"),
+            "role" => $currentSession->get("role")
+        ]; //données du modele
+//redirect to sendmail ????
+// die(var_dump($this->data));
     }
 
     protected function registration($safeData)
@@ -186,7 +194,7 @@ global $currentSession;
             exit();
         }
     }
-    
+
     protected function logout()
     {
         $user = new User([]);

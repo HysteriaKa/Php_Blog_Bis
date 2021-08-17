@@ -86,7 +86,7 @@ class Post extends Entity
                 $safedata->post["image"],
                 $safedata->post["created_at"],
                 // $safedata->post["titre"]
-                die(var_dump(($currentSession)))
+                
             );
         } catch (\Throwable $th) {
             die(var_dump($th));
