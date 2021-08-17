@@ -1482,17 +1482,17 @@ ul.grid-icons.four > li:nth-child(4n - 3):before {
 
 /* Contact Icons */
 
-ul.contact-icons {
+ul.contact-icons{
   list-style: none;
   padding-left: 0;
 }
 
-ul.contact-icons > li {
+ul.contact-icons > li{
   margin: 1.25rem 0 0 0;
   padding-left: 0;
 }
 
-ul.contact-icons > li:before {
+ul.contact-icons > li:before{
   display: inline-block;
   width: 2.25rem;
   height: 2.25rem;
@@ -1507,7 +1507,7 @@ ul.contact-icons > li:before {
   vertical-align: middle;
 }
 
-body.is-ie ul.contact-icons > li:before {
+body.is-ie ul.contact-icons > li:before{
   line-height: 2.125;
 }
 
@@ -1515,15 +1515,15 @@ ul.contact-icons > li a {
   border-bottom: 0;
 }
 
-ul.contact-icons.color1 > li:before {
+ul.contact-icons.color1 > li:before{
   color: #726193;
 }
 
-ul.contact-icons.color2 > li:before {
+ul.contact-icons.color2 > li:before{
   color: #e37b7c;
 }
 
-ul.contact-icons.color3 > li:before {
+ul.contact-icons.color3 > li:before{
   color: #ffe4b4;
 }
 
@@ -1598,7 +1598,12 @@ table.alt thead {
 table.alt tfoot {
   border-top: 0;
 }
-
+.footer{
+  position:fixed;
+  color: black;
+  bottom: 7px;
+  left: 85px;
+}
 /* Button */
 
 input[type="submit"],
@@ -4136,14 +4141,14 @@ button:disabled,
   right: 0;
 }
 
-/* #wrapper > .copyright {
+#wrapper > .copyright {
 			position: absolute;
 			bottom: -3rem;
 			right: 0;
 			font-size: 0.8rem;
 			color: rgba(46, 43, 55, 0.375);
 			margin-bottom: 0;
-		} */
+		}
 
 #wrapper > .copyright {
   position: fixed;
@@ -4262,15 +4267,17 @@ body.is-preload #wrapper {
   text-decoration: none;
   text-transform: uppercase;
 }
-.photoprofil {
+.photoprofil{
   width: 200px;
   border-radius: 50%;
 }
-.center {
+
+.center{
   justify-content: center;
   text-align: center;
   align-items: center;
 }
+
 .pl-1 {
   padding-left: 1rem;
 }
@@ -4357,7 +4364,7 @@ body.is-preload #wrapper {
 #copyright {
   display: inline-block;
   background: #18141a;
-  padding: 0.75em 2em 0.75em 2em;
+  padding: 1.75em 2em 0.75em 2em;
   border-radius: 8px;
   color: #8b9790;
   margin: 4em 0 0 0;

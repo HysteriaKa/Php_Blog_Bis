@@ -22,6 +22,7 @@ $safeData = new Blog\Ctrl\SafeData([
         "removeContent" => FILTER_SANITIZE_STRING,
         "titre" =>FILTER_SANITIZE_STRING,
         "username" => FILTER_SANITIZE_STRING,
+        "message" =>FILTER_SANITIZE_STRING
         
     ]
 ]);

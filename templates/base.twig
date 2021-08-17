@@ -82,21 +82,20 @@
 
             {% block content %}
             {% endblock %}
-            <footer>
-                <div class="copyright">
-                    <p>&copy; 2021 Ka's Blog<a href="https://html5up.net">Design</a>.</p>
-                    <p>Se connecter ADMIN</p>
-
-                </div>
-            </footer>
+        
         </div>
 
     </div>
 
 
-    <footer>
+    <footer class="footer">
+        <div class="copyright" id="copyright">
+            <p>&copy; 2021 Ka's Blog</p>
+            {% if data.user is empty %}
+            <a href="/login">Connexion admin</a>
+            {% endif %}
 
-
+        </div>
     </footer>
 
 

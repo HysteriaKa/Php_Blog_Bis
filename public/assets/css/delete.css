@@ -14,8 +14,7 @@
   .column {
     flex-direction: column;
   }
-  
-  .btn-grad {background-image: linear-gradient(to right, #1D2B64 0%, #F8CDDA  51%, #1D2B64  100%)}
+
   .btn-grad {
      margin: 10px;
      padding: 15px 45px;
@@ -27,6 +26,7 @@
      box-shadow: 0 0 20px #eee;
      border-radius: 10px;
      display: block;
+     background-image: linear-gradient(to right, #1d2b64 0%, #F8CDDA  51%, #1D2B64  100%)
    }
 
    .btn-grad:hover {
