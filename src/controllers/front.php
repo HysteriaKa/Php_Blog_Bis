@@ -12,10 +12,10 @@ use Blog\Debug;
 class Front extends Page
 {
 
-
+   
     protected function home()
     {
-
+        
         global $currentSession;
         //    var_dump($sessionActuelle);
         $this->template = "home";
@@ -161,6 +161,7 @@ class Front extends Page
 
     protected function login($safeData)
     {
+        
         $this->template = "login";
         $this->current_page = "login";
         if ($safeData->method === "GET") {

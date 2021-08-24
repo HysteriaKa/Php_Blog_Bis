@@ -42,14 +42,14 @@ class Contact extends Entity
         // $email = $data['email'];
         // $name = $data['name'];
             $msg = "aaa";
-            $email = "test@test.com";
+            $email = "test@mailhog.local";
             $name = "bbb";
     
             $headers = 'From: poupette2310@gmail.com\r\n' .
                 'Reply-To: '.$email. "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
             $test = mail('poupette2310@gmail.com', 'contact de : ' . $name, $msg . 'Pour répondre contacter : ' . $email, $headers, error_reporting(E_ALL));
-            die(var_dump($test));
+            // die(var_dump($test));
         }
         catch(Throwable $err){
             die(var_dump($err));
