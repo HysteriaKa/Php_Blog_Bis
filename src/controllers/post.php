@@ -117,7 +117,7 @@ class Post extends Entity
         try {
             $this->model->deleteArticle();
         } catch (\Exception $err) {
-            var_dump($err);
+            //      
             throw $err;
         }
     }
@@ -135,7 +135,7 @@ class Post extends Entity
                 $safedata->post["image"]
             );
         } catch (\Exception $err) {
-            var_dump($err);
+            // var_dump($err);
             throw $err;
         }
     }

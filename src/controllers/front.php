@@ -87,7 +87,7 @@ class Front extends Page
         $this->template = 'article';
         $article = new Post(["titre" => $safedata->uri[1]]);
         $article->initByTitle();
-
+       
         $commentaires = new Comments(["id_article" => $article->getId()]);
         $this->data = [
             "user" => $currentSession->get("user"),
@@ -100,6 +100,7 @@ class Front extends Page
             ]
 
         ];
+        
     }
 
     protected function contact($safedata)
@@ -111,7 +112,7 @@ class Front extends Page
         $contact = new Contact;
             $contact->getInfos();
             return;
-
+//TODO remplacer la globale
         if (isset($_POST) && !empty($_POST)) {
 
             $contact = new Contact;

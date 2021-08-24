@@ -22,6 +22,7 @@ form,
 }
 
 .input-group {
+
 	margin: 10px 0px 10px 0px;
 }
 
@@ -57,7 +58,7 @@ form,
 	color: white;
 	background: #970a58;
 	border: none;
-	border-radius: 5px
+	border-radius: 5px;
 }
 
 .error {
@@ -68,7 +69,7 @@ form,
 	color: #a94442;
 	background: #f2dede;
 	border-radius: 5px;
-	text-align: left
+	text-align: left;
 }
 
 .success {
