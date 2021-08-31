@@ -27,7 +27,6 @@
 <section class="panel color2-alt ">
   <div class="intro color2 commenttitle">
     <h2 class="major">Commentaires</h2>
-
   </div>
   <div class="inner columns aligned contentcomment">
     <div class="span-2-75 ">
@@ -36,7 +35,7 @@
       {% for item in data.commentaires %}
       {% if item.statut == 1 %}
       <div class="d-flex column">
-        <div class="d-flex">
+        <div class="d-flex mt-1">
           <h4>
             {% if data.role == 1 %}	
             <a href="/admin/delete_comment/{{item.id}}" method="get">
@@ -45,17 +44,18 @@
             {% endif %}
             
             Auteur : </h4>
-          <p class="auteur">{{ item.username}}</p>
+          <p class="auteur">{{ data.user }}</p>
         </div>
         <div class="mb-2">
           <div>
+            <h4>Commentaire :</h4>
             {% autoescape %}
             {{ item.contenu|raw }} {# var won't be escaped #}
         {% endautoescape %}
           </div>
         </div>
         <div class="d-flex">
-          <p>Date : </p>
+          <h4>Date : </h4>
           <p class="ml-1">{{item.created_at|date("d/m/Y")}}</p>
         </div>
         {% endif %}

@@ -1,30 +1,37 @@
 .header {
+
 	width: 40%;
 	margin: 50px auto 0px;
 	color: white;
 	background: #970a58;
 	text-align: center;
-	border: 1px solid #B0C4DE;
+	border: 1px solid #b0c4de;
 	border-bottom: none;
 	border-radius: 10px 10px 0px 0px;
 	padding: 20px;
 }
-form, .content {
+
+form,
+.content {
 	width: 40%;
 	margin: 0px auto;
 	padding: 20px;
-	border: 1px solid #B0C4DE;
+	border: 1px solid #b0c4de;
 	background: white;
 	border-radius: 0px 0px 10px 10px;
 }
+
 .input-group {
+
 	margin: 10px 0px 10px 0px;
 }
+
 .input-group label {
 	display: block;
 	text-align: left;
 	margin: 3px;
 }
+
 .input-group input {
 	height: 30px;
 	width: 93%;
@@ -33,6 +40,7 @@ form, .content {
 	border-radius: 5px;
 	border: 1px solid gray;
 }
+
 #user_type {
 	height: 40px;
 	width: 98%;
@@ -42,7 +50,9 @@ form, .content {
 	border-radius: 5px;
 	border: 1px solid gray;
 }
+
 .btn {
+
 	padding: 10px;
 	font-size: 15px;
 	color: white;
@@ -50,38 +60,44 @@ form, .content {
 	border: none;
 	border-radius: 5px;
 }
+
 .error {
-	width: 92%; 
-	margin: 0px auto; 
-	padding: 10px; 
-	border: 1px solid #a94442; 
-	color: #a94442; 
-	background: #f2dede; 
-	border-radius: 5px; 
+	width: 92%;
+	margin: 0px auto;
+	padding: 10px;
+	border: 1px solid #a94442;
+	color: #a94442;
+	background: #f2dede;
+	border-radius: 5px;
 	text-align: left;
 }
+
 .success {
-	color: #3c763d; 
-	background: #dff0d8; 
+	color: #3c763d;
+	background: #dff0d8;
 	border: 1px solid #3c763d;
-	margin-bottom: 20px;
+	margin-bottom: 20px
 }
+
 .profile_info img {
-	display: inline-block; 
-	width: 50px; 
-	height: 50px; 
+	display: inline-block;
+	width: 50px;
+	height: 50px;
 	margin: 5px;
 	float: left;
 }
+
 .profile_info div {
-	display: inline-block; 
+	display: inline-block;
 	margin: 5px;
 }
+
 .profile_info:after {
 	content: "";
 	display: block;
 	clear: both;
 }
-.center{
-    align-items:center;
+
+.center {
+	align-items: center;
 }

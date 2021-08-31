@@ -10,7 +10,7 @@ class SessionManager
     private  $expiration; //stock la date d'expiration de la session
     private $role;
     private $idUser;
-
+    
     public function __construct()
     {
         session_cache_expire(280);
@@ -27,7 +27,7 @@ class SessionManager
         $this->user = "";
         $this->ack = [];
         $this->role = 0; //utilisateur
-        $this->idUser ="";
+        $this->idUser = "";
     }
 
     /**
@@ -81,7 +81,7 @@ class SessionManager
     {
         $this->name = $username;
         $this->role = $role;
-        $this->idUser =$id;
+        $this->idUser = $id;
         $date = new \DateTime();
         $date->add(new \DateInterval('P1D'));
         $this->expiration = $date;

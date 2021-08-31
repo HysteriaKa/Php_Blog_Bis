@@ -28,11 +28,6 @@ class Comments extends Entity
     }
 
 
-
-    private function InitInOrderToGetListByarticle()
-    {
-    }
-
     public function getAll()
     {
         return [
@@ -123,7 +118,7 @@ class Comments extends Entity
         try{
             $this->model->updateComment($this->post["commentToValidate"]);
         }catch (\Exception $err) {
-            var_dump($err);
+            
             throw $err;
         }
     }

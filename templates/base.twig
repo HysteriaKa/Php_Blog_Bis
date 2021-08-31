@@ -20,7 +20,13 @@
 
 
 <body class="is-preload">
-
+    {% if ack is defined %}
+    {% for item in ack %}
+    <div class="ack_{{ item.type }} message">
+        {{ item.message }}
+    </div>
+    {% endfor %}
+    {% endif %}
     <!-- Page Wrapper -->
     <div id="page-wrapper">
 
@@ -29,13 +35,7 @@
 
             <!-- Panel (Banner) -->
             <section class="panel banner right">
-                {% if ack is defined %}
-                {% for item in ack %}
-                <div class="ack_{{ item.type }} message">
-                    {{ item.message }}
-                </div>
-                {% endfor %}
-                {% endif %}
+
                 <div class="intro color2">
                     <nav id="nav">
                         <ul>
@@ -70,7 +70,7 @@
                     <p class="center ">
                         <img src="/public/images/IMG-6502.jpg" alt="photo de profil" class="photoprofil"></p>
                     <ul class="actions">
-                        <li><a href="#first" class="button primary color1 circle icon solid fa-angle-right">Next</a>
+                        <li><a href="#first" class="button primary color1 circle icon solid fa-angle-right center">Next</a>
                         </li>
                     </ul>
                 </div>
@@ -93,6 +93,8 @@
             <p>&copy; 2021 Ka's Blog</p>
             {% if data.user is empty %}
             <a href="/login">Connexion admin</a>
+            {% else %}
+            <a href="/logout">Déconnexion</a>  
             {% endif %}
 
         </div>
@@ -102,3 +104,4 @@
 </body>
 
 </html>
+

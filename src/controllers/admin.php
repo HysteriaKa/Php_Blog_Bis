@@ -46,7 +46,7 @@ class Admin extends Page
                 return header("Location:/article/$articleUrl");
             }
             try {
-                $idArticle = $comment->getArticleId();
+                // $idArticle = $comment->getArticleId();
                 // var_dump($idArticle);
                 $comment->removeComment();
                 $currentSession->addNotification("success", "Le commentaire a bien été supprimé.");
