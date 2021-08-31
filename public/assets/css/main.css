@@ -2716,9 +2716,9 @@ button:disabled,
   width: 100rem;
 }
 
-.panel .span-15 {
+/* .panel .span-15 {
   width: 120rem;
-}
+} */
 
 .panel.small {
   width: 35rem;

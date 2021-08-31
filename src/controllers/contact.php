@@ -35,7 +35,7 @@ class Contact extends Entity
     {
 
         try{
-        $data = $_POST;
+        // $data = $_POST;
         // die(var_dump($data));
         // die(var_dump($data));
         // $msg = $data['message'];

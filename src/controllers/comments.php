@@ -28,11 +28,6 @@ class Comments extends Entity
     }
 
 
-
-    private function InitInOrderToGetListByarticle()
-    {
-    }
-
     public function getAll()
     {
         return [

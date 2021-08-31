@@ -124,7 +124,7 @@ class Post extends Entity
 
     public function modifyArticle($safedata)
     {
-        global $currentSession;
+        // global $currentSession;
         try {
             $this->model->updateArticle(
                 $id =$this->getId(),
