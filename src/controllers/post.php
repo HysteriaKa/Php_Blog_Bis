@@ -88,8 +88,8 @@ class Post extends Entity
                 // $safedata->post["titre"]
                 
             );
-        } catch (\Throwable $th) {
-            die(var_dump($th));
+        } catch (\Exception $e) {
+            new ErrorHandler($e);
         }
     }
 
@@ -98,8 +98,8 @@ class Post extends Entity
         try {
             $data = $this->model->addArticle();
             $this->hydrate($data);
-        } catch (\Throwable $th) {
-            die(var_dump($th));
+        } catch (\Exception $e) {
+            new ErrorHandler($e);
         }
     }
     public function deleteArticle($safedata)
@@ -116,9 +116,8 @@ class Post extends Entity
     {
         try {
             $this->model->deleteArticle();
-        } catch (\Exception $err) {
-            //      
-            throw $err;
+        } catch (\Exception $e) {
+            new ErrorHandler($e);
         }
     }
 
@@ -134,9 +133,8 @@ class Post extends Entity
                 $safedata->post["chapo"],
                 $safedata->post["image"]
             );
-        } catch (\Exception $err) {
-            // var_dump($err);
-            throw $err;
+        } catch (\Exception $e) {
+            new ErrorHandler($e);
         }
     }
 }

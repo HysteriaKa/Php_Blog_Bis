@@ -156,7 +156,7 @@ class Front extends Page
             }
             $currentSession->addNotification("success", "le compte a bien été créé");
             return header("Location:/login");
-            exit();
+            exit(0);
         }
     }
 

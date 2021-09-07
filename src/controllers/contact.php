@@ -28,38 +28,34 @@ class Contact extends Entity
         } catch (\Throwable $th) {
             //throw $th;
         }
-       
     }
     // private $PHPMailer;
     public function getInfos()
     {
 
-        try{
-        // $data = $_POST;
-        // die(var_dump($data));
-        // die(var_dump($data));
-        // $msg = $data['message'];
-        // $email = $data['email'];
-        // $name = $data['name'];
+        try {
+            // $data = $_POST;
+            // die(var_dump($data));
+            // die(var_dump($data));
+            // $msg = $data['message'];
+            // $email = $data['email'];
+            // $name = $data['name'];
             $msg = "aaa";
             $email = "test@mailhog.local";
             $name = "bbb";
-    
+
             $headers = 'From: poupette2310@gmail.com\r\n' .
-                'Reply-To: '.$email. "\r\n" .
+                'Reply-To: ' . $email . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
             $test = mail('poupette2310@gmail.com', 'contact de : ' . $name, $msg . 'Pour répondre contacter : ' . $email, $headers, error_reporting(E_ALL));
             // die(var_dump($test));
+        } catch (\Exception $e) {
+            new ErrorHandler($e);
         }
-        catch(Throwable $err){
-            die(var_dump($err));
-        }
-        
     }
-    
+
 
     public function sendMail()
     {
-        
     }
 }
