@@ -6,6 +6,7 @@ use Blog\Ctrl\Comments;
 // use Blog\Models\CommentModel;
 use Blog\Ctrl\Utils;
 use Blog\Debug;
+use Blog\Ctrl\ErrorHandler;
 
 class Admin extends Page
 {
@@ -15,7 +16,7 @@ class Admin extends Page
         if ($currentSession->get("role") === "0" || is_null($_SERVER["HTTP_REFERER"])) {
             $currentSession->addNotification("error", "vous ne pouvez pas faire cette action.");
             header("Location:/login");
-            exit;
+            exit(0);
         }
         parent::__construct($safeData);
     }
@@ -55,7 +56,7 @@ class Admin extends Page
                 header("Location:/article/$articleUrl");
                 exit();
             } catch (\Exception $e) {
-                die(var_dump($e));
+                new ErrorHandler($e);
             }
         }
     }
@@ -73,7 +74,7 @@ class Admin extends Page
                 $currentSession->addNotification("success", "Le commentaire est en ligne.");
                 return header("Location:/admin/listComments");
             } catch (\Exception $e) {
-                die(var_dump($e));
+                new ErrorHandler($e);
             }
         }
         $this->template = 'listComments';
@@ -172,7 +173,7 @@ class Admin extends Page
                 $currentSession->addNotification("success", "La modification a été effectuée.");
                 return header("location:/articles");
             } catch (\Exception $e) {
-                die(var_dump($e));
+                new ErrorHandler($e);
             }
         }
         $this->template = 'addArticle';

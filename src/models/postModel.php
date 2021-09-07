@@ -4,6 +4,7 @@ namespace Blog\Models;
 
 use Blog\Models\DataBase;
 use Blog\Ctrl\Utils;
+use Blog\Ctrl\ErrorHandler;
 
 class PostModel extends DataBase
 {
@@ -60,8 +61,8 @@ class PostModel extends DataBase
                 ->prepare("INSERT INTO articles(titre,id_user,content,image,created_at,chapo) VALUES(:titre,:id_user,:content,:image,now(),:chapo)");
             $req->execute($data);
             //  die(var_dump($req->debugDumpParams())); 
-        } catch (\Throwable $th) {
-            die(var_dump($th));
+        } catch (\Exception $e) {
+            new ErrorHandler($e);
         }
     }
     public function updateArticle($id, $titre, $content, $chapo, $image)
