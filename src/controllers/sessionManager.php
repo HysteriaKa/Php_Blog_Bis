@@ -1,16 +1,16 @@
 <?php
 
-namespace Blog\Ctrl;
+namespace Controller;
 // session_start();
 class SessionManager
 {
 
-    public array $ack = [];  //tableau contenant des tableaux associatifs contenant type et message : utile pour les notifications
+    public  $ack;  //tableau contenant des tableaux associatifs contenant type et message : utile pour les notifications
     private  $user; // nom d'utilisateur
     private  $expiration; //stock la date d'expiration de la session
     private $role;
     private $idUser;
-    
+
     public function __construct()
     {
         session_cache_expire(280);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Blog\Ctrl;
+namespace Controller;
 
 class Entity{
     public function hydrate($data){

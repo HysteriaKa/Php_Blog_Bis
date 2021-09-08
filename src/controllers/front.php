@@ -1,12 +1,12 @@
 <?php
 
-namespace Blog\Ctrl;
+namespace Controller;
 
-use Blog\Ctrl\Page;
-use Blog\Ctrl\utils;
-use Blog\Ctrl\Post;
-use Blog\Ctrl\Comments;
-use Blog\Ctrl\User;
+use Controller\Page;
+use Controller\utils;
+use Controller\Post;
+use Controller\Comments;
+use Controller\User;
 use Blog\Debug;
 
 class Front extends Page
@@ -193,7 +193,7 @@ class Front extends Page
             // $logged =true;
             return header("location:/home");
             //TODO trouver pourquoi il n'y a pas les ACK
-            exit();
+            exit(0);
         }
     }
 

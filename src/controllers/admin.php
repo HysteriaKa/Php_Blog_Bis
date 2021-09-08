@@ -1,12 +1,12 @@
 <?php
 
-namespace Blog\Ctrl;
+namespace Controller;
 
-use Blog\Ctrl\Comments;
+use Controller\Comments;
 // use Blog\Models\CommentModel;
-use Blog\Ctrl\Utils;
-use Blog\Debug;
-use Blog\Ctrl\ErrorHandler;
+use Controller\Utils;
+use App\Debug;
+use Controller\ErrorHandler;
 
 class Admin extends Page
 {
@@ -155,7 +155,7 @@ class Admin extends Page
                 header("Location:/articles");
                 exit();
             } catch (\Exception $e) {
-                die(var_dump($e));
+                new ErrorHandler($e);
             }
         }
     }
