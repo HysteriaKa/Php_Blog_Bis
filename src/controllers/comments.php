@@ -1,9 +1,9 @@
 <?php
 
-namespace Blog\Ctrl;
+namespace Controller;
 
-use Blog\Ctrl\Entity;
-use Blog\Models\CommentModel;
+use Controller\Entity;
+use Models\CommentModel;
 
 class Comments extends Entity
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Blog\Models;
+namespace Models;
 
-use Blog\Models\DataBase;
-use Blog\Ctrl\Utils;
-use Blog\Ctrl\ErrorHandler;
+// use Models\DataBase;
+use Controller\Utils;
+use Controller\ErrorHandler;
 
 class PostModel extends DataBase
 {
@@ -77,8 +77,8 @@ class PostModel extends DataBase
             $req->execute([":id" => $id, ":content"=>$content, ":chapo"=>$chapo,":titre"=>$titre, ":image"=>$image]);
             //   die(var_dump($req->debugDumpParams())); 
 
-        } catch (\Throwable $th) {
-            die(var_dump($th));
+        } catch (\Exception $e) {
+            new ErrorHandler($e);
         }
     }
     public function deleteArticle()
@@ -88,8 +88,8 @@ class PostModel extends DataBase
                 ->prepare("DELETE FROM articles where id=:id");
             $req->execute();
             //  die(var_dump($req->debugDumpParams())); 
-        } catch (\Throwable $th) {
-            die(var_dump($th));
+        } catch (\Exception $e) {
+            new ErrorHandler($e);
         }
     }
 }

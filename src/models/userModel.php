@@ -1,8 +1,8 @@
 <?php
 
-namespace Blog\Models;
+namespace Models;
 
-use Blog\Models\DataBase;
+use Models\DataBase;
 // use Blog\Ctrl\Utils;
 
 class UserModel extends DataBase
