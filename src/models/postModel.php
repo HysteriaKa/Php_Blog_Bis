@@ -1,10 +1,11 @@
 <?php
 
-namespace Models;
+namespace Blog\Models;
 
-// use Models\DataBase;
-use Controller\Utils;
-use Controller\ErrorHandler;
+use Blog\Models\Database;
+use Blog\Ctrl\Utils;
+use Blog\Ctrl\ErrorHandler;
+
 
 class PostModel extends DataBase
 {

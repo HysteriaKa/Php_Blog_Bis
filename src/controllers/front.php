@@ -1,12 +1,12 @@
 <?php
 
-namespace Controller;
+namespace Blog\Ctrl;
 
-use Controller\Page;
-use Controller\utils;
-use Controller\Post;
-use Controller\Comments;
-use Controller\User;
+use Blog\Ctrl\Page;
+use Blog\Ctrl\Utils;
+use Blog\Ctrl\Post;
+use Blog\Ctrl\Comments;
+use Blog\Ctrl\User;
 use Blog\Debug;
 
 class Front extends Page

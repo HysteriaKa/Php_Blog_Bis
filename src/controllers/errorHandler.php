@@ -1,5 +1,5 @@
 <?php
-namespace Controller;
+namespace Blog\Ctrl;
 class ErrorHandler
 {
     public function __construct($err) {

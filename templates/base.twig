@@ -45,17 +45,17 @@
                                         <li><a href="/home"
                                                 class="{% if current_page == "home" %} active {% endif %}">Accueil</a>
                                         </li>
-                                        <li><a href="/articles">Tous les posts</a></li>
-                                        <li><a href="/contact">Contact</a></li>
+                                        <li><a href="./articles">Tous les posts</a></li>
+                                        <li><a href="./contact">Contact</a></li>
                                         {% if data.role == 1 %}
-                                        <li><a href="/admin/listComments">Commentaires à modérer</a></li>
-                                        <li><a href="/admin/addArticle">Ajouter un article</a></li>
+                                        <li><a href="./admin/listComments">Commentaires à modérer</a></li>
+                                        <li><a href="./admin/addArticle">Ajouter un article</a></li>
                                         {% endif %}
                                         {% if data.user is empty %}
-                                        <li><a href="/registration">Inscription</a></li>
-                                        <li><a href="/login">Connexion</a></li>
+                                        <li><a href="./registration">Inscription</a></li>
+                                        <li><a href="./login">Connexion</a></li>
                                         {% else %}
-                                        <li><a href="/logout">Déconnexion</a></li>
+                                        <li><a href="./logout">Déconnexion</a></li>
                                         {% endif %}
                                     </ul>
                                 </div>

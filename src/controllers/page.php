@@ -1,8 +1,6 @@
 <?php
 
-namespace Controller;
-
-use Controller\SafeData;
+namespace Blog\Ctrl;
 
 class Page{
 

@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
-
-namespace Controller;
+use Blog\Ctrl\Entity;
+namespace Blog\Ctrl;
 
 use Throwable;
 
@@ -23,7 +23,7 @@ class Contact extends Entity
             if ($mail->SMTPAuth) {
                 $mail->SMTPSecure = 'ssl';               //Protocole de sécurisation des échanges avec le SMTP
                 $mail->Username   =  'poupette2310@gmail.com';   //Adresse email à utiliser
-                $mail->Password   =  'angel2424';         //Mot de passe de l'adresse email à utiliser
+                $mail->Password   =  'xxxxx';         //Mot de passe de l'adresse email à utiliser
             }
         } catch (\Throwable $th) {
             //throw $th;

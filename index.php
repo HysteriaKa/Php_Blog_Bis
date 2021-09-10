@@ -1,14 +1,14 @@
 <?php
-use Controller\SessionManager;
+
 require_once 'vendor/autoload.php';
 
 // die(var_dump($_POST));
 // session_start();
 
 try {
-    $currentSession = new SessionManager;
+    $currentSession = new \Blog\Ctrl\SessionManager();
 
-    $safeData = new Controller\SafeData([
+    $safeData =  new Blog\Ctrl\SafeData([
         "post" => [
             "auteur" => FILTER_SANITIZE_STRING,
             "chapo" => FILTER_SANITIZE_STRING,
@@ -41,10 +41,10 @@ try {
     switch ($safeData->uri[0]) {
         case "admin":
             array_shift($safeData->uri);
-            $page = new Controller\Admin($safeData);
+            $page = new Blog\Ctrl\Admin($safeData);
             break;
         default:
-            $page = new Controller\Front($safeData);
+            $page = new Blog\Ctrl\Front($safeData);
             break;
     }
 
