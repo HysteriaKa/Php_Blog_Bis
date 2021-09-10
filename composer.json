@@ -6,9 +6,10 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\": "src/",
-      "Controller\\": "src/controllers",
-      "Models\\": "src/models"
+      "Blog\\": "src/",
+      
+      "Blog\\Ctrl\\": "src/controllers",
+      "Blog\\Models\\": "src/models"
     }
   }
 }

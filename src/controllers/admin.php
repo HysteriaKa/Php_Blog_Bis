@@ -1,12 +1,12 @@
 <?php
 
-namespace Controller;
+namespace Blog\Ctrl;
 
-use Controller\Comments;
+use Blog\Ctrl\Comments;
 // use Blog\Models\CommentModel;
-use Controller\Utils;
-use App\Debug;
-use Controller\ErrorHandler;
+use Blog\Ctrl\Utils;
+use Blog\Debug;
+use Blog\Ctrl\ErrorHandler;
 
 class Admin extends Page
 {

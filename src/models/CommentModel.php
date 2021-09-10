@@ -1,8 +1,8 @@
 <?php
 
-namespace Models;
+namespace Blog\Models;
 
-use Models\DataBase;
+use Blog\Models\DataBase;
 
 class CommentModel extends DataBase
 {

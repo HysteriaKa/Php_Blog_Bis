@@ -1,9 +1,9 @@
 <?php
 
-namespace Controller;
+namespace Blog\Ctrl;
 
-use Controller\Entity;
-use Models\UserModel;
+use Blog\Ctrl\Entity;
+use Blog\Models\UserModel;
 
 class User extends Entity
 {

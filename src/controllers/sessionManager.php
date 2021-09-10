@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Blog\Ctrl;
 // session_start();
 class SessionManager
 {

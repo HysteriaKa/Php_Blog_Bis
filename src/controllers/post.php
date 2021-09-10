@@ -1,9 +1,9 @@
 <?php
 
-namespace Controller;
+namespace Blog\Ctrl;
 
-use Controller\Entity;
-use Models\PostModel;
+use Blog\Ctrl\Entity;
+use Blog\Models\PostModel;
 
 class Post extends Entity
 {

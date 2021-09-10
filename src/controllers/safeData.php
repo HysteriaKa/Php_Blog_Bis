@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Blog\Ctrl;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 

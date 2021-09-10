@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Blog\Ctrl;
 
 class Utils {
     public static function titleToURI($title)
