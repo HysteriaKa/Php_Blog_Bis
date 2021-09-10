@@ -2,9 +2,9 @@
 
 namespace Blog\Models;
 
-use Blog\Models\DataBase;
+use Blog\Models\Database;
 
-class CommentModel extends DataBase
+class CommentModel extends Database
 {
     /**
      * permet d'obtenir la liste des commentaires à partir d'un id
