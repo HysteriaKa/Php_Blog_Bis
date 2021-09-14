@@ -18,13 +18,14 @@ class Comments extends Entity
 
     public function __construct($datas=[])
     {
-
+        // die(var_dump($datas));
         foreach ($datas as $key => $data) {
             $this->$key = $data;
         }
 
         // if (isset($data["id_article"])) $this->id_article = $data["id_article"]; 
         $this->model = new CommentModel($data);
+        // die(var_dump(new CommentModel($data)));
     }
 
 
@@ -43,6 +44,7 @@ class Comments extends Entity
     public function getCommentByArticle()
     {
         $this->commentaires = $this->model->getComments($this->id_article);
+        
         return $this->commentaires;
     }
 
@@ -59,12 +61,12 @@ class Comments extends Entity
                 $safedata->post["content"],   
                 0,
                 
-                // die(var_dump(($currentSession)))
+                
             );
         } catch (\Throwable $th) {
             // die(var_dump($th));
         }
-        // die(var_dump($currentSession));
+        
     }
 
 
