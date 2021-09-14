@@ -18,7 +18,9 @@ class CommentModel extends Database
         $req = $this->db
             ->prepare("SELECT * FROM `commentaires`   WHERE id_article=:id_article ");
             // ->prepare("SELECT commentaires.contenu, commentaires.statut, commentaires.created_at, users.username from ((commentaires INNER JOIN articles ON commentaires.id_article = articles.id) JOIN users ON commentaires.id_user = users.id)");
-        $req->execute(["id_article" => $id_article]);
+        //  die(var_dump($req));
+            $req->execute(["id_article" => $id_article]);
+       
         return $req->fetchAll();
     }
 

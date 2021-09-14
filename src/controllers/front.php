@@ -8,14 +8,15 @@ use Blog\Ctrl\Post;
 use Blog\Ctrl\Comments;
 use Blog\Ctrl\User;
 use Blog\Debug;
+use Blog\Ctrl\Contact;
 
 class Front extends Page
 {
 
-   
-    protected function home()
+
+    protected function home($safeData)
     {
-        
+
         global $currentSession;
         //    var_dump($sessionActuelle);
         $this->template = "home";
@@ -35,6 +36,16 @@ class Front extends Page
         foreach ($articles->getList() as $key => $value) {
             $value->url = Utils::titleToURI($value->titre);
             array_push($this->data["posts"], $value);
+        }
+        if ($safeData->post) {
+            if ($safeData->post["sendHomeForm"] !== "") {
+                $this->sendMessage(
+                    $safeData->post["username"],
+                    $safeData->post["email"],
+                    $safeData->post["message"]
+                );
+                // die(var_dump($safeData->post));
+            }
         }
     }
 
@@ -87,8 +98,9 @@ class Front extends Page
         $this->template = 'article';
         $article = new Post(["titre" => $safedata->uri[1]]);
         $article->initByTitle();
-       
+
         $commentaires = new Comments(["id_article" => $article->getId()]);
+        // die(var_dump($article->getId()));
         $this->data = [
             "user" => $currentSession->get("user"),
             "role" => $currentSession->get("role"),
@@ -100,7 +112,7 @@ class Front extends Page
             ]
 
         ];
-        
+        //    die(var_dump($safedata));
     }
 
     protected function contact($safedata)
@@ -109,21 +121,12 @@ class Front extends Page
         $this->template = "contact";
         $this->current_page = "contact";
 
-        $contact = new Contact;
-            $contact->getInfos();
-            return;
-//TODO remplacer la globale
-        if (isset($_POST) && !empty($_POST)) {
-
-            $contact = new Contact;
-            $contact->getInfos();
+        if (!is_null($safedata->post)) {
+            $this->sendMessage($safedata->post["username"], $safedata->post["email"], $safedata->post["message"]);
         }
-        $this->data = [
-            "user" => $currentSession->get("user"),
-            "role" => $currentSession->get("role")
-        ]; //données du modele
-//redirect to sendmail ????
-// die(var_dump($this->data));
+
+        //redirect to sendmail ????
+        // die(var_dump($this->data));
     }
 
     protected function registration($safeData)
@@ -162,7 +165,7 @@ class Front extends Page
 
     protected function login($safeData)
     {
-        
+
         $this->template = "login";
         $this->current_page = "login";
         if ($safeData->method === "GET") {
@@ -203,5 +206,19 @@ class Front extends Page
         $user->logout();
         // $logged =true;
         return header("location:/home");
+    }
+
+    private function sendMessage($from, $email, $message)
+    {
+        try {
+            Contact::sendMail($from, $email, $message);
+            // $this->data = [
+            //     "user" => $currentSession->get("user"),
+            //     "role" => $currentSession->get("role")
+            // ]; //données du modele
+        } catch (\Exception $e) {
+            die(var_dump($safedata) . var_dump($e));
+            new ErrorHandler($e);
+        }
     }
 }

@@ -2,10 +2,11 @@
 
 namespace Blog\Ctrl;
 
-use Blog\Ctrl\Comments;
+use Blog\Debug;
 // use Blog\Models\CommentModel;
 use Blog\Ctrl\Utils;
-use Blog\Debug;
+use Blog\Ctrl\Comments;
+use Blog\Ctrl\SafeData;
 use Blog\Ctrl\ErrorHandler;
 
 class Admin extends Page
@@ -64,9 +65,10 @@ class Admin extends Page
 
     public function listComments($safeData)
     {
+        // die(var_dump($safeData));
         global $currentSession;
         $comment = new Comments($safeData);
-
+// die(var_dump($comment));
         $currentSession->addNotification("success", "test");
         if ($safeData->method === "POST") {
             try {

@@ -22,6 +22,7 @@ try {
             "password_2" => FILTER_SANITIZE_STRING,
             "register_btn" => FILTER_SANITIZE_STRING,
             "removeContent" => FILTER_SANITIZE_STRING,
+            "sendHomeForm"=>FILTER_SANITIZE_STRING,
             "titre" => FILTER_SANITIZE_STRING,
             "username" => FILTER_SANITIZE_STRING,
             "message" => FILTER_SANITIZE_STRING
