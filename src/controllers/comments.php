@@ -102,7 +102,7 @@ class Comments extends Entity
         try {
             $this->model->deleteComment($this->id);
         } catch (\Exception $err) {
-            var_dump($err);
+            
             throw $err;
         }
     }

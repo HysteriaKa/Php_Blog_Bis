@@ -1,6 +1,6 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require 'vendor/autoload.php';
 
 // die(var_dump($_POST));
 // session_start();
