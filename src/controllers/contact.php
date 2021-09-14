@@ -26,6 +26,7 @@ class Contact
                "Bonjour Karine, tu as un nouveau message de $from:\n$message",
                $headers
            );
+           
         } catch (\Exception $e) {
              throw $e;
         }
