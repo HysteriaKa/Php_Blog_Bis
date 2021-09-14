@@ -121,7 +121,7 @@ class Front extends Page
         $this->template = "contact";
         $this->current_page = "contact";
 
-        if (!is_null($safedata->post)) {
+        if ($safedata->post  !== null) {
             $this->sendMessage($safedata->post["username"], $safedata->post["email"], $safedata->post["message"]);
         }
 
@@ -211,13 +211,17 @@ class Front extends Page
     private function sendMessage($from, $email, $message)
     {
         try {
+
             Contact::sendMail($from, $email, $message);
-            // $this->data = [
+            $this->data = ["ack" => [
+                "type" => "success",
+                "message" => "le message a bien été envoyé."
+            ]];
             //     "user" => $currentSession->get("user"),
             //     "role" => $currentSession->get("role")
             // ]; //données du modele
         } catch (\Exception $e) {
-            die(var_dump($safedata) . var_dump($e));
+
             new ErrorHandler($e);
         }
     }
