@@ -3,7 +3,6 @@
 namespace Blog\Ctrl;
 
 use Blog\Ctrl\Page;
-use Blog\Ctrl\Utils;
 use Blog\Ctrl\Post;
 use Blog\Ctrl\Comments;
 use Blog\Ctrl\User;
@@ -17,7 +16,7 @@ class Front extends Page
     protected function home($safeData)
     {
 
-        global $currentSession;
+        global $currentSession, $utils;
         //    var_dump($sessionActuelle);
         $this->template = "home";
         $articles = new Post("all");
@@ -34,7 +33,7 @@ class Front extends Page
             ];
         }
         foreach ($articles->getList() as $key => $value) {
-            $value->url = Utils::titleToURI($value->titre);
+            $value->url = $utils->titleToURI($value->titre);
             array_push($this->data["posts"], $value);
         }
         if ($safeData->post) {
@@ -52,7 +51,7 @@ class Front extends Page
 
     protected function articles()
     {
-        global $currentSession;
+        global $currentSession, $utils;
         $this->template = "blogListe";
         $articles = new Post("all");
         // (new Debug)->vardump($articles->getList());
@@ -66,7 +65,7 @@ class Front extends Page
         // var_dump($this->data);
         foreach ($articles->getList() as $key => $value) {
 
-            $value->url = Utils::titleToURI($value->titre);
+            $value->url = $utils->titleToURI($value->titre);
             // (new Debug)->vardump($value, $this->data);
             array_push($this->data["posts"], $value);
         }
@@ -139,7 +138,7 @@ class Front extends Page
 
         }
         if ($safeData->method === "POST") {
-            global $currentSession;
+            global $currentSession, $utils;
             $this->data = $safeData->post;
             if ($safeData->post["password"] !== $safeData->post["password_2"]) {
                 $currentSession->addNotification("error", "Les mots de passe ne correspondent pas.");
@@ -150,15 +149,17 @@ class Front extends Page
                 "username" => $safeData->post["username"],
                 "email" => $safeData->post["email"]
             ]);
-            if (!$user->create()) {
-
-                header("HTTP/1.0 500");
-                $currentSession->addNotification("error", "l'enregistrement à échoué");
-                return;
-            }
-            $currentSession->addNotification("success", "le compte a bien été créé");
-            return header("Location:/login");
-            // exit(0);
+            if (!$user->create())  return $utils->end([
+                    "message"=>"l'enregistrement à échoué.",
+                    "messageType"=>"error",
+                    "header"=>"HTTP/1.0 500",
+                ]);   
+            $utils->end([
+                "message"=>"le compte a bien été créé.",
+                "messageType"=>"success",
+                "header"=>"Location:/login",
+                "exit"=>true
+            ]);
         }
     }
 
@@ -172,7 +173,7 @@ class Front extends Page
 
         }
         if ($safeData->method === "POST") {
-            global $currentSession;
+            global $currentSession, $utils;
             // $logged =false;
             $this->data = $safeData->post;
             // $hash = 'pwd';
@@ -185,26 +186,30 @@ class Front extends Page
 
 
             $isLogged = $user->login();
-            if (!$isLogged) {
-
-                header("HTTP/1.0 500");
-                $currentSession->addNotification("error", "la connexion à échouée");
-                return;
-            }
-            $currentSession->addNotification("success", "Bienvenue");
+            if (!$isLogged)  return $utils->end([
+                "message"=>"la connexion à échouée.",
+                "messageType"=>"error",
+                "header"=>"HTTP/1.0 500",
+            ]);
             // $logged =true;
-            return header("location:/home");
-            //TODO trouver pourquoi il n'y a pas les ACK
-            // exit(0);
+            $utils->end([
+                "message"=>"Bienvenue",
+                "messageType"=>"success",
+                "header"=>"Location:/home",
+                "exit"=>true
+            ]);
         }
     }
 
     protected function logout()
     {
+        global $utils;
         $user = new User([]);
         $user->logout();
         // $logged =true;
-        return header("location:/home");
+        return $utils->end([
+            "header"=>"location:/home",
+        ]);   
     }
 
     private function sendMessage($from, $email, $message)

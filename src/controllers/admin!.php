@@ -4,7 +4,6 @@ namespace Blog\Ctrl;
 
 use Blog\Debug;
 // use Blog\Models\CommentModel;
-use Blog\Ctrl\Utils;
 use Blog\Ctrl\Comments;
 use Blog\Ctrl\SafeData;
 use Blog\Ctrl\ErrorHandler;
@@ -13,20 +12,23 @@ class Admin extends Page
 {
     public function __construct(SafeData $safeData)
     {
-        global $currentSession;
+        global $currentSession, $utils;
         if ($currentSession->get("role") === "0" || is_null($_SERVER["HTTP_REFERER"])) {
-            $currentSession->addNotification("error", "vous ne pouvez pas faire cette action.");
-            header("Location:/login");
-            // exit(0);
+            $utils->end([
+                "message" => "vous ne pouvez pas faire cette action.",
+                "messageType" =>"error",
+                "redirection" => "Location:/login",
+                "exit" => true
+            ]);
         }
         parent::__construct($safeData);
     }
 
     public function delete_comment($safeData)
     {
-        global $currentSession;
+        global $utils;
         $comment = new Comments(["id" => $safeData->uri[1]]);
-        $articleUrl = Utils::titleToURI($comment->getArticleTitle());
+        $articleUrl = $utils->titleToURI($comment->getArticleTitle());
         // die(var_dump($comment->getArticle()));
         // si methode GET
         if ($safeData->method === "GET") {
@@ -44,18 +46,25 @@ class Admin extends Page
         }
         if ($safeData->method === "POST") {
             if ($safeData->post["removeContent"] !== "") {
-                $currentSession->addNotification("warn", "le commentaire n'a pas été supprimé");
-                return header("Location:/article/$articleUrl");
+                return $utils->end([
+                    "message"=>"le commentaire n'a pas été supprimé",
+                    "messageType"=>"warn",
+                    "header"=>"Location:/article/$articleUrl"
+                ]);
             }
             try {
                 // $idArticle = $comment->getArticleId();
                 // var_dump($idArticle);
                 $comment->removeComment();
-                $currentSession->addNotification("success", "Le commentaire a bien été supprimé.");
                 // $this->template = 'article';
                 // die(var_dump($_SESSION));
-                header("Location:/article/$articleUrl");
-                // exit();
+                $utils->end([
+                    "message"=>"Le commentaire a bien été supprimé.",
+                    "messageType"=>"success",
+                    "header"=>"Location:/article/$articleUrl",
+                    "exit"=>true
+                ]);
+
             } catch (\Exception $e) {
                 new ErrorHandler($e);
             }
@@ -66,15 +75,18 @@ class Admin extends Page
     public function listComments($safeData)
     {
         // die(var_dump($safeData));
-        global $currentSession;
+        global $currentSession, $utils;
         $comment = new Comments($safeData);
 // die(var_dump($comment));
-        $currentSession->addNotification("success", "test");
+        // $currentSession->addNotification("success", "test");
         if ($safeData->method === "POST") {
             try {
                 $comment->validateComment();
-                $currentSession->addNotification("success", "Le commentaire est en ligne.");
-                return header("Location:/admin/listComments");
+                return $utils->end([
+                    "message"=> "Le commentaire est en ligne.",
+                    "messageType"=>"success",
+                    "header"=>"Location:/admin/listComments"
+                ]);
             } catch (\Exception $e) {
                 new ErrorHandler($e);
             }
@@ -91,7 +103,7 @@ class Admin extends Page
 
     public function addArticle($safedata)
     {
-        global $currentSession;
+        global $currentSession, $utils;
 
         if ($safedata->method === "POST") {
 
@@ -99,7 +111,7 @@ class Admin extends Page
                 // die(var_dump($safedata, $currentSession));
                 $newArticle = new Post($safedata->post);
                 $newArticle->addPost();
-                return header("location:/articles");
+                return $utils->end(["header"=>"Location:/articles"]);
             } catch (\Throwable $th) {
                 //throw $th;
                 $this->template = "page500";
@@ -127,7 +139,7 @@ class Admin extends Page
     public function delete_article($safedata)
     {
 
-        global $currentSession;
+        global $currentSession, $utils;
 
         //   die(var_dump($article->getArticleToDelete($safedata)));
         // si methode GET
@@ -148,14 +160,20 @@ class Admin extends Page
         if ($safedata->method === "POST") {
             if ($safedata->post["removeContent"] !== "") {
                 $currentSession->addNotification("warn", "l'article' n'a pas été supprimé");
-                return header("Location:/articles");
+                return $utils->end(["header"=>"Location:/articles"]);
+
             }
             try {
+                global $utils;
                 $article = new Post(["id" => $safedata->uri[1]]);
                 $article->removeArticle();
-                $currentSession->addNotification("success", "L'article' a bien été supprimé.");
-                header("Location:/articles");
-                // exit();
+                $utils->end([
+                    "message"=>"L'article' a bien été supprimé.",
+                    "messageType"=>"success",
+                    "header"=>"Location:/articles",
+                    "exit"=>true
+                ]);
+
             } catch (\Exception $e) {
                 new ErrorHandler($e);
             }
@@ -164,7 +182,7 @@ class Admin extends Page
 
     public function edit_article($safedata)
     {
-        global $currentSession;
+        global $utils;
         $article = new Post(["id" => $safedata->uri[1]]);
         $article->initById();
        
@@ -172,8 +190,11 @@ class Admin extends Page
             try {
                 // var_dump($article);
                 $article->modifyArticle($safedata);
-                $currentSession->addNotification("success", "La modification a été effectuée.");
-                return header("location:/articles");
+                return $utils->end([
+                    "message"=>"La modification a été effectuée.",
+                    "messageType"=>"success",
+                    "header"=>"Location:/articles"
+                ]);
             } catch (\Exception $e) {
                 new ErrorHandler($e);
             }

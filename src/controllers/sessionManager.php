@@ -43,25 +43,25 @@ class SessionManager
         // var_dump("addNotification", $type, $message);
         array_push($this->ack, ["type" => $type, "message" => $message]);
         $this->update("ack");
-        // die(var_dump($this->update()));
+     
 
     }
 
     public function getNotifications()
     {
-        // var_dump("getNotifications");
+        
         $response = $this->ack;
         $this->ack = [];
         $this->update("ack");
         return $response;
-        // die(var_dump($response));
+       
     }
 
     private function update($key)
     {
         $_SESSION[$key] = $this->$key;
 
-        // var_dump("updated", $_SESSION);
+       
     }
 
     public function set($key, $value)
@@ -74,7 +74,7 @@ class SessionManager
     {
 
         return $this->$value;
-        // return $this->$value ? $this->$value : null;
+        
     }
 
     public function init($username, $role, $id)
@@ -92,7 +92,7 @@ class SessionManager
     }
 
     /**
-     * remove supergolbales value
+     * remove superglobales value
      *
      * @return  void    clear superglobal. After you need to create a new iteration of SessionManger
      */
