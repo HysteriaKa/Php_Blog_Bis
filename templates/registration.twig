@@ -17,13 +17,13 @@
 
 <div class="header">
 	<h2>Enregistrement</h2>
-	{% if ack is defined %}
+{#{% if ack is defined %}
 	{% for item in ack %}
 	<div class="ack_{{ item.type }} message">
 		{{ item.message }}
 	</div>
 	{% endfor %}
-	{% endif %}
+	{% endif %}}#}
 </div>
 <form method="post" action="/registration">
 	<div class="input-group">

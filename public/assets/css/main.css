@@ -4197,7 +4197,6 @@ a:hover {
   .d-none {
     display: none !important;
   }
- 
 }
 
 @media screen and (max-width: 480px) {
@@ -4516,9 +4515,12 @@ body.is-preload #wrapper {
     /* margin-top: 5%; */
   }
 }
-
 #toast-container {
-  /* z-index: 9999; */
-  left: 90vw;
-  position: absolute;
+  top: 10%;
+  right: auto !important;
+  bottom: auto !important;
+  left: 90%;
+  background-color:#18141a;
+  position:fixed;
+  padding:1rem;
 }

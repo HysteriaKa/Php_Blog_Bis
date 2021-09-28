@@ -53,11 +53,8 @@ class Admin extends Page
                 ]);
             }
             try {
-                // $idArticle = $comment->getArticleId();
-                // var_dump($idArticle);
+             
                 $comment->removeComment();
-                // $this->template = 'article';
-                // die(var_dump($_SESSION));
                 $utils->end([
                     "message"=>"Le commentaire a bien été supprimé.",
                     "messageType"=>"success",
@@ -77,8 +74,6 @@ class Admin extends Page
         // die(var_dump($safeData));
         global $currentSession, $utils;
         $comment = new Comments($safeData);
-// die(var_dump($comment));
-        // $currentSession->addNotification("success", "test");
         if ($safeData->method === "POST") {
             try {
                 $comment->validateComment();
@@ -98,7 +93,6 @@ class Admin extends Page
             "role" => $currentSession->get("role"),
             "commentaires" => $comment->getCommentsToValidate()
         ];
-        // var_dump($this->data);
     }
 
     public function addArticle($safedata)
