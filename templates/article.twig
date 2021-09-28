@@ -1,7 +1,13 @@
 {% extends 'base.twig' %}
 {% block content %}
 
-
+{% if ack is defined %}
+{% for item in ack %}
+<div class="ack_{{ item.type }} message">
+    {{ item.message }}
+</div>
+{% endfor %}
+{% endif %}
 <section class="panel spotlight large left d-flex ">
   <div class="content span-5">
     <h1 class="major align-center">{{ data.article.titre }}</h1>
