@@ -51,6 +51,7 @@ class Post extends Entity
 
     public function getAll()
     {
+        global $utils;
         return [
             "id" => $this->id,
             "titre" => $this->titre,
@@ -60,7 +61,7 @@ class Post extends Entity
             "image" => $this->image,
             "idUser" => $this->id_user,
             "modifyAt" => $this->modify_at,
-            "url" => Utils::titleToURI($this->titre)
+            "url" => $utils->titleToURI($this->titre)
         ];
     }
 

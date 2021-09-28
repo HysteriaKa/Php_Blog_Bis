@@ -14,7 +14,13 @@
 </head>
 
 <body>
-  
+  {% if ack is defined %}
+  {% for item in ack %}
+  <div class="ack_{{ item.type }} message">
+      {{ item.message }}
+  </div>
+  {% endfor %}
+  {% endif %}
         <div class="center">
           <h1>Suppression</h1>
        

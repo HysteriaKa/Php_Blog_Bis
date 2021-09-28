@@ -8,6 +8,7 @@ require 'vendor/autoload.php';
 // session_start();
 
 try {
+    $utils = new Blog\Ctrl\Utils();
     $currentSession = new \Blog\Ctrl\SessionManager();
 
     $safeData =  new Blog\Ctrl\SafeData([
