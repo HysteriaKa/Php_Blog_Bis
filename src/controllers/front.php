@@ -211,7 +211,7 @@ class Front extends Page
     private function sendMessage($from, $email, $message)
     {
         try {
-
+            throw new \Exception();
             Contact::sendMail($from, $email, $message);
             $this->data = ["ack" => [
                 "type" => "success",
@@ -221,8 +221,7 @@ class Front extends Page
             //     "role" => $currentSession->get("role")
             // ]; //données du modele
         } catch (\Exception $e) {
-
-            new ErrorHandler($e);
+            new ErrorHandler($e, "le message n'a pas pu être envoyé");
         }
     }
 }

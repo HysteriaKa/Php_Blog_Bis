@@ -1,5 +1,7 @@
 <?php
 
+use Blog\Ctrl\ErrorHandler;
+
 require 'vendor/autoload.php';
 
 // die(var_dump($_POST));
@@ -49,12 +51,15 @@ try {
             break;
     }
 
+} catch (\Throwable $th) {
+    new ErrorHandler($th);
+}
+finally{
     //rendu
     $templateData = ["data" => $page->data];
     $notifications  = $currentSession->getNotifications();
     // die(var_dump($page->data));
     if (!empty($notifications)) $templateData["ack"] = $notifications;
-    echo $twig->render($page->template . ".twig", $templateData, $page->current_page);
-} catch (\Throwable $th) {
-    throw $th;
+    echo $twig->render($page->template.".twig", $templateData, $page->current_page);
+
 }
