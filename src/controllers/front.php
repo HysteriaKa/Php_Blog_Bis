@@ -117,7 +117,6 @@ class Front extends Page
 
     protected function contact($safedata)
     {
-        global $currentSession;
         $this->template = "contact";
         $this->current_page = "contact";
 
@@ -159,7 +158,7 @@ class Front extends Page
             }
             $currentSession->addNotification("success", "le compte a bien été créé");
             return header("Location:/login");
-            exit(0);
+            // exit(0);
         }
     }
 
@@ -196,7 +195,7 @@ class Front extends Page
             // $logged =true;
             return header("location:/home");
             //TODO trouver pourquoi il n'y a pas les ACK
-            exit(0);
+            // exit(0);
         }
     }
 
