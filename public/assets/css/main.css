@@ -4128,7 +4128,7 @@ button:disabled,
 #copyright {
   display: inline-block;
   background: #18141a;
-  padding: 1.75em 2em 0.75em 2em;
+  /* padding: 0.75em 1em 0.75em 1em; */
   border-radius: 8px;
   color: #8b9790;
   margin: 4em 0 0 0;
@@ -4185,20 +4185,27 @@ a:hover {
   span {
     margin-bottom: 10px !important;
   }
-  a.button.primary.color1.circle.icon.solid.fa-angle-right.center::before{
+  a.button.primary.color1.circle.icon.solid.fa-angle-right.center::before {
     position: absolute;
   }
-  h2{
+  h2 {
     display: none !important;
   }
- div.d-flex.column{
-   margin-top: 10px !important;
- }
+  div.d-flex.column {
+    margin-top: 10px !important;
+  }
+  .d-none {
+    display: none !important;
+  }
+ 
 }
 
 @media screen and (max-width: 480px) {
   .panel.spotlight .content {
     min-height: 8rem;
+  }
+  .d-none {
+    display: none;
   }
 }
 
@@ -4508,4 +4515,10 @@ body.is-preload #wrapper {
 
     /* margin-top: 5%; */
   }
+}
+
+#toast-container {
+  /* z-index: 9999; */
+  left: 90vw;
+  position: absolute;
 }

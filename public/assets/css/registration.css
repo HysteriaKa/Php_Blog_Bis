@@ -1,6 +1,6 @@
 .header {
 
-	width: 40%;
+	width: 65%;
 	margin: 50px auto 0px;
 	color: white;
 	background: #970a58;
@@ -13,7 +13,7 @@
 
 form,
 .content {
-	width: 40%;
+	width: 65%;
 	margin: 0px auto;
 	padding: 20px;
 	border: 1px solid #b0c4de;
@@ -101,3 +101,25 @@ form,
 .center {
 	align-items: center;
 }
+@media screen and (max-width: 736px) {
+	html {
+	  height: auto;
+	}
+  
+	body {
+	  height: auto;
+	  overflow-x: hidden;
+	  overflow-y: auto;
+	}
+	form{
+		width:80%
+	}
+   
+  }
+  
+  @media screen and (max-width: 480px) {
+	html,
+	body {
+	  min-width: 320px;
+	}
+  }

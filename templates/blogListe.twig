@@ -20,8 +20,8 @@
 
             <h3>{{ article.titre}}</h3>
             <p>{{article.chapo}}</p>
-            <div class="">
-                <div class="display: inline mb-2 ">
+            <div class="d-flex">
+                <div class="d-flex mb-2">
                     <span><a href="/article/{{ article.url }}" class="button">En détail</a></span>
                     {% if data.role == 1 %}
                     <span><a href="/admin/edit_article/{{ article.id }}" class="button">Modifier</a></span>

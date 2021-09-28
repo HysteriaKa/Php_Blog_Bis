@@ -9,11 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css"
         integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
+    
     <script src="/public/assets/js/jquery.min.js" defer></script>
     <script src="/public/assets/js/browser.min.js" defer></script>
     <script src="/public/assets/js/breakpoints.min.js" defer></script>
     <script src="/public/assets/js/main.js" defer></script>
+    <script src="/public/assets/js/toaster.js" defer></script>
     <noscript>
         <link rel="stylesheet" href="/public/assets/css/noscript.css" /></noscript>
 </head>
@@ -69,7 +72,7 @@
                     <p class="center"><strong>Le développement de sites passe par le développement de soi.</strong></p>
                     <p class="center ">
                         <img src="/public/images/IMG-6502.jpg" alt="photo de profil" class="photoprofil"></p>
-                    <ul class="actions">
+                    <ul class="actions d-none">
                         <li><a href="#first" class="button primary color1 circle icon solid fa-angle-right center">Next</a>
                         </li>
                     </ul>
@@ -90,11 +93,11 @@
 
     <footer class="footer">
         <div class="copyright" id="copyright">
-            <p>&copy; 2021 Ka's Blog</p>
+            <p style="margin: 10px" >&copy; 2021 Ka's Blog</p>
             {% if data.user is empty %}
-            <a href="/login">Connexion admin</a>
+            <a class="ml-1 mr-1" href="/login">Connexion admin</a>
             {% else %}
-            <a href="/logout">Déconnexion</a>  
+            <a class="ml-1 mr-1" href="/logout">Déconnexion</a>  
             {% endif %}
 
         </div>
