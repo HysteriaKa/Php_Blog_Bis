@@ -17,7 +17,7 @@ class Admin extends Page
         if ($currentSession->get("role") === "0" || is_null($_SERVER["HTTP_REFERER"])) {
             $currentSession->addNotification("error", "vous ne pouvez pas faire cette action.");
             header("Location:/login");
-            exit(0);
+            // exit(0);
         }
         parent::__construct($safeData);
     }
@@ -55,7 +55,7 @@ class Admin extends Page
                 // $this->template = 'article';
                 // die(var_dump($_SESSION));
                 header("Location:/article/$articleUrl");
-                exit();
+                // exit();
             } catch (\Exception $e) {
                 new ErrorHandler($e);
             }
@@ -155,7 +155,7 @@ class Admin extends Page
                 $article->removeArticle();
                 $currentSession->addNotification("success", "L'article' a bien été supprimé.");
                 header("Location:/articles");
-                exit();
+                // exit();
             } catch (\Exception $e) {
                 new ErrorHandler($e);
             }

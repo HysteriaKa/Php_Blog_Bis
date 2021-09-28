@@ -20,6 +20,6 @@ window.onload = function () {
         M.toast({html: content, classes:classe})
     });
     
-    M.toast({html: "coucou", classes:"white red darken-4"});
+    M.toast({html: "coucou", classes:"white red darken-4"},9000);
     // alert("...")
 }
