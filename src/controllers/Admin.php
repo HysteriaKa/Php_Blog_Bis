@@ -13,7 +13,7 @@ class Admin extends Page
     public function __construct(SafeData $safeData)
     {
         global $currentSession, $utils;
-        if ($currentSession->get("role") === "0" || is_null($_SERVER["HTTP_REFERER"])) {
+        if ($currentSession->get("role") === "0" || ($_SERVER["HTTP_REFERER"]) === null) {
             $utils->end([
                 "message" => "vous ne pouvez pas faire cette action.",
                 "messageType" =>"error",
@@ -105,7 +105,13 @@ class Admin extends Page
                 // die(var_dump($safedata, $currentSession));
                 $newArticle = new Post($safedata->post);
                 $newArticle->addPost();
-                return $utils->end(["header"=>"Location:/articles"]);
+                
+        return $utils->end([
+            "message"=>"l'article a bien été publié.",
+            "messageType"=>"success",
+            "header"=>"Location:/articles",
+            "exit"=>true
+        ]);
             } catch (\Throwable $th) {
                 //throw $th;
                 $this->template = "page500";
@@ -118,11 +124,6 @@ class Admin extends Page
 
         $this->template = 'addArticle';
         $this->data = [
-
-            "ack" => [
-                "type" => "success",
-                "message" => "l'article a bien été publié."
-            ],
             "idUser" => $currentSession->get("idUser"),
             "role" => $currentSession->get("role"),
             "user" => $currentSession->get("user"),
@@ -153,7 +154,7 @@ class Admin extends Page
         }
         if ($safedata->method === "POST") {
             if ($safedata->post["removeContent"] !== "") {
-                $currentSession->addNotification("warn", "l'article' n'a pas été supprimé");
+                $currentSession->addNotification("warn", "l'article n'a pas été supprimé");
                 return $utils->end(["header"=>"Location:/articles"]);
 
             }
@@ -162,7 +163,7 @@ class Admin extends Page
                 $article = new Post(["id" => $safedata->uri[1]]);
                 $article->removeArticle();
                 $utils->end([
-                    "message"=>"L'article' a bien été supprimé.",
+                    "message"=>"L'article a bien été supprimé.",
                     "messageType"=>"success",
                     "header"=>"Location:/articles",
                     "exit"=>true

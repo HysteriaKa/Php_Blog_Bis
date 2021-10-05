@@ -19,6 +19,17 @@
     <script src="/public/assets/js/toaster.js" defer></script>
     <noscript>
         <link rel="stylesheet" href="/public/assets/css/noscript.css" /></noscript>
+        <script>
+            {% block javascript %}
+            {% endblock %};
+            window.onload= function(){
+                if (notifications !== null) {
+                   for(let i=0; i<notifications.length; i++){
+                        M.toast({html: notifications[i].message, class:notifications[i].type})
+                    }
+                }
+            }
+        </script>
 </head>
 
 

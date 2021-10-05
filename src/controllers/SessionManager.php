@@ -14,7 +14,7 @@ class SessionManager
     public function __construct()
     {
         session_cache_expire(280);
-        $expiration = session_cache_expire();
+        // $expiration = session_cache_expire();
         session_start();
         $this->initValue();
         foreach ($_SESSION as $key => $value) {
@@ -100,7 +100,7 @@ class SessionManager
     {
         session_destroy();
         foreach ($this as $key => $value) {
-            unset($this->key);
+            unset($this->$key);
         }
         $this->initValue();
     }

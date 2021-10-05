@@ -127,7 +127,7 @@ class Post extends Entity
         // global $currentSession;
         try {
             $this->model->updateArticle(
-                $id =$this->getId(),
+                $this->getId(),
                 // $currentSession->get("idUser"),
                 $safedata->post["titre"],
                 $safedata->post["content"],

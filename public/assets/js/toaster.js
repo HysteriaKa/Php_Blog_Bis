@@ -19,7 +19,4 @@ window.onload = function () {
         node.parentNode.removeChild(node);
         M.toast({html: content, classes:classe},9000)
     });
-    
-    // M.toast({html: "coucou", classes:"white red darken-4"},9000);
-    // alert("...")
 }

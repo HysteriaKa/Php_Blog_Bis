@@ -12,27 +12,27 @@ use Blog\Ctrl\Contact;
 class Front extends Page
 {
 
-
+/**
+ * [home description]
+ *
+ * @param   [type]  $safeData  [$safeData description]
+ *
+ * @return  [type]             [return description]
+ */
     protected function home($safeData)
     {
-
         global $currentSession, $utils;
-        //    var_dump($sessionActuelle);
         $this->template = "home";
         $articles = new Post("all");
         $this->current_page = "home";
+        $this->data = [
+            "posts" => []
+        ];
         if ($currentSession->get("user")) {
-            $this->data = [
-                "user" => $currentSession->get("user"),
-                "role" => $currentSession->get("role"),
-                "posts" => []
-            ];
-        } else {
-            $this->data = [
-                "posts" => []
-            ];
+            $this->data["user"] = $currentSession->get("user");
+            $this->data["role"] = $currentSession->get("role");
         }
-        foreach ($articles->getList() as $key => $value) {
+        foreach ($articles->getList() as $value) {
             $value->url = $utils->titleToURI($value->titre);
             array_push($this->data["posts"], $value);
         }
@@ -43,7 +43,6 @@ class Front extends Page
                     $safeData->post["email"],
                     $safeData->post["message"]
                 );
-                // die(var_dump($safeData->post));
             }
         }
     }
@@ -76,12 +75,18 @@ class Front extends Page
     protected function article($safedata)
     {
 
-        global $currentSession;
+        global $currentSession, $utils;
         if ($safedata->method === "POST") {
             //  die(var_dump($safedata));   
             try {
                 $newComment = new Comments($safedata);
                 $newComment->save($safedata);
+               
+                $utils->end([
+                    "message"=>"le commentaire a bien été envoyé.",
+                    "messageType"=>"success"
+                ]);
+                // die(var_dump($this->data));
             } catch (\Throwable $th) {
                 //throw $th;
                 $this->template = "page500";
@@ -104,14 +109,13 @@ class Front extends Page
             "user" => $currentSession->get("user"),
             "role" => $currentSession->get("role"),
             "article"     => $article->getAll(),
-            "commentaires" => $commentaires->getCommentByArticle(),
-            "ack" => [
-                "type" => "success",
-                "message" => "le commentaire a bien été envoyé."
-            ]
-
+            "commentaires" => $commentaires->getCommentByArticle()
         ];
-        //    die(var_dump($safedata));
+        $utils->end([
+            "message"=>"le commentaire a bien été envoyé.",
+            "messageType"=>"success"
+        ]);
+        // die(var_dump($this->data));
     }
 
     protected function contact($safedata)
@@ -123,8 +127,6 @@ class Front extends Page
             $this->sendMessage($safedata->post["username"], $safedata->post["email"], $safedata->post["message"]);
         }
 
-        //redirect to sendmail ????
-        // die(var_dump($this->data));
     }
 
     protected function registration($safeData)
@@ -173,7 +175,7 @@ class Front extends Page
 
         }
         if ($safeData->method === "POST") {
-            global $currentSession, $utils;
+            global $utils;
             // $logged =false;
             $this->data = $safeData->post;
             // $hash = 'pwd';
@@ -214,16 +216,15 @@ class Front extends Page
 
     private function sendMessage($from, $email, $message)
     {
+        global $utils;
         try {
             throw new \Exception();
             Contact::sendMail($from, $email, $message);
-            $this->data = ["ack" => [
-                "type" => "success",
-                "message" => "le message a bien été envoyé."
-            ]];
-            //     "user" => $currentSession->get("user"),
-            //     "role" => $currentSession->get("role")
-            // ]; //données du modele
+            $utils->end([
+                "message"=>"le message a bien été envoyé.",
+                "messageType"=>"success"
+            ]);
+
         } catch (\Exception $e) {
             new ErrorHandler($e, "le message n'a pas pu être envoyé");
         }
