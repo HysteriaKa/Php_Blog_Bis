@@ -12,13 +12,13 @@ use Blog\Ctrl\Contact;
 class Front extends Page
 {
 
-/**
- * [home description]
- *
- * @param   [type]  $safeData  [$safeData description]
- *
- * @return  [type]             [return description]
- */
+    /**
+     * [home]
+     *
+     * @param   [data]  $safeData  
+     *
+     * @return  [safedata]             
+     */
     protected function home($safeData)
     {
         global $currentSession, $utils;
@@ -46,14 +46,20 @@ class Front extends Page
             }
         }
     }
-
+  /**
+     * [articles]
+     *
+     * @param   [articles]  $articles 
+     *
+     * @return  [list of articles]             
+     */
 
     protected function articles()
     {
         global $currentSession, $utils;
         $this->template = "blogListe";
         $articles = new Post("all");
-        // (new Debug)->vardump($articles->getList());
+
 
         $this->data = [
             "user" => $currentSession->get("user"),
@@ -61,39 +67,45 @@ class Front extends Page
             "posts" => []
         ];
 
-        // var_dump($this->data);
-        foreach ($articles->getList() as $key => $value) {
+        foreach ($articles->getList() as $value) {
 
             $value->url = $utils->titleToURI($value->titre);
-            // (new Debug)->vardump($value, $this->data);
+          
             array_push($this->data["posts"], $value);
         }
-        // (new Debug)->vardump($this->data);
-
     }
-
+ /**
+     * [articles]
+     *
+     * @param   [article]  $article 
+     *
+     * @return  [affiche un article et ses commentaires et envoie commentaire]             
+     */
     protected function article($safedata)
     {
 
         global $currentSession, $utils;
         if ($safedata->method === "POST") {
-            //  die(var_dump($safedata));   
+            
             try {
                 $newComment = new Comments($safedata);
                 $newComment->save($safedata);
-               
                 $utils->end([
-                    "message"=>"le commentaire a bien été envoyé.",
-                    "messageType"=>"success"
+                    "message" => "le commentaire a bien été envoyé.",
+                    "messageType" => "success"
                 ]);
-                // die(var_dump($this->data));
+              
             } catch (\Throwable $th) {
-                //throw $th;
+            
                 $this->template = "page500";
                 $this->status = 500;
                 $this->data = [
                     "msg" => $th
                 ];
+                $utils->end([
+                    "message" => "le commentaire a bien été envoyé.",
+                    "messageType" => "success"
+                ]);
 
                 return;
             }
@@ -104,20 +116,21 @@ class Front extends Page
         $article->initByTitle();
 
         $commentaires = new Comments(["id_article" => $article->getId()]);
-        // die(var_dump($article->getId()));
         $this->data = [
             "user" => $currentSession->get("user"),
             "role" => $currentSession->get("role"),
             "article"     => $article->getAll(),
             "commentaires" => $commentaires->getCommentByArticle()
         ];
-        $utils->end([
-            "message"=>"le commentaire a bien été envoyé.",
-            "messageType"=>"success"
-        ]);
-        // die(var_dump($this->data));
+      
     }
-
+/**
+ * [contact]
+ *
+ * @param   [Data]  $safedata  [$safedata]
+ *
+ * @return  [infos contact]             
+ */
     protected function contact($safedata)
     {
         $this->template = "contact";
@@ -126,7 +139,6 @@ class Front extends Page
         if ($safedata->post  !== null) {
             $this->sendMessage($safedata->post["username"], $safedata->post["email"], $safedata->post["message"]);
         }
-
     }
 
     protected function registration($safeData)
@@ -152,33 +164,32 @@ class Front extends Page
                 "email" => $safeData->post["email"]
             ]);
             if (!$user->create())  return $utils->end([
-                    "message"=>"l'enregistrement à échoué.",
-                    "messageType"=>"error",
-                    "header"=>"HTTP/1.0 500",
-                ]);   
+                "message" => "l'enregistrement à échoué.",
+                "messageType" => "error",
+                "header" => "HTTP/1.0 500",
+            ]);
             $utils->end([
-                "message"=>"le compte a bien été créé.",
-                "messageType"=>"success",
-                "header"=>"Location:/login",
-                "exit"=>true
+                "message" => "le compte a bien été créé.",
+                "messageType" => "success",
+                "header" => "Location:/login",
+                "exit" => true
             ]);
         }
     }
 
     protected function login($safeData)
     {
-
+        
         $this->template = "login";
         $this->current_page = "login";
         if ($safeData->method === "GET") {
             $this->data = []; //données du modele
 
         }
+      
         if ($safeData->method === "POST") {
             global $utils;
-            // $logged =false;
             $this->data = $safeData->post;
-            // $hash = 'pwd';
             $user = new User([
                 "password" => $safeData->post["password"],
                 "email" => $safeData->post["email"]
@@ -186,19 +197,18 @@ class Front extends Page
 
             unset($safeData->post["password"]);
 
-
             $isLogged = $user->login();
             if (!$isLogged)  return $utils->end([
-                "message"=>"la connexion à échouée.",
-                "messageType"=>"error",
-                "header"=>"HTTP/1.0 500",
+                "message" => "la connexion à échouée.",
+                "messageType" => "error",
+                "header" => "HTTP/1.0 500",
             ]);
-            // $logged =true;
+           
             $utils->end([
-                "message"=>"Bienvenue",
-                "messageType"=>"success",
-                "header"=>"Location:/home",
-                "exit"=>true
+                "message" => "Bienvenue",
+                "messageType" => "success",
+                "header" => "Location:/home",
+                "exit" => true
             ]);
         }
     }
@@ -210,8 +220,8 @@ class Front extends Page
         $user->logout();
         // $logged =true;
         return $utils->end([
-            "header"=>"location:/home",
-        ]);   
+            "header" => "location:/home",
+        ]);
     }
 
     private function sendMessage($from, $email, $message)
@@ -221,10 +231,9 @@ class Front extends Page
             throw new \Exception();
             Contact::sendMail($from, $email, $message);
             $utils->end([
-                "message"=>"le message a bien été envoyé.",
-                "messageType"=>"success"
+                "message" => "le message a bien été envoyé.",
+                "messageType" => "success"
             ]);
-
         } catch (\Exception $e) {
             new ErrorHandler($e, "le message n'a pas pu être envoyé");
         }

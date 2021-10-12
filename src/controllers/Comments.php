@@ -18,16 +18,14 @@ class Comments extends Entity
 
     public function __construct($datas=[])
     {
-        // die(var_dump($datas));
+        
         foreach ($datas as $key => $data) {
             $this->$key = $data;
         }
 
-        // if (isset($data["id_article"])) $this->id_article = $data["id_article"]; 
         $this->model = new CommentModel($data);
-        // die(var_dump(new CommentModel($data)));
+        
     }
-
 
     public function getAll()
     {
@@ -57,33 +55,28 @@ class Comments extends Entity
             $this->model->postComment(
                 $safedata->post["id_article"],
                 $currentSession->get("idUser"),
-                
                 $safedata->post["content"],   
                 0,
                 
                 
             );
         } catch (\Throwable $th) {
-            // die(var_dump($th));
+            
         }
         
     }
 
-
-
     public function getArticleTitle()
     {
-        // die(var_dump($this->model->getParentArticle($this->id)));
+       
         $title = $this->model->getParentArticle($this->id);
-        // die(var_dump($title->titre));
         return $title->titre;
     }
 
     public function getArticleId()
     {
-        // die(var_dump($this->model->getParentArticle($this->id)));
+      
         $article = $this->model->getParentArticle($this->id);
-        // die(var_dump($article->id));
         return $article->id;
     }
     public function deleteComment($safedata)
@@ -112,15 +105,14 @@ class Comments extends Entity
             $comments = $this->model->getCommentsToValidate();
             return $comments;
         } catch (\Throwable $th) {
-            //throw $th;
+           
         }
     }
     public function validateComment()
     {
         try{
             $this->model->updateComment($this->post["commentToValidate"]);
-        }catch (\Exception $err) {
-            
+        }catch (\Exception $err) {  
             throw $err;
         }
     }

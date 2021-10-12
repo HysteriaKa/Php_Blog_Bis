@@ -23,7 +23,7 @@ class Post extends Entity
         $this->model = new PostModel($data);
 
         if ($data === "all") return $this->initInOrderToGetList();
-        // if (isset($data["titre"])) return $this->initByTitle(); TODO : verifier quand on en vait besoin et adapter
+       
     }
 
     public function initByTitle()
@@ -85,8 +85,7 @@ class Post extends Entity
                 $safedata->post["chapo"],
                 $safedata->post["content"],
                 $safedata->post["image"],
-                $safedata->post["created_at"],
-                // $safedata->post["titre"]
+                $safedata->post["created_at"] 
                 
             );
         } catch (\Exception $e) {
@@ -103,9 +102,9 @@ class Post extends Entity
             new ErrorHandler($e);
         }
     }
+
     public function deleteArticle($safedata)
     {
-
         try {
             $this->model->deleteArticle(
                 $safedata
@@ -123,12 +122,10 @@ class Post extends Entity
     }
 
     public function modifyArticle($safedata)
-    {
-        // global $currentSession;
+    { 
         try {
             $this->model->updateArticle(
                 $this->getId(),
-                // $currentSession->get("idUser"),
                 $safedata->post["titre"],
                 $safedata->post["content"],
                 $safedata->post["chapo"],
