@@ -17,35 +17,49 @@ class CommentModel extends Database
     {
         $req = $this->db
             ->prepare("SELECT * FROM `commentaires`   WHERE id_article=:id_article ");
-            // ->prepare("SELECT commentaires.contenu, commentaires.statut, commentaires.created_at, users.username from ((commentaires INNER JOIN articles ON commentaires.id_article = articles.id) JOIN users ON commentaires.id_user = users.id)");
-        //  die(var_dump($req));
-            $req->execute(["id_article" => $id_article]);
-       
+        $req->execute(["id_article" => $id_article]);
+
         return $req->fetchAll();
     }
-
+    /**
+     * permet d'insérer un nouveau commentaire à partir de l' id article
+     *
+     * @param   String  $id_article  l'id de l'article
+     *
+     * @return   void
+     */
     public function postComment($idArticle, $idAuteur, $content, $statut)
     {
 
         $req = $this->db
             ->prepare("INSERT INTO commentaires(id_article,id_user,contenu,created_at,statut) VALUES(?,?,?,NOW(),?)");
         $req->execute(array($idArticle, $idAuteur, $content, $statut));
-        // var_dump($idArticle, $idAuteur, $content, $statut);
     }
+    /**
+     * permet de supprimer un commentaire à partir d'un id
+     *
+     * @param   String  $id_article  l'id de l'article
+     *
+     * @return   Array              la liste des commentaires
+     */
     public function deleteComment($id)
     {
         $req = $this->db
             ->prepare("DELETE FROM commentaires where id=:id");
-        // die(var_dump($this));
         $req->execute(["id" => $id]);
     }
-
+   /**
+     * permet de récupérer le bon commentaire à partir d'un id
+     *
+     * @param   String  $idcomment
+     *
+     * @return  String              
+     */
     public function getParentArticle($idComment)
     {
-        // die(var_dump($idComment)); on récupère bien l id en string 
+        
         $req = $this->db
             ->prepare("SELECT articles.titre, articles.id from commentaires INNER JOIN articles ON commentaires.id_article = articles.id WHERE commentaires.id = ? LIMIT 1");
-        // die(var_dump($req->debugDumpParams())); resultat null 
         $req->execute([$idComment]);
         return $req->fetch();
     }
@@ -60,7 +74,7 @@ class CommentModel extends Database
         while ($rows = $req->fetchObject()) {
             $comments[] = $rows;
         }
-        // var_dump($comments);
+       
         return $comments;
     }
     public function updateComment($id)

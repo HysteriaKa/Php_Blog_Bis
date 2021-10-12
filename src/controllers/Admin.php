@@ -2,8 +2,6 @@
 
 namespace Blog\Ctrl;
 
-use Blog\Debug;
-// use Blog\Models\CommentModel;
 use Blog\Ctrl\Comments;
 use Blog\Ctrl\SafeData;
 use Blog\Ctrl\ErrorHandler;
@@ -29,8 +27,7 @@ class Admin extends Page
         global $utils;
         $comment = new Comments(["id" => $safeData->uri[1]]);
         $articleUrl = $utils->titleToURI($comment->getArticleTitle());
-        // die(var_dump($comment->getArticle()));
-        // si methode GET
+        
         if ($safeData->method === "GET") {
             try {
                 $this->template = "deleteConfirm";
@@ -40,7 +37,6 @@ class Admin extends Page
 
                 ];
             } catch (\Throwable $th) {
-                //throw $th;
 
             }
         }

@@ -32,13 +32,11 @@
         </script>
 </head>
 
-
 <body class="is-preload">
     {% if ack is defined %}
     {% for item in ack %}
     <div class="ack_{{ item.type }} message">
         {{ item.message }}
-        TEST
     </div>
     {% endfor %}
     {% endif %}

@@ -15,7 +15,13 @@ class Utils {
         $title = implode(" ", $title);
         return $title;
     }
-    
+    /**
+     * [end Gestion des messages et des redirections]
+     *
+     * @param  $props  données envoyées 
+     *
+     * @return  message header fin de session      
+     */
     public function end($props){
         if (isset($props["message"])){
             global $currentSession;

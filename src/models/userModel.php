@@ -4,7 +4,6 @@
 namespace Blog\Models;
 
 use Blog\Models\DataBase;
-// use Blog\Ctrl\Utils;
 
 class UserModel extends DataBase
 {
@@ -20,7 +19,7 @@ class UserModel extends DataBase
      */
     public function addUser($cryptedPwd)
     {
-        // var_dump($this->props);
+        
         try {
             unset($this->props->password);
             $req = $this->db->prepare("INSERT INTO `users` (`email`, `password`, `username`, `user_type`) VALUES (:email, :pwd, :username, '0');");
@@ -29,27 +28,19 @@ class UserModel extends DataBase
                 ":pwd" => $cryptedPwd,
                 ":username" => $this->props->username
             ]);
-            // $req->execute(array($email, $password, $username));
+           
             return true;
         } catch (\Exception $e) {
             return false;
         }
     }
-
-
-
-    // public function getArticle()
-    // {
-
-    //     $resultData = $this->db->prepare("SELECT * FROM `articles` WHERE `titre`=:titre ORDER BY `created_at` DESC");
-    //     $resultData->execute(["titre" => Utils::uriToTitle($this->props->titre)]);
-    //     // die(var_dump($resultData->debugDumpParams()));
-
-    //     while ($data = $resultData->fetchObject()) {
-    //         return $data;
-    //     }
-    // }
-
+   /**
+     * permet d'obtenir les infos user à partir du mail
+     *
+     * @param   String  $email
+     *
+     * @return   Object User
+     */
     public function getDataFromEmail()
     {
         try {

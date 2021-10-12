@@ -7,8 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/assets/css/registration.css" />
-
-    {# <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> #}
     <noscript>
         <link rel="stylesheet" href="/public/assets/css/noscript.css" /></noscript>
 </head>
@@ -17,13 +15,6 @@
 
 <div class="header">
 	<h2>Enregistrement</h2>
-{#{% if ack is defined %}
-	{% for item in ack %}
-	<div class="ack_{{ item.type }} message">
-		{{ item.message }}
-	</div>
-	{% endfor %}
-	{% endif %}}#}
 </div>
 <form method="post" action="/registration">
 	<div class="input-group">

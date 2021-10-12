@@ -1,7 +1,7 @@
 <?php
 
 namespace Blog\Ctrl;
-// session_start();
+
 class SessionManager
 {
 
@@ -14,7 +14,6 @@ class SessionManager
     public function __construct()
     {
         session_cache_expire(280);
-        // $expiration = session_cache_expire();
         session_start();
         $this->initValue();
         foreach ($_SESSION as $key => $value) {
@@ -40,11 +39,10 @@ class SessionManager
      */
     public function addNotification($type, $message)
     {
-        // var_dump("addNotification", $type, $message);
+       
         array_push($this->ack, ["type" => $type, "message" => $message]);
         $this->update("ack");
-     
-
+    
     }
 
     public function getNotifications()
@@ -60,8 +58,6 @@ class SessionManager
     private function update($key)
     {
         $_SESSION[$key] = $this->$key;
-
-       
     }
 
     public function set($key, $value)

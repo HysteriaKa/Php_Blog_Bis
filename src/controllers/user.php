@@ -20,7 +20,7 @@ class User extends Entity
 
     public function create()
     {
-        try { //has
+        try { 
             $this->model->addUser($this->crypt());
             return true;
         } catch (\Throwable $th) {
@@ -41,8 +41,6 @@ class User extends Entity
             $currentSession->set("role", $data->user_type);
             $currentSession->set("user", $data->username);
             $currentSession->set("idUser", $data->id);
-            // die(var_dump($data));
-            //TODO : ajouter la durée de la session
             return true;
         } catch (\Throwable $th) {
             return false;
@@ -52,7 +50,7 @@ class User extends Entity
     {
         $pwd = $this->password;
         unset($this->password);
-        // $toCrypt="aaa";
+        
         return password_hash($pwd, PASSWORD_DEFAULT);
     }
     public function logout()
