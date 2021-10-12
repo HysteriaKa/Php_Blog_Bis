@@ -4,8 +4,6 @@ use Blog\Ctrl\ErrorHandler;
 
 require 'vendor/autoload.php';
 
-// die(var_dump($_POST));
-// session_start();
 
 try {
     $utils = new Blog\Ctrl\Utils();
@@ -37,7 +35,6 @@ try {
     $twig = new Twig\Environment($loader, [
         'debug' => false,
         'cache' => false,
-        //__DIR__.'/tmp'
     ]);
 
     $twig->addExtension(new \Twig\Extension\DebugExtension());
@@ -59,7 +56,6 @@ finally{
     //rendu
     $templateData = ["data" => $page->data];
     $notifications  = $currentSession->getNotifications();
-    // die(var_dump($page->data));
     if (!empty($notifications)) $templateData["ack"] = $notifications;
     echo $twig->render($page->template.".twig", $templateData, $page->current_page);
 
