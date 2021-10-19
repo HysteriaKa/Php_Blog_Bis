@@ -1,13 +1,65 @@
 <?php
 
-
 namespace Blog\Models;
 
-use Blog\Models\DataBase;
+use Blog\Models\Entity;
 
-class UserModel extends DataBase
+
+
+class User extends Entity
 {
 
+    protected $id;
+    protected $username;
+    protected $email;
+
+    public function __construct($data)
+    {
+        $this->props = $data;
+        $this->hydrate($data);
+    }
+
+    public function create()
+    {
+        try { 
+            $this->addUser($this->crypt());
+            return true;
+        } catch (\Throwable $th) {
+
+            return false;
+        }
+    }
+
+    public function login()
+    {
+        global $currentSession;
+        try {
+            $data = $this->getDataFromEmail();
+            if (!password_verify($this->password, $data->password)) throw ("mot de passe invalide");
+            unset($data->password);
+            unset($this->password);
+            $this->hydrate($data);
+            $currentSession->set("role", $data->user_type);
+            $currentSession->set("user", $data->username);
+            $currentSession->set("idUser", $data->id);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+    private function crypt()
+    {
+        $pwd = $this->password;
+        unset($this->password);
+        
+        return password_hash($pwd, PASSWORD_DEFAULT);
+    }
+    public function logout()
+    {
+        global $currentSession;
+        $currentSession->clear();
+        $currentSession->addNotification("success", "Vous êtes déconnectés");
+    }
     /**
      * [addUser description]
      *

@@ -6,7 +6,6 @@ use Blog\Ctrl\Page;
 use Blog\Ctrl\Post;
 use Blog\Ctrl\Comments;
 use Blog\Ctrl\User;
-use Blog\Debug;
 use Blog\Ctrl\Contact;
 
 class Front extends Page
@@ -149,8 +148,8 @@ class Front extends Page
 
         if ($safeData->method === "GET") {
             $this->data = []; //données du modele
-
         }
+       
         if ($safeData->method === "POST") {
             global $currentSession, $utils;
             $this->data = $safeData->post;
@@ -158,6 +157,7 @@ class Front extends Page
                 $currentSession->addNotification("error", "Les mots de passe ne correspondent pas.");
                 return;
             }
+           
             $user = new User([
                 "password" => $safeData->post["password"],
                 "username" => $safeData->post["username"],
