@@ -3,7 +3,7 @@
 namespace Blog\Models;
 
 use Blog\Models\Entity;
-use Blog\Ctrl\Utils;
+
 
 
 class Comments extends Entity
@@ -19,12 +19,11 @@ class Comments extends Entity
 
     public function __construct($datas=[])
     {
+        parent::__construct();
         
         foreach ($datas as $key => $data) {
             $this->$key = $data;
         }
-
-        $this->props =$data;
         
     }
 
@@ -42,7 +41,7 @@ class Comments extends Entity
     }
     public function getCommentByArticle()
     {
-        $this->commentaires = $this->model->getComments($this->id_article);
+        $this->commentaires = $this->getComments($this->id_article);
         
         return $this->commentaires;
     }
@@ -53,7 +52,7 @@ class Comments extends Entity
         global $currentSession;
         try {
 
-            $this->model->postComment(
+            $this->postComment(
                 $safedata->post["id_article"],
                 $currentSession->get("idUser"),
                 $safedata->post["content"],   
@@ -69,15 +68,15 @@ class Comments extends Entity
 
     public function getArticleTitle()
     {
-        $title = $this->model->getParentArticle($this->id);
-        return $title->titre;
+        $title = $this->getParentArticle($this->id);
+        return $title["titre"];
     }
 
     public function getArticleId()
     {
       
-        $article = $this->model->getParentArticle($this->id);
-        return $article->id;
+        $article = $this->getParentArticle($this->id);
+        return $article["id"];
     }
     public function deleteComment($safedata)
     {

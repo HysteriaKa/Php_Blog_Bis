@@ -3,9 +3,9 @@
 namespace Blog\Ctrl;
 
 use Blog\Ctrl\Page;
-use Blog\Ctrl\Post;
-use Blog\Ctrl\Comments;
-use Blog\Ctrl\User;
+use Blog\Models\Post;
+use Blog\Models\Comments;
+use Blog\Models\User;
 use Blog\Ctrl\Contact;
 
 class Front extends Page

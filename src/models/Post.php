@@ -16,14 +16,12 @@ class Post extends Entity
     protected $image;
     protected $list;
     protected $modify_at;
-    private $props;
 
     public function __construct($data)
     {
-        $this->props = $data;
-
+        parent::__construct();
+        $this->hydrate($data);
         if ($data === "all") return $this->initInOrderToGetList();
-       
     }
 
     public function initByTitle()
@@ -115,7 +113,7 @@ class Post extends Entity
     public function removeArticle()
     { //TODSO voir pour enlever la fonction
         try {
-            $this->requestDeleteArticle($this->props["id"]);
+            $this->requestDeleteArticle($this->id);
         } catch (\Exception $e) {
             new ErrorHandler($e);
         }
@@ -152,9 +150,10 @@ class Post extends Entity
 
     public function getArticle()
     {
+        //  die(var_dump($this));
         global $utils;
         $resultData = $this->db->prepare("SELECT * FROM `articles` WHERE `titre`=:titre ORDER BY `created_at` DESC");
-        $resultData->execute(["titre" => $utils->uriToTitle($this->props->titre)]);
+        $resultData->execute(["titre" => $utils->uriToTitle($this->titre)]);
         while ($data = $resultData->fetchObject()) {
             return $data;
         }
@@ -163,7 +162,7 @@ class Post extends Entity
     {
 
         $resultData = $this->db->prepare("SELECT * FROM `articles` WHERE `id`=:id ");
-        $resultData->execute(["id" => $this->props->id]);
+        $resultData->execute(["id" => $this->id]);
 
         return $resultData->fetch();
     }
@@ -172,8 +171,15 @@ class Post extends Entity
     {
         try {
             $req = $this->db
-                ->prepare("INSERT INTO articles(titre,id_user,content,image,created_at,chapo) VALUES(:titre,:id_user,:content,:image,now(),:chapo)");
-            $req->execute($this->props);
+                ->prepare("INSERT INTO articles(titre,id_user,content,image,created_at,chapo) 
+                VALUES(:titre,:id_user,:content,:image,now(),:chapo)");
+            $req->execute([
+                ":titre"=>$this->titre,
+                ":id_user"=>$this->id_user,
+                ":content"=>$this->content,
+                ":image"=>$this->image,
+                ":chapo"=>$this->chapo
+            ]);
             
         } catch (\Exception $e) {
             new ErrorHandler($e);

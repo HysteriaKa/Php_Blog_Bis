@@ -15,7 +15,7 @@ class User extends Entity
 
     public function __construct($data)
     {
-        $this->props = $data;
+        parent::__construct();
         $this->hydrate($data);
     }
 
@@ -73,12 +73,12 @@ class User extends Entity
     {
         
         try {
-            unset($this->props->password);
+            
             $req = $this->db->prepare("INSERT INTO `users` (`email`, `password`, `username`, `user_type`) VALUES (:email, :pwd, :username, '0');");
             $req->execute([
-                ":email" => $this->props->email,
+                ":email" => $this->email,
                 ":pwd" => $cryptedPwd,
-                ":username" => $this->props->username
+                ":username" => $this->username
             ]);
            
             return true;
@@ -98,9 +98,8 @@ class User extends Entity
         try {
             $req = $this->db->prepare("SELECT * FROM `users` WHERE email = :email LIMIT 1");
             $req->execute([
-                ":email" => $this->props->email
+                ":email" => $this->email
             ]);
-            unset($this->props->password);
             return $req->fetch();
         } catch (\Exception $e) {
             return false;

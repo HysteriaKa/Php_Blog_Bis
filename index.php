@@ -38,8 +38,8 @@ try {
     ]);
 
     $twig->addExtension(new \Twig\Extension\DebugExtension());
+    
     //routing
-    // die(var_dump($safeData->uri[0]));
     switch ($safeData->uri[0]) {
         case "admin":
             array_shift($safeData->uri);

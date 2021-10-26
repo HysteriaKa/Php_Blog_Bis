@@ -18,7 +18,7 @@ class Page{
             return;
         }
         $this->$action($safeData);
-        die(var_dump($this->$action($safeData)));
+        
     }
 
 }
