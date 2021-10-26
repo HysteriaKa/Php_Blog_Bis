@@ -32,6 +32,7 @@ class SafeData{
         $this->uri = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
         $this->uri = substr($this->uri, 1);
         $this->uri = explode("/", $this->uri);
+        // die(var_dump($this->uri));
     }
 
     private function usePurifier($sanitizedData, $rules){

@@ -2,9 +2,10 @@
 
 namespace Blog\Ctrl;
 
-use Blog\Ctrl\Comments;
+use Blog\Models\Comments;
 use Blog\Ctrl\SafeData;
 use Blog\Ctrl\ErrorHandler;
+use Blog\Models\Post;
 
 class Admin extends Page
 {

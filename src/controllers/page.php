@@ -18,6 +18,7 @@ class Page{
             return;
         }
         $this->$action($safeData);
+        
     }
 
 }

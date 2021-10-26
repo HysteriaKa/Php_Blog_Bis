@@ -38,6 +38,7 @@ try {
     ]);
 
     $twig->addExtension(new \Twig\Extension\DebugExtension());
+    
     //routing
     switch ($safeData->uri[0]) {
         case "admin":
@@ -54,6 +55,7 @@ try {
 }
 finally{
     //rendu
+  
     $templateData = ["data" => $page->data];
     $notifications  = $currentSession->getNotifications();
     if (!empty($notifications)) $templateData["ack"] = $notifications;
