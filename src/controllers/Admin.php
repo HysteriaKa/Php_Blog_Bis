@@ -15,7 +15,7 @@ class Admin extends Page
         if ($currentSession->get("role") === "0" || ($_SERVER["HTTP_REFERER"]) === null) {
             $utils->end([
                 "message" => "vous ne pouvez pas faire cette action.",
-                "messageType" =>"error",
+                "messageType" => "error",
                 "redirection" => "Location:/login",
                 "exit" => true
             ]);
@@ -26,42 +26,38 @@ class Admin extends Page
     public function delete_comment($safeData)
     {
         global $utils;
-        $comment = new Comments(["id" => $safeData->uri[1]]);
-        $articleUrl = $utils->titleToURI($comment->getArticleTitle());
-        
-        if ($safeData->method === "GET") {
-            try {
+        //die(var_dump($comment));
+        try {
+            $comment = new Comments(["id" => $safeData->uri[1]]);
+            $articleUrl = $utils->titleToURI($comment->getArticleTitle());
+
+            if ($safeData->method === "GET") {
                 $this->template = "deleteConfirm";
                 $this->data = [
                     "message" => "voulez vous supprimer ce commentaire",
                     "articleUrl" => $articleUrl
-
                 ];
-            } catch (\Throwable $th) {
+            }
+            if ($safeData->method === "POST") {
+                if ($safeData->post["removeContent"] !== "") {
+                    return $utils->end([
+                        "message" => "le commentaire n'a pas été supprimé",
+                        "messageType" => "warn",
+                        "header" => "Location:/article/$articleUrl"
+                    ]);
+                }
 
-            }
-        }
-        if ($safeData->method === "POST") {
-            if ($safeData->post["removeContent"] !== "") {
-                return $utils->end([
-                    "message"=>"le commentaire n'a pas été supprimé",
-                    "messageType"=>"warn",
-                    "header"=>"Location:/article/$articleUrl"
-                ]);
-            }
-            try {
-             
                 $comment->removeComment();
                 $utils->end([
-                    "message"=>"Le commentaire a bien été supprimé.",
-                    "messageType"=>"success",
-                    "header"=>"Location:/article/$articleUrl",
-                    "exit"=>true
+                    "message" => "Le commentaire a bien été supprimé.",
+                    "messageType" => "success",
+                    "header" => "Location:/article/$articleUrl",
+                    "exit" => true
                 ]);
-
-            } catch (\Exception $e) {
-                new ErrorHandler($e);
             }
+        } catch (\Throwable $th) {
+            die(var_dump($th));
+            // new ErrorHandler($th);
         }
     }
 
@@ -75,9 +71,9 @@ class Admin extends Page
             try {
                 $comment->validateComment();
                 return $utils->end([
-                    "message"=> "Le commentaire est en ligne.",
-                    "messageType"=>"success",
-                    "header"=>"Location:/admin/listComments"
+                    "message" => "Le commentaire est en ligne.",
+                    "messageType" => "success",
+                    "header" => "Location:/admin/listComments"
                 ]);
             } catch (\Exception $e) {
                 new ErrorHandler($e);
@@ -102,13 +98,13 @@ class Admin extends Page
                 // die(var_dump($safedata, $currentSession));
                 $newArticle = new Post($safedata->post);
                 $newArticle->addPost();
-                
-        return $utils->end([
-            "message"=>"l'article a bien été publié.",
-            "messageType"=>"success",
-            "header"=>"Location:/articles",
-            "exit"=>true
-        ]);
+
+                return $utils->end([
+                    "message" => "l'article a bien été publié.",
+                    "messageType" => "success",
+                    "header" => "Location:/articles",
+                    "exit" => true
+                ]);
             } catch (\Throwable $th) {
                 //throw $th;
                 $this->template = "page500";
@@ -152,20 +148,18 @@ class Admin extends Page
         if ($safedata->method === "POST") {
             if ($safedata->post["removeContent"] !== "") {
                 $currentSession->addNotification("warn", "l'article n'a pas été supprimé");
-                return $utils->end(["header"=>"Location:/articles"]);
-
+                return $utils->end(["header" => "Location:/articles"]);
             }
             try {
                 global $utils;
                 $article = new Post(["id" => $safedata->uri[1]]);
                 $article->removeArticle();
                 $utils->end([
-                    "message"=>"L'article a bien été supprimé.",
-                    "messageType"=>"success",
-                    "header"=>"Location:/articles",
-                    "exit"=>true
+                    "message" => "L'article a bien été supprimé.",
+                    "messageType" => "success",
+                    "header" => "Location:/articles",
+                    "exit" => true
                 ]);
-
             } catch (\Exception $e) {
                 new ErrorHandler($e);
             }
@@ -177,15 +171,15 @@ class Admin extends Page
         global $utils;
         $article = new Post(["id" => $safedata->uri[1]]);
         $article->initById();
-       
+
         if ($safedata->method === "POST") {
             try {
                 // var_dump($article);
                 $article->modifyArticle($safedata);
                 return $utils->end([
-                    "message"=>"La modification a été effectuée.",
-                    "messageType"=>"success",
-                    "header"=>"Location:/articles"
+                    "message" => "La modification a été effectuée.",
+                    "messageType" => "success",
+                    "header" => "Location:/articles"
                 ]);
             } catch (\Exception $e) {
                 new ErrorHandler($e);
@@ -193,7 +187,5 @@ class Admin extends Page
         }
         $this->template = 'addArticle';
         $this->data = $article->getAll();
-        
-
     }
 }

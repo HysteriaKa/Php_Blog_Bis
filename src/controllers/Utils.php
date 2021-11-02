@@ -7,6 +7,7 @@ class Utils {
     {
         $title = explode(" ", $title);
         $title = implode("_", $title);
+        // die(var_dump($title));
         return $title;
     }
     public function uriToTitle($title)

@@ -69,14 +69,14 @@ class Comments extends Entity
     public function getArticleTitle()
     {
         $title = $this->getParentArticle($this->id);
-        return $title["titre"];
+        return $title->titre;
     }
 
     public function getArticleId()
     {
       
         $article = $this->getParentArticle($this->id);
-        return $article["id"];
+        return $article->id;
     }
     public function deleteComment($safedata)
     {
@@ -155,7 +155,7 @@ class Comments extends Entity
      *
      * @param   String  $idcomment
      *
-     * @return  String              
+     * @return  Object              
      */
     public function getParentArticle($idComment)
     {
@@ -163,6 +163,7 @@ class Comments extends Entity
         $req = $this->db
             ->prepare("SELECT articles.titre, articles.id from commentaires INNER JOIN articles ON commentaires.id_article = articles.id WHERE commentaires.id = ? LIMIT 1");
         $req->execute([$idComment]);
+        
         return $req->fetch();
     }
     public function RequestCommentsToValidate()
