@@ -228,7 +228,7 @@ class Front extends Page
     {
         global $utils;
         try {
-            throw new \Exception();
+           //;b throw new \Exception();
             Contact::sendMail($from, $email, $message);
             $utils->end([
                 "message" => "le message a bien été envoyé.",
